@@ -1,0 +1,34 @@
+:root {
+    --bs-black: #000;
+    --bs-darkgray: #808080;
+    --bs-lightgray: #d9d9d9;
+    --bs-white: #fff;
+    --bs-warning: #da9120;
+    --bs-bg-dark: #2b2b2b;
+    --bs-bg-light: #efefef;
+    --bs-heading-font: "VTC Martin";
+    --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+    --bs-body-font-family: "Hepta Slab";
+    --bs-body-font-size: 1rem;
+    --bs-body-font-weight: 400;
+    --bs-body-line-height: 1.5;
+    --bs-body-color: #212529;
+    --bs-body-bg: #fff;
+    --bs-border-width: 1px;
+    --bs-border-style: solid;
+    --bs-border-color: #dee2e6;
+    --bs-border-color-translucent: rgba(0, 0, 0, 0.175);
+    --bs-border-radius: 0.375rem;
+    --bs-border-radius-sm: 0.25rem;
+    --bs-border-radius-lg: 0.5rem;
+    --bs-border-radius-xl: 1rem;
+    --bs-border-radius-2xl: 2rem;
+    --bs-border-radius-pill: 50rem;
+    --bs-link-color: #212529;
+    --bs-link-hover-color: #0085A1;
+    --bs-code-color: #d63384;
+    --bs-highlight-bg: #fff3cd;
+  }
+
+
+  var(--bs-body-font-size)
