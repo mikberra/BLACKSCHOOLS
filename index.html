@@ -113,6 +113,7 @@
             </div>
             <div class="container">
                 <div id="map" class="map-container"></div>
+                <script src="map.js"></script>
             </div>
         </div>
     </section>
@@ -226,17 +227,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
-<!-- Mapbox JS-->
-        <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
-        <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
-            <script>
-                mapboxgl.accessToken = 'pk.eyJ1IjoibWlrYmVycmEiLCJhIjoiY20xODh2MHdwMTIwdDJxcHNhazBoZTE3NCJ9.KQAl5jVzZBXZUvvLoD4x_Q';
-                const map = new mapboxgl.Map({
-                    container: 'map', // Container ID
-                    style: 'mapbox://styles/mikberra/cm1gpvzcc00y601nw1c3iaao8', // Style URL
-                    center: [-98.5795, 39.8283], // Starting position [lng, lat]
-                    zoom: 3 // Starting zoom
-                });
-            </script>
+
     </body>
 </html>
