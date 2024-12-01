@@ -298,3 +298,20 @@ app.post('/submit', async (req, res) => {
     res.status(500).send('Error saving data');
   }
 });
+// add html path in server.js
+app.get('/test', (req, res) => {
+  res.sendFile(__dirname + '/test.html');
+  });
+  // API endpoint to get data by _id
+  app.get('/api/location/:id', async (req, res) => {
+  try {
+  const feature = await GeoModel.findById(req.params.id);
+  if (feature) {
+  res.json(feature);
+  } else {
+  res.status(404).json({ error: 'Data not found' });
+  }
+  } catch (error) {
+  res.status(500).json({ error: 'Failed to fetch data' });
+  }
+  });

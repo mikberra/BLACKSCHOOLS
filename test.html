@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test Data Fetch</title>
+    <style>
+        body {
+        font-family: Arial, sans-serif;
+        }
+        #result {
+        white-space: pre-wrap; /* Preserve whitespace and line breaks */
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        }
+        #details {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #e0e0e0;
+        border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Fetch and Display Data</h1>
+    <input type="text" id="inputId" placeholder="Enter ID" />
+    <button id="fetchData">Fetch Data</button>
+    <div id="result"></div>
+    <div id="details"></div>
+    <script>
+    document.getElementById('fetchData').addEventListener('click', async () => {
+        const _id = document.getElementById('inputId').value.trim(); // Get input ID
+        if (!_id) {
+            alert('Please enter a valid ID');
+            return;
+        }
+
+        const url = `http://localhost:3000/api/geojson`; // Fetch all features
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+            const feature = data.features.find(f => f._id === _id); // Find the feature with the matching ID
+            
+            if (!feature) {
+                document.getElementById('result').innerHTML = 'No matching feature found.';
+                document.getElementById('details').innerHTML = ''; // Clear details
+                return;
+            }
+
+            document.getElementById('result').innerHTML = JSON.stringify(feature, null, 2);
+
+            // Extract and display Name and AltName1
+            const Name = feature.properties.Name || 'No Name available';
+            const AltName1 = feature.properties.AltName1 || 'No AltName1 available';
+            document.getElementById('details').innerHTML = `
+                <h3>Details</h3>
+                <p><strong>Name:</strong> ${Name}</p>
+                <p><strong>AltName1:</strong> ${AltName1}</p>
+            `;
+        } catch (error) {
+            console.error('There was a problem with the fetch operation:', error);
+            document.getElementById('result').innerHTML = 'Error fetching data. Please try again.';
+            document.getElementById('details').innerHTML = ''; // Clear details on error
+        }
+    });
+    </script>
+</body>
+</html>
