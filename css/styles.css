@@ -92,6 +92,13 @@
   .border-bottom {
     border-bottom: 3px solid black; /* Divider between columns */
   }
+  .border-white {
+  border-color: #ffffff;
+  }
+
+  .border-white-bottom {
+    border-bottom: 3px solid white; /* Divider between columns */
+  }
 /**/
 
 /*! Text sizes*/
@@ -362,6 +369,40 @@
 
 /**/
 
+/*! Specific buttons*/
+  .sticky-top-buttons {
+      position: sticky;
+      top: 0;
+      z-index: 1020;
+      background-color: #fff;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+    }
+
+    .sticky-top-buttons button {
+      flex: 1;
+      background-color: #fff;
+      border: none;
+      border-bottom: 2px solid grey;
+      color: grey;
+      font-weight: bold;
+      text-align: center;
+      padding: 10px 0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .sticky-top-buttons button.active {
+      color: orange;
+      border-bottom: 2px solid orange;
+    }
+
+    .sticky-top-buttons button:focus {
+      outline: none;
+    }
+ 
+/**/
+
 /*! Buttons  */
   button {
     border-radius: 10;
@@ -521,19 +562,19 @@
 
   .btn-primary {
     --bs-btn-color: #fff;
-    --bs-btn-bg: #0085A1;
-    --bs-btn-border-color: #0085A1;
+    --bs-btn-bg: transparent;
+    --bs-btn-border-color: #fff;
     --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #007189;
-    --bs-btn-hover-border-color: #006a81;
+    --bs-btn-hover-bg: #fff;
+    --bs-btn-hover-border-color:#fff;
     --bs-btn-focus-shadow-rgb: 38, 151, 175;
     --bs-btn-active-color: #fff;
-    --bs-btn-active-bg: #006a81;
-    --bs-btn-active-border-color: #006479;
+    --bs-btn-active-bg: #fff;
+    --bs-btn-active-border-color: #fff;
     --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     --bs-btn-disabled-color: #fff;
-    --bs-btn-disabled-bg: #0085A1;
-    --bs-btn-disabled-border-color: #0085A1;
+    --bs-btn-disabled-bg:#fff;
+    --bs-btn-disabled-border-color: #fff;
     --bs-btn-border-radius: 10px;
     --display: inline-block;
   }
@@ -725,6 +766,29 @@
     height: 600px; /* Set height for the map */
     z-index: 0; /* Place the map behind the content */
   }
+  .map-column {
+    position: relative;
+    overflow: hidden; /* Ensures no overflow outside the column */
+  }
+
+  #map {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0; /* Map stays in the background */
+  }
+
+  .events-overlay {
+      position: relative;
+      z-index: 1; /* Overlay content stays above the map */
+      color: white;
+      padding: 1rem;
+      margin-top: 80vh;
+  }
+
+
 
 /**/
 
@@ -732,7 +796,6 @@
 
   header.masthead {
     height: 80vh;
-    /* Full viewport height */
     width: 100vw;
     display: flex;
     align-items: center;
@@ -752,21 +815,21 @@
     padding: 0;
   }
 
-  header.masthead .masthead-overlay {
+  .masthead-overlay {
     position: relative;
     height: 80vh;
-    width: 100%;
-    background-size: cover;
-    background-position: center;
-    border-radius: 0px;
-    /* Optional styling */
+    background-size: cover; /* Ensure the image covers the container */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent repeating */
+    border-radius: 0; /* Optional styling */
     display: flex;
-    align-items: end;
-    justify-content: left;
-    color: white;
-    padding: var(--bs-padding);
-    /* Text color for the overlaid title */
-  }
+    flex-direction: column; /* Stack text vertically */
+    align-items: flex-start; /* Align content to the left */
+    justify-content: flex-end; /* Align content to the bottom */
+    color: white; /* Text color for the overlaid title */
+    padding: var(--bs-padding); /* Use Bootstrap padding variable */
+}
+
 
   header.masthead:before {
     content: "";
@@ -777,12 +840,6 @@
     bottom: 0;
     background-color: transparent;
     opacity: 0.5;
-  }
-
-  .description-box {
-    border-right: 2px solid white; /* Adds a black border */
-    padding: var(--bs-padding);           /* Adds spacing between the text and the border */;
-    display: inline-block; 
   }
 
   .all {
@@ -801,12 +858,12 @@
 /*! Case-Maps  */
   .parallax {
     flex: 1; /* Take up one portion of the available space */
-    margin-right: -50px; /* Extend left to overlap margins */
+    margin-right: -50px; /* Extend right to overlap margins */
     height: 200vh;
     /* Full viewport height */
     background-size: 50%;
     /* Ensure the background covers the entire section */
-    background-position: left;
+    background-position: top left;
     /* Align left */
     background-attachment: fixed;
     /* Keeps the image fixed during scroll */
@@ -848,6 +905,19 @@
     padding: 1rem;
     margin: 20px auto;
     background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow */
+    height: 200px; /* Set a fixed height for the card */
+    width: 100%; /* Ensure the card takes the full width of its container */
+    display: flex;
+    align-items: center; /* Vertically align content */
+  }
+
+  .event-card-transparent {
+    border: 2px solid white; /* Thicker black stroke */
+    border-radius: 0.75rem; /* Rounded edges */
+    padding: 1rem;
+    margin: 20px auto;
+    background-color: transparent;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow */
     height: 200px; /* Set a fixed height for the card */
     width: 100%; /* Ensure the card takes the full width of its container */
