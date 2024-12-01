@@ -22,17 +22,16 @@
     </head>
     <body>
 <!-- Navigation-->
-    <div id="navbar-placeholder"></div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            fetch("navbar.html")
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById("navbar-placeholder").innerHTML = data;
-                })
-                .catch(error => console.error("Error loading navbar:", error));
-        });
-    </script>
+    <nav class="navbar">
+        <div class="t3">
+            BLACK SCHOOLS
+        </div>
+        <div class="navbar-right">
+            <button class="nav-button">Explore</button>
+            <button class="nav-button">Contribute</button>
+            <button class="nav-button">News</button>
+        </div>
+    </nav>
 <!-- Masthead-->
     <div class="container-fluid px-0">
         <div class="row g-0 text-white">
@@ -966,7 +965,9 @@
             </div>
         </footer>
 
-<!-- Components-->        
+<!-- Components-->   
+    <!-- Navbar-->
+
     <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->

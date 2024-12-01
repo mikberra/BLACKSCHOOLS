@@ -19,19 +19,18 @@
     </head>
     <body background="./images/background.png">
     <!-- Navigation-->
-        <div id="navbar-placeholder"></div>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                fetch("navbar.html")
-                    .then(response => response.text())
-                    .then(data => {
-                        document.getElementById("navbar-placeholder").innerHTML = data;
-                    })
-                    .catch(error => console.error("Error loading navbar:", error));
-            });
-        </script>
+        <nav class="navbar">
+            <div class="t3">
+                BLACK SCHOOLS
+            </div>
+            <div class="navbar-right">
+                <button class="nav-button">Explore</button>
+                <button class="nav-button">Contribute</button>
+                <button class="nav-button">News</button>
+            </div>
+        </nav>
     <!-- Page Header-->
-        <header class="masthead">
+        <header class="first masthead">
             <div class="container position-relative px-3 px-lg-5">
                 <div class="row gx-3 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
@@ -105,8 +104,8 @@
         </div>
     </div>
     </div>
-<!-- Map -->
-    <section>
+<!-- Map  PROBLEMS-->
+<!--     <section>
         <div class="container-fluid bg-dark">
             <div class="container">
                 <t2 class="text-white">Explore the Map</t2>
@@ -116,7 +115,7 @@
                 <script src="map.js"></script>
             </div>
         </div>
-    </section>
+    </section> -->
 <!-- Places -->
     <div class="container px-3 px-lg-5">
         <div class="container">
@@ -222,7 +221,14 @@
         </div>
     </div>
 </footer>
-
+<!-- Navbar-->
+    <script>
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+            });
+    </script>
 <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
