@@ -365,7 +365,50 @@ app.post('/submit', async (req, res) => {
       sources_description,
     } = req.body;
 
-    // Construct the MongoDB document
+    // Normalize input
+    const normalizeField = (field) => field?.trim() || null;
+
+    const contributors = {};
+    for (let i = 1; i <= 5; i++) {
+      const org = normalizeField(req.body[`organization_${i}`]);
+      const type = normalizeField(req.body[`type_of_organization_${i}`]);
+      if (org) {
+        contributors[`contributor${i}`] = { organization: org, type: type || null };
+      }
+    }
+
+    const otherNames = {};
+    for (let i = 1; i <= 5; i++) {
+      const name = normalizeField(req.body[`other_school_name_${i}`]);
+      if (name) {
+        otherNames[`name${i}`] = name;
+      }
+    }
+
+    const timeline = {};
+    for (let i = 1; i <= 10; i++) {
+      const title = normalizeField(req.body[`event_title_${i}`]);
+      const year = normalizeField(req.body[`event_year_${i}`]);
+      const description = normalizeField(req.body[`event_brief_description_${i}`]);
+      const sources = normalizeField(req.body[`event_sources_${i}`]);
+      if (title) {
+        timeline[`event${i}`] = { title, year, briefDescription: description, sources };
+      }
+    }
+
+    const relevantFigures = {};
+    for (let i = 1; i <= 5; i++) {
+      const name = normalizeField(req.body[`figure_name_${i}`]);
+      const years = normalizeField(req.body[`figure_years_${i}`]);
+      const role = normalizeField(req.body[`figure_role_${i}`]);
+      const roleYears = normalizeField(req.body[`figure_roleyears_${i}`]);
+      const description = normalizeField(req.body[`figure_brief_description_${i}`]);
+      const sources = normalizeField(req.body[`figure_sources_description_${i}`]);
+      if (name) {
+        relevantFigures[`figure${i}`] = { name, years, role, roleYears, briefDescription: description, sources };
+      }
+    }
+
     const formData = new FormData({
       generalInformation: {
         areaOfWork: area_of_work,
@@ -384,28 +427,7 @@ app.post('/submit', async (req, res) => {
           name: organization_p,
           type: type_of_organization_p,
         },
-        contributors: {
-          contributor1: {
-            organization: organization_1,  // e.g., "Local School"
-            type: type_of_organization_1  // e.g., "School"
-          },
-          contributor2: {
-            organization: organization_2,
-            type: type_of_organization_2
-          },
-          contributor3: {
-            organization: organization_3,
-            type: type_of_organization_3
-          },
-          contributor4: {
-            organization: organization_4,
-            type: type_of_organization_4
-          },
-          contributor5: {
-            organization: organization_5,
-            type: type_of_organization_5
-          }
-        }
+        contributors,
       },
       school: {
         name: school_name,
@@ -428,13 +450,7 @@ app.post('/submit', async (req, res) => {
         landmarkedBy: landmarked_by,
         sign,
         owner,
-        otherNames: {
-          name1: other_school_name_1,
-          name2: other_school_name_2,
-          name3: other_school_name_3,
-          name4: other_school_name_4,
-          name5: other_school_name_5,
-        },
+        otherNames,
         description: {
           yearInstitutionCreation: year_institution_creation,
           yearBuildingStarted: year_building_started,
@@ -445,111 +461,9 @@ app.post('/submit', async (req, res) => {
           briefDescription: brief_description,
           sources: sources_description,
         },
-        timeline: {
-          event1: {
-            title: event_title_1,
-            year: event_year_1,
-            briefDescription: event_brief_description_1,
-            sources: event_sources_1
-          },
-          event2: {
-            title: event_title_2,
-            year: event_year_2,
-            briefDescription: event_brief_description_2,
-            sources: event_sources_2
-          },
-          event3: {
-            title: event_title_3,
-            year: event_year_3,
-            briefDescription: event_brief_description_3,
-            sources: event_sources_3
-          },
-          event4: {
-            title: event_title_4,
-            year: event_year_4,
-            briefDescription: event_brief_description_4,
-            sources: event_sources_4
-          },
-          event5: {
-            title: event_title_5,
-            year: event_year_5,
-            briefDescription: event_brief_description_5,
-            sources: event_sources_5
-          },
-          event6: {
-            title: event_title_6,
-            year: event_year_6,
-            briefDescription: event_brief_description_6,
-            sources: event_sources_6
-          },
-          event7: {
-            title: event_title_7,
-            year: event_year_7,
-            briefDescription: event_brief_description_7,
-            sources: event_sources_7
-          },
-          event8: {
-            title: event_title_8,
-            year: event_year_8,
-            briefDescription: event_brief_description_8,
-            sources: event_sources_8
-          },
-          event9: {
-            title: event_title_9,
-            year: event_year_9,
-            briefDescription: event_brief_description_9,
-            sources: event_sources_9
-          },
-          event10: {
-            title: event_title_10,
-            year: event_year_10,
-            briefDescription: event_brief_description_10,
-            sources: event_sources_10
-          }
-        }
+        timeline,
       },
-      relevantFigures: {
-        figure1: {
-            name: figure_name_1,
-            years: figure_years_1,
-            role: figure_role_1,
-            roleYears: figure_roleyears_1,
-            briefDescription: figure_brief_description_1,
-            sources: figure_sources_description_1
-          },
-          figure2: {
-            name: figure_name_2,
-            years: figure_years_2,
-            role: figure_role_2,
-            roleYears: figure_roleyears_2,
-            briefDescription: figure_brief_description_2,
-            sources: figure_sources_description_2
-          },
-          figure3: {
-            name: figure_name_3,
-            years: figure_years_3,
-            role: figure_role_3,
-            roleYears: figure_roleyears_3,
-            briefDescription: figure_brief_description_3,
-            sources: figure_sources_description_3
-          },
-          figure4: {
-            name: figure_name_4,
-            years: figure_years_4,
-            role: figure_role_4,
-            roleYears: figure_roleyears_4,
-            briefDescription: figure_brief_description_4,
-            sources: figure_sources_description_4
-          },
-          figure5: {
-            name: figure_name_5,
-            years: figure_years_5,
-            role: figure_role_5,
-            roleYears: figure_roleyears_5,
-            briefDescription: figure_brief_description_5,
-            sources: figure_sources_description_5
-          }
-        }
+      relevantFigures,
     });
 
     // Save to MongoDB
@@ -560,6 +474,8 @@ app.post('/submit', async (req, res) => {
     res.status(500).send('Error saving data');
   }
 });
+
+
 
 
 //Submit contributors
