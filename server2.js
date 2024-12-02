@@ -2,10 +2,43 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const multer = require('multer');
 const path = require('path');
+
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+// Configure storage for uploaded images
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/'); // Directory where images will be saved
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`); // Unique file name
+  },
+});
+
+// Multer instance
+const upload = multer({
+  storage,
+  fileFilter: (req, file, cb) => {
+    // Accept only image files
+    if (file.mimetype.startsWith('image/')) {
+      cb(null, true);
+    } else {
+      cb(new Error('Invalid file type. Only images are allowed.'));
+    }
+  },
+});
+
+
+// Ensure the 'uploads' directory exists
+const fs = require('fs');
+if (!fs.existsSync('uploads')) {
+  fs.mkdirSync('uploads');  
+}
+
 
 app.use(cors());
 
@@ -125,68 +158,101 @@ const formSchema = new mongoose.Schema({
       yearCeased: { type: Number },
       yearDemolished: { type: Number },
       briefDescription: { type: String },
-      sources: { type: String }
+      sources: { type: String },
+      image: { type: String },
+      footnote: { type: String },
+      sources_image: { type: String }
     },
     timeline: {
       event1: {
         title: { type: String },
         year: { type: Number },
         briefDescription: { type: String },
-        sources: { type: String }
+        sources: { type: String },
+        image: { type: String },
+      footnote: { type: String },
+      sources_image: { type: String }
       },
       event2: {
         title: { type: String },
         year: { type: Number },
         briefDescription: { type: String },
-        sources: { type: String }
+        sources: { type: String },
+        image: { type: String },
+      footnote: { type: String },
+      sources_image: { type: String }
       },
       event3: {
         title: { type: String },
         year: { type: Number },
         briefDescription: { type: String },
-        sources: { type: String }
+        sources: { type: String },
+        image: { type: String },
+      footnote: { type: String },
+      sources_image: { type: String }
       },
       event4: {
         title: { type: String },
         year: { type: Number },
         briefDescription: { type: String },
-        sources: { type: String }
+        sources: { type: String },
+        image: { type: String },
+      footnote: { type: String },
+      sources_image: { type: String }
       },
       event5: {
         title: { type: String },
         year: { type: Number },
         briefDescription: { type: String },
-        sources: { type: String }
+        sources: { type: String },
+        image: { type: String },
+      footnote: { type: String },
+      sources_image: { type: String }
       },
       event6: {
         title: { type: String },
         year: { type: Number },
         briefDescription: { type: String },
-        sources: { type: String }
+        sources: { type: String },
+        image: { type: String },
+      footnote: { type: String },
+      sources_image: { type: String }
       },
       event7: {
         title: { type: String },
         year: { type: Number },
         briefDescription: { type: String },
-        sources: { type: String }
+        sources: { type: String },
+        image: { type: String },
+      footnote: { type: String },
+      sources_image: { type: String }
       },
       event8: {
         title: { type: String },
         year: { type: Number },
         briefDescription: { type: String },
-        sources: { type: String }
+        sources: { type: String },
+        image: { type: String },
+      footnote: { type: String },
+      sources_image: { type: String }
       },
       event9: {
         title: { type: String },
         year: { type: Number },
         briefDescription: { type: String },
-        sources: { type: String }
+        sources: { type: String },
+        image: { type: String },
+      footnote: { type: String },
+      sources_image: { type: String }
       },
       event10: {
         title: { type: String },
         year: { type: Number },
         briefDescription: { type: String },
-        sources: { type: String }
+        sources: { type: String },
+        image: { type: String },
+      footnote: { type: String },
+      sources_image: { type: String }
       }
     }
   },
@@ -197,7 +263,10 @@ const formSchema = new mongoose.Schema({
       role: { type: String },
       roleYears: { type: String },
       briefDescription: { type: String },
-      sources: { type: String }
+      sources: { type: String },
+      image: { type: String },
+      footnote: { type: String },
+      sources_image: { type: String }
     },
     figure2: {
       name: { type: String },
@@ -205,7 +274,10 @@ const formSchema = new mongoose.Schema({
       role: { type: String },
       roleYears: { type: String },
       briefDescription: { type: String },
-      sources: { type: String }
+      sources: { type: String },
+      image: { type: String },
+      footnote: { type: String },
+      sources_image: { type: String }
     },
     figure3: {
       name: { type: String },
@@ -213,7 +285,10 @@ const formSchema = new mongoose.Schema({
       role: { type: String },
       roleYears: { type: String },
       briefDescription: { type: String },
-      sources: { type: String }
+      sources: { type: String },
+      image: { type: String },
+      footnote: { type: String },
+      sources_image: { type: String }
     },
     figure4: {
       name: { type: String },
@@ -221,7 +296,10 @@ const formSchema = new mongoose.Schema({
       role: { type: String },
       roleYears: { type: String },
       briefDescription: { type: String },
-      sources: { type: String }
+      sources: { type: String },
+      image: { type: String },
+      footnote: { type: String },
+      sources_image: { type: String }
     },
     figure5: {
       name: { type: String },
@@ -229,7 +307,10 @@ const formSchema = new mongoose.Schema({
       role: { type: String },
       roleYears: { type: String },
       briefDescription: { type: String },
-      sources: { type: String }
+      sources: { type: String },
+      image: { type: String },
+      footnote: { type: String },
+      sources_image: { type: String }
     }
   }
 });
@@ -243,7 +324,29 @@ app.get('/form', (req, res) => {
 });
 
 
-app.post('/submit', async (req, res) => {
+app.post('/submit', upload.fields([
+  { name: 'image_school', maxCount: 1 },
+  { name: 'event_image_1', maxCount: 1 },
+  { name: 'event_image_2', maxCount: 1 },
+  { name: 'event_image_3', maxCount: 1 },
+  { name: 'event_image_4', maxCount: 1 },
+  { name: 'event_image_5', maxCount: 1 },
+  { name: 'event_image_6', maxCount: 1 },
+  { name: 'event_image_7', maxCount: 1 },
+  { name: 'event_image_8', maxCount: 1 },
+  { name: 'event_image_9', maxCount: 1 },
+  { name: 'event_image_10', maxCount: 1 },
+  { name: 'figure_image_1', maxCount: 1 },
+  { name: 'figure_image_2', maxCount: 1 },
+  { name: 'figure_image_3', maxCount: 1 },
+  { name: 'figure_image_4', maxCount: 1 },
+  { name: 'figure_image_5', maxCount: 1 },
+  { name: 'figure_image_6', maxCount: 1 },
+  { name: 'figure_image_7', maxCount: 1 },
+  { name: 'figure_image_8', maxCount: 1 },
+  { name: 'figure_image_9', maxCount: 1 },
+  { name: 'figure_image_10', maxCount: 1 },
+]), async (req, res) => {
   try {
     const {
       area_of_work,
@@ -363,10 +466,40 @@ app.post('/submit', async (req, res) => {
       year_demolished,
       brief_description,
       sources_description,
+      footnote_image,
+      sources_image,
+      footnote_event_image_1,
+      sources_event_image_1,
+      footnote_event_image_2,
+      sources_event_image_2,
+      footnote_event_image_3,
+      sources_event_image_3,
+      footnote_event_image_4,
+      sources_event_image_4,
+      footnote_event_image_5,
+      sources_event_image_5,
+      footnote_event_image_7,
+      sources_event_image_7,
+      footnote_event_image_8,
+      sources_event_image_8,
+      footnote_event_image_9,
+      sources_event_image_9,
+      footnote_event_image_10,
+      sources_event_image_10,
+      footnote_figure_image_1,
+      sources_figure_image_1,
+      footnote_figure_image_2,
+      sources_figure_image_2,
+      footnote_figure_image_3,
+      sources_figure_image_3,
+      footnote_figure_image_4,
+      sources_figure_image_4,
+      footnote_figure_image_5,
+      sources_figure_image_5
     } = req.body;
 
     // Normalize input
-    const normalizeField = (field) => field?.trim() || null;
+    const normalizeField = (field) => (typeof field === 'string' ? field.trim() : field) || null;
 
     const contributors = {};
     for (let i = 1; i <= 5; i++) {
@@ -386,15 +519,20 @@ app.post('/submit', async (req, res) => {
     }
 
     const timeline = {};
-    for (let i = 1; i <= 10; i++) {
-      const title = normalizeField(req.body[`event_title_${i}`]);
-      const year = normalizeField(req.body[`event_year_${i}`]);
-      const description = normalizeField(req.body[`event_brief_description_${i}`]);
-      const sources = normalizeField(req.body[`event_sources_${i}`]);
-      if (title) {
-        timeline[`event${i}`] = { title, year, briefDescription: description, sources };
-      }
+for (let i = 1; i <= 10; i++) {
+    const title = normalizeField(req.body[`event_title_${i}`]);
+    const year = normalizeField(req.body[`event_year_${i}`]);
+    const description = normalizeField(req.body[`event_brief_description_${i}`]);
+    const sources = normalizeField(req.body[`event_sources_${i}`]);
+    const image = req.files?.[`event_image_${i}`]?.[0]?.path || null;
+    const footnote = normalizeField(req.body[`footnote_event_image_${i}`]);
+    const sources_image = normalizeField(req.body[`sources_event_image_${i}`]);
+
+    if (title) {
+        timeline[`event${i}`] = { title, year, briefDescription: description, sources, image, footnote, sources_image };
     }
+}
+
 
     const relevantFigures = {};
     for (let i = 1; i <= 5; i++) {
@@ -404,10 +542,18 @@ app.post('/submit', async (req, res) => {
       const roleYears = normalizeField(req.body[`figure_roleyears_${i}`]);
       const description = normalizeField(req.body[`figure_brief_description_${i}`]);
       const sources = normalizeField(req.body[`figure_sources_description_${i}`]);
+      const image = req.files[`figure_image_${i}`]?.[0]?.path || null;
+      const footnote = normalizeField(req.body[`footnote_figure_image_${i}`]);
+      const sources_image = normalizeField(req.body[`sources_figure_image_${i}`]);
       if (name) {
-        relevantFigures[`figure${i}`] = { name, years, role, roleYears, briefDescription: description, sources };
+        relevantFigures[`figure${i}`] = { name, years, role, roleYears, briefDescription: description, sources,image, footnote, sources_image };
       }
     }
+
+    // Store file paths
+    const Images = {
+      image_school: req.files['image_school'] ? req.files['image_school'][0].path : null,
+    };
 
     const formData = new FormData({
       generalInformation: {
@@ -460,6 +606,9 @@ app.post('/submit', async (req, res) => {
           yearDemolished: year_demolished,
           briefDescription: brief_description,
           sources: sources_description,
+          image: image_school,
+          footnote: footnote_image,
+          sources_image: sources_image,
         },
         timeline,
       },

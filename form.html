@@ -28,7 +28,7 @@
 </head>
 <body>
     <h1>SUBMIT YOUR DATA ABOUT THE BLACK SCHOOLS!</h1>
-    <form action="/submit" method="POST">
+    <form action="/submit" method="POST" enctype="multipart/form-data">
         <!-- General Information -->
         <fieldset id="generalinformation">
             <legend>Location</legend>
@@ -202,6 +202,12 @@
                     <textarea id="brief_description" name="brief_description"></textarea><br><br>
                     <label for="sources_description">Sources:</label>
                     <textarea id="sources_description" name="sources_description"></textarea><br><br>
+                    <label for="image_school">Upload Image:</label>
+                    <input type="file" id="image_school" name="image_school" accept="image/*"><br><br>
+                    <label for="footnote_image">Footnote:</label>
+                    <input type="text" id="footnote_image" name="footnote_image"><br><br>
+                    <label for="sources_image">Sources:</label>
+                    <textarea id="sources_image" name="sources_image"></textarea><br><br>
                 </fieldset>
             </fieldset>
         </fieldset>
@@ -223,6 +229,14 @@
                 <label for="event_sources_1">Sources:</label>
                 <textarea id="event_sources_1" name="event_sources_1"></textarea><br><br>
 
+                <label for="event_image_1">Upload Image:</label>
+                <input type="file" id="event_image_1" name="event_image_1" accept="image/*"><br><br>
+                <label for="footnote_event_image_1">Footnote:</label>
+                <input type="text" id="footnote_event_image_1" name="footnote_event_image_1"><br><br>
+                <label for="sources_event_image_1">Sources:</label>
+                <textarea id="sources_event_image_1" name="sources_event_image_1"></textarea><br><br>
+            
+
                 <!-- Event 2 -->
                 <legend>Event 2</legend>
                 <label for="event_title_2">Title of the event:</label>
@@ -236,6 +250,14 @@
 
                 <label for="event_sources_2">Sources:</label>
                 <textarea id="event_sources_2" name="event_sources_2"></textarea><br><br>
+                
+                <label for="event_image_2">Upload Image:</label>
+                <input type="file" id="event_image_2" name="event_image_2" accept="image/*"><br><br>
+                <label for="footnote_event_image_2">Footnote:</label>
+                <input type="text" id="footnote_event_image_2" name="footnote_event_image_2"><br><br>
+                <label for="sources_event_image_2">Sources:</label>
+                <textarea id="sources_event_image_2" name="sources_event_image_2"></textarea><br><br>
+
 
                 <!-- Event 3 -->
                 <legend>Event 3</legend>
@@ -251,6 +273,13 @@
                 <label for="event_sources_3">Sources:</label>
                 <textarea id="event_sources_3" name="event_sources_3"></textarea><br><br>
 
+                <label for="event_image_3">Upload Image:</label>
+                <input type="file" id="event_image_3" name="event_image_3" accept="image/*"><br><br>
+                <label for="footnote_event_image_3">Footnote:</label>
+                <input type="text" id="footnote_event_image_3" name="footnote_event_image_2"><br><br>
+                <label for="sources_event_image_3">Sources:</label>
+                <textarea id="sources_event_image_3" name="sources_event_image_3"></textarea><br><br>
+
                 <!-- Event 4 -->
                 <legend>Event 4</legend>
                 <label for="event_title_4">Title of the event:</label>
@@ -264,6 +293,13 @@
 
                 <label for="event_sources_4">Sources:</label>
                 <textarea id="event_sources_4" name="event_sources_4"></textarea><br><br>
+
+                <label for="event_image_4">Upload Image:</label>
+                <input type="file" id="event_image_4" name="event_image_4" accept="image/*"><br><br>
+                <label for="footnote_event_image_4">Footnote:</label>
+                <input type="text" id="footnote_event_image_4" name="footnote_event_image_4"><br><br>
+                <label for="sources_event_image_4">Sources:</label>
+                <textarea id="sources_event_image_4" name="sources_event_image_4"></textarea><br><br>
 
                 <!-- Event 5 -->
                 <legend>Event 5</legend>
@@ -279,6 +315,13 @@
                 <label for="event_sources_5">Sources:</label>
                 <textarea id="event_sources_5" name="event_sources_5"></textarea><br><br>
 
+                <label for="event_image_5">Upload Image:</label>
+                <input type="file" id="event_image_5" name="event_image_5" accept="image/*"><br><br>
+                <label for="footnote_event_image_5">Footnote:</label>
+                <input type="text" id="footnote_event_image_5" name="footnote_event_image_5"><br><br>
+                <label for="sources_event_image_5">Sources:</label>
+                <textarea id="sources_event_image_5" name="sources_event_image_5"></textarea><br><br>
+
                 <!-- Event 6 -->
                 <legend>Event 6</legend>
                 <label for="event_title_6">Title of the event:</label>
@@ -293,6 +336,13 @@
                 <label for="event_sources_6">Sources:</label>
                 <textarea id="event_sources_6" name="event_sources_6"></textarea><br><br>
 
+                <label for="event_image_6">Upload Image:</label>
+                <input type="file" id="event_image_6" name="event_image_6" accept="image/*"><br><br>
+                <label for="footnote_event_image_6">Footnote:</label>
+                <input type="text" id="footnote_event_image_6" name="footnote_event_image_6"><br><br>
+                <label for="sources_event_image_6">Sources:</label>
+                <textarea id="sources_event_image_6" name="sources_event_image_6"></textarea><br><br>
+                
                 <!-- Event 7 -->
                 <legend>Event 7</legend>
                 <label for="event_title_7">Title of the event:</label>
@@ -306,6 +356,13 @@
 
                 <label for="event_sources_7">Sources:</label>
                 <textarea id="event_sources_7" name="event_sources_7"></textarea><br><br>
+
+                <label for="event_image_7">Upload Image:</label>
+                <input type="file" id="event_image_7" name="event_image_7" accept="image/*"><br><br>
+                <label for="footnote_event_image_7">Footnote:</label>
+                <input type="text" id="footnote_event_image_7" name="footnote_event_image_7"><br><br>
+                <label for="sources_event_image_7">Sources:</label>
+                <textarea id="sources_event_image_7" name="sources_event_image_7"></textarea><br><br>
 
                 <!-- Event 8 -->
                 <legend>Event 8</legend>
@@ -321,6 +378,13 @@
                 <label for="event_sources_8">Sources:</label>
                 <textarea id="event_sources_8" name="event_sources_8"></textarea><br><br>
 
+                <label for="event_image_8">Upload Image:</label>
+                <input type="file" id="event_image_8" name="event_image_8" accept="image/*"><br><br>
+                <label for="footnote_event_image_8">Footnote:</label>
+                <input type="text" id="footnote_event_image_8" name="footnote_event_image_8"><br><br>
+                <label for="sources_event_image_8">Sources:</label>
+                <textarea id="sources_event_image_8" name="sources_event_image_8"></textarea><br><br>
+
                 <!-- Event 9 -->
                 <legend>Event 9</legend>
                 <label for="event_title_9">Title of the event:</label>
@@ -335,6 +399,13 @@
                 <label for="event_sources_9">Sources:</label>
                 <textarea id="event_sources_9" name="event_sources_9"></textarea><br><br>
 
+                <label for="event_image_9">Upload Image:</label>
+                <input type="file" id="event_image_9" name="event_image_9" accept="image/*"><br><br>
+                <label for="footnote_event_image_9">Footnote:</label>
+                <input type="text" id="footnote_event_image_9" name="footnote_event_image_9"><br><br>
+                <label for="sources_event_image_9">Sources:</label>
+                <textarea id="sources_event_image_9" name="sources_event_image_9"></textarea><br><br>
+
                 <!-- Event 10 -->
                 <legend>Event 10</legend>
                 <label for="event_title_10">Title of the event:</label>
@@ -348,7 +419,15 @@
 
                 <label for="event_sources_10">Sources:</label>
                 <textarea id="event_sources_10" name="event_sources_10"></textarea><br><br>
-        </fieldset>
+                
+                <label for="event_image_10">Upload Image:</label>
+                <input type="file" id="event_image_10" name="event_image_10" accept="image/*"><br><br>
+                <label for="footnote_event_image_10">Footnote:</label>
+                <input type="text" id="footnote_event_image_10" name="footnote_event_image_10"><br><br>
+                <label for="sources_event_image_10">Sources:</label>
+                <textarea id="sources_event_image_10" name="sources_event_image_10"></textarea><br><br>
+        
+            </fieldset>
 
         <!-- Relevant Figures -->
         <fieldset id="relevantfig">
@@ -374,6 +453,13 @@
             <label for="figure_sources_description_1">Sources:</label>
             <textarea id="figure_sources_description_1" name="figure_sources_description_1"></textarea><br><br>
 
+            <label for="figure_image_1">Upload Image:</label>
+            <input type="file" id="figure_image_1" name="figure_image_1" accept="image/*"><br><br>
+            <label for="footnote_figure_image_1">Footnote:</label>
+            <input type="text" id="footnote_figure_image_1" name="footnote_figure_image_1"><br><br>
+            <label for="footnote_figure_image_11">Sources:</label>
+            <textarea id="sources_figure_image_1" name="sources_figure_image_1"></textarea><br><br>
+
             <!-- Figure 2 -->
             <legend>Relevant Figure 2</legend>
             <label for="figure_name_2">Name:</label>
@@ -393,6 +479,13 @@
 
             <label for="figure_sources_description_2">Sources:</label>
             <textarea id="figure_sources_description_2" name="figure_sources_description_2"></textarea><br><br>
+
+            <label for="figure_image_2">Upload Image:</label>
+            <input type="file" id="figure_image_2" name="figure_image_2" accept="image/*"><br><br>
+            <label for="footnote_figure_image_2">Footnote:</label>
+            <input type="text" id="footnote_figure_image_2" name="footnote_figure_image_2"><br><br>
+            <label for="sources_figure_image_2">Sources:</label>
+            <textarea id="sources_figure_image_2" name="sources_figure_image_2"></textarea><br><br>
 
             <!-- Figure 3 -->
             <legend>Relevant Figure 3</legend>
@@ -414,6 +507,13 @@
             <label for="figure_sources_description_3">Sources:</label>
             <textarea id="figure_sources_description_3" name="figure_sources_description_3"></textarea><br><br>
 
+            <label for="figure_image_3">Upload Image:</label>
+            <input type="file" id="figure_image_3" name="figure_image_3" accept="image/*"><br><br>
+            <label for="footnote_figure_image_3">Footnote:</label>
+            <input type="text" id="footnote_figure_image_3" name="footnote_figure_image_3"><br><br>
+            <label for="sources_figure_image_3">Sources:</label>
+            <textarea id="sources_figure_image_3" name="sources_figure_image_3"></textarea><br><br>
+
             <!-- Figure 4 -->
             <legend>Relevant Figure 4</legend>
             <label for="figure_name_4">Name:</label>
@@ -433,6 +533,13 @@
 
             <label for="figure_sources_description_4">Sources:</label>
             <textarea id="figure_sources_description_4" name="figure_sources_description_4"></textarea><br><br>
+
+            <label for="figure_image_4">Upload Image:</label>
+            <input type="file" id="figure_image_4" name="figure_image_4" accept="image/*"><br><br>
+            <label for="footnote_figure_image_4">Footnote:</label>
+            <input type="text" id="footnote_figure_image_4" name="footnote_figure_image_4"><br><br>
+            <label for="sources_figure_image_4">Sources:</label>
+            <textarea id="sources_figure_image_4" name="sources_figure_image_4"></textarea><br><br>
 
             <!-- Figure 5 -->
             <legend>Relevant Figure 5</legend>
@@ -454,6 +561,12 @@
             <label for="figure_sources_description_5">Sources:</label>
             <textarea id="figure_sources_description_5" name="figure_sources_description_5"></textarea><br><br>
 
+            <label for="figure_image_5">Upload Image:</label>
+            <input type="file" id="figure_image_5" name="figure_image_5" accept="image/*"><br><br>
+            <label for="footnote_figure_image_5">Footnote:</label>
+            <input type="text" id="footnote_figure_image_5" name="footnote_figure_image_5"><br><br>
+            <label for="sources_figure_image_5">Sources:</label>
+            <textarea id="sources_figure_image_5" name="sources_figure_image_5"></textarea><br><br>
         </fieldset>
 
         <button type="submit">Submit</button>
