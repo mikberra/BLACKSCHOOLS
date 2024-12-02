@@ -22,6 +22,8 @@ db.once('open', () => {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+
+// GeoJSON for map
 // Define schema for GeoJSON data
 const geoSchema = new mongoose.Schema({
   type: { type: String, default: "Feature" },
@@ -30,7 +32,7 @@ const geoSchema = new mongoose.Schema({
     type: { type: String, enum: ['Point'], required: true },
     coordinates: { type: [Number], required: true }
   }
-}, { collection: 'Brooklyn' });
+}, { collection: 'Brooklyn' }); //To be changed when integrate
 
 const GeoModel = mongoose.model('GeoCollection', geoSchema);
 
@@ -52,7 +54,7 @@ app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });
 
-// Main form schema
+// Main form schema for submitting schools
 const formSchema = new mongoose.Schema({
   generalInformation: {
     areaOfWork: { type: String, required: true },
@@ -558,6 +560,334 @@ app.post('/submit', async (req, res) => {
     res.status(500).send('Error saving data');
   }
 });
+
+
+//Submit contributors
+
+//Set up general scheme
+const formSchema_cont = new mongoose.Schema({
+  generalInformation: {
+    areaOfWork: { type: String, required: true },
+    city: { type: String },
+    county: { type: String, required: true },
+    neighborhood: { type: String },
+    state: { type: String, required: true }
+  },
+  contacts: {
+    contactPerson: {
+      name: { type: String, required: true },
+      email: { type: String, required: true },
+      phone: { type: String, required: true }
+    },
+    organization: {
+      name: { type: String, required: true },
+      type: { type: String, required: true }
+    },
+    contributors: {
+      contributor1: {
+        organization: { type: String },
+        type: { type: String }
+      },
+      contributor2: {
+        organization: { type: String },
+        type: { type: String }
+      },
+      contributor3: {
+        organization: { type: String },
+        type: { type: String }
+      },
+      contributor4: {
+        organization: { type: String },
+        type: { type: String }
+      },
+      contributor5: {
+        organization: { type: String },
+        type: { type: String }
+      }
+    }
+  }
+});
+
+const FormDataCont = mongoose.model('FormDataCont', formSchema_cont);
+
+
+// Serve the form
+app.get('/form_cont', (req, res) => {
+  res.sendFile(path.join(__dirname, 'form_cont.html'));
+});
+
+//Submit
+app.post('/submit_cont', async (req, res) => {
+  try {
+    // Normalize input fields
+    const area_of_work = req.body.area_of_work?.trim() || null;
+    const city = req.body.city?.trim() || null;
+    const borough_county = req.body.borough_county?.trim() || null;
+    const neighborhood = req.body.neighborhood?.trim() || null;
+    const state = req.body.state?.trim() || null;
+    const contact_name = req.body.contact_name?.trim() || null;
+    const email = req.body.email?.trim() || null;
+    const phone = req.body.phone?.trim() || null;
+    const organization_p = req.body.organization_p?.trim() || null;
+    const type_of_organization_p = req.body.type_of_organization_p?.trim() || null;
+
+    const organization_1 = req.body.organization_1?.trim() || null;
+    const type_of_organization_1 = req.body.type_of_organization_1?.trim() || null;
+
+    const organization_2 = req.body.organization_2?.trim() || null;
+    const type_of_organization_2 = req.body.type_of_organization_2?.trim() || null;
+
+    const organization_3 = req.body.organization_3?.trim() || null;
+    const type_of_organization_3 = req.body.type_of_organization_3?.trim() || null;
+
+    const organization_4 = req.body.organization_4?.trim() || null;
+    const type_of_organization_4 = req.body.type_of_organization_4?.trim() || null;
+
+    const organization_5 = req.body.organization_5?.trim() || null;
+    const type_of_organization_5 = req.body.type_of_organization_5?.trim() || null;
+
+    // Create contributors object, including only those with non-empty organization_X
+    const contributors = {};
+    if (organization_1) {
+      contributors.contributor1 = { organization: organization_1, type: type_of_organization_1 || null };
+    }
+    if (organization_2) {
+      contributors.contributor2 = { organization: organization_2, type: type_of_organization_2 || null };
+    }
+    if (organization_3) {
+      contributors.contributor3 = { organization: organization_3, type: type_of_organization_3 || null };
+    }
+    if (organization_4) {
+      contributors.contributor4 = { organization: organization_4, type: type_of_organization_4 || null };
+    }
+    if (organization_5) {
+      contributors.contributor5 = { organization: organization_5, type: type_of_organization_5 || null };
+    }
+
+    // Construct the MongoDB document
+    const formDataCont = new FormDataCont({
+      generalInformation: {
+        areaOfWork: area_of_work,
+        city,
+        county: borough_county,
+        neighborhood,
+        state,
+      },
+      contacts: {
+        contactPerson: {
+          name: contact_name,
+          email,
+          phone,
+        },
+        organization: {
+          name: organization_p,
+          type: type_of_organization_p,
+        },
+        contributors, // Includes only contributors with non-empty organizations
+      },
+    });
+
+    // Save to MongoDB
+    await formDataCont.save();
+    res.send('Data successfully saved to MongoDB!');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error saving data');
+  }
+});
+
+
+
+
+
+
+
+// Main form schema for submitting local context
+const formSchemaContext = new mongoose.Schema({
+  generalInformation: {
+    areaOfWork: { type: String, required: true },
+    city: { type: String },
+    county: { type: String, required: true },
+    neighborhood: { type: String },
+    state: { type: String, required: true },
+  },
+  timeline: {
+    event1: {
+      title: { type: String },
+      year: { type: Number },
+      briefDescription: { type: String },
+      sources: { type: String },
+    },
+    event2: {
+      title: { type: String },
+      year: { type: Number },
+      briefDescription: { type: String },
+      sources: { type: String },
+    },
+    event3: {
+      title: { type: String },
+      year: { type: Number },
+      briefDescription: { type: String },
+      sources: { type: String },
+    },
+    event4: {
+      title: { type: String },
+      year: { type: Number },
+      briefDescription: { type: String },
+      sources: { type: String },
+    },
+    event5: {
+      title: { type: String },
+      year: { type: Number },
+      briefDescription: { type: String },
+      sources: { type: String },
+    },
+    event6: {
+      title: { type: String },
+      year: { type: Number },
+      briefDescription: { type: String },
+      sources: { type: String },
+    },
+    event7: {
+      title: { type: String },
+      year: { type: Number },
+      briefDescription: { type: String },
+      sources: { type: String },
+    },
+    event8: {
+      title: { type: String },
+      year: { type: Number },
+      briefDescription: { type: String },
+      sources: { type: String },
+    },
+    event9: {
+      title: { type: String },
+      year: { type: Number },
+      briefDescription: { type: String },
+      sources: { type: String },
+    },
+    event10: {
+      title: { type: String },
+      year: { type: Number },
+      briefDescription: { type: String },
+      sources: { type: String },
+    },
+  },
+});
+
+const FormDataContext = mongoose.model('FormDataContext', formSchemaContext);
+
+// Serve the form
+app.get('/form_context', (req, res) => {
+  res.sendFile(path.join(__dirname, 'form_context.html'));
+});
+
+app.post('/submit_context', async (req, res) => {
+  try {
+    // Normalize input fields inline
+    const area_of_work = req.body.area_of_work?.trim() || null;
+    const city = req.body.city?.trim() || null;
+    const borough_county = req.body.borough_county?.trim() || null;
+    const neighborhood = req.body.neighborhood?.trim() || null;
+    const state = req.body.state?.trim() || null;
+
+    // Create an array of events and filter valid ones
+    const events = [
+      {
+        title: req.body.event_title_1?.trim() || null,
+        year: req.body.event_year_1 ? parseInt(req.body.event_year_1, 10) : null,
+        briefDescription: req.body.event_brief_description_1?.trim() || null,
+        sources: req.body.event_sources_1?.trim() || null,
+      },
+      {
+        title: req.body.event_title_2?.trim() || null,
+        year: req.body.event_year_2 ? parseInt(req.body.event_year_2, 10) : null,
+        briefDescription: req.body.event_brief_description_2?.trim() || null,
+        sources: req.body.event_sources_2?.trim() || null,
+      },
+      {
+        title: req.body.event_title_3?.trim() || null,
+        year: req.body.event_year_3 ? parseInt(req.body.event_year_3, 10) : null,
+        briefDescription: req.body.event_brief_description_3?.trim() || null,
+        sources: req.body.event_sources_3?.trim() || null,
+      },
+      {
+        title: req.body.event_title_4?.trim() || null,
+        year: req.body.event_year_4 ? parseInt(req.body.event_year_4, 10) : null,
+        briefDescription: req.body.event_brief_description_4?.trim() || null,
+        sources: req.body.event_sources_4?.trim() || null,
+      },
+      {
+        title: req.body.event_title_5?.trim() || null,
+        year: req.body.event_year_5 ? parseInt(req.body.event_year_5, 10) : null,
+        briefDescription: req.body.event_brief_description_5?.trim() || null,
+        sources: req.body.event_sources_5?.trim() || null,
+      },
+      {
+        title: req.body.event_title_6?.trim() || null,
+        year: req.body.event_year_6 ? parseInt(req.body.event_year_6, 10) : null,
+        briefDescription: req.body.event_brief_description_6?.trim() || null,
+        sources: req.body.event_sources_6?.trim() || null,
+      },
+      {
+        title: req.body.event_title_7?.trim() || null,
+        year: req.body.event_year_7 ? parseInt(req.body.event_year_7, 10) : null,
+        briefDescription: req.body.event_brief_description_7?.trim() || null,
+        sources: req.body.event_sources_7?.trim() || null,
+      },
+      {
+        title: req.body.event_title_8?.trim() || null,
+        year: req.body.event_year_8 ? parseInt(req.body.event_year_8, 10) : null,
+        briefDescription: req.body.event_brief_description_8?.trim() || null,
+        sources: req.body.event_sources_8?.trim() || null,
+      },
+      {
+        title: req.body.event_title_9?.trim() || null,
+        year: req.body.event_year_9 ? parseInt(req.body.event_year_9, 10) : null,
+        briefDescription: req.body.event_brief_description_9?.trim() || null,
+        sources: req.body.event_sources_9?.trim() || null,
+      },
+      {
+        title: req.body.event_title_10?.trim() || null,
+        year: req.body.event_year_10 ? parseInt(req.body.event_year_10, 10) : null,
+        briefDescription: req.body.event_brief_description_10?.trim() || null,
+        sources: req.body.event_sources_10?.trim() || null,
+      },
+    ];
+
+    // Construct timeline object by including only events with a defined title
+    const timeline = {};
+    events.forEach((event, index) => {
+      if (event.title) {
+        timeline[`event${index + 1}`] = event;
+      }
+    });
+
+    // Construct the MongoDB document
+    const formDataContext = new FormDataContext({
+      generalInformation: {
+        areaOfWork: area_of_work,
+        city,
+        county: borough_county,
+        neighborhood,
+        state,
+      },
+      timeline, // Includes only events with a defined title
+    });
+
+    // Save to MongoDB
+    await formDataContext.save();
+    res.send('Data successfully saved to MongoDB!');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error saving data');
+  }
+});
+
+
+
+
+
 
 
 
