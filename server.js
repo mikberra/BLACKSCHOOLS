@@ -285,14 +285,6 @@ app.post('/submit', async (req, res) => {
       landmarked_by,
       sign,
       owner,
-      year_institution_creation,
-      year_building_started,
-      year_building_ended,
-      year_desegration,
-      year_ceased,
-      year_demolished,
-      brief_description,
-      sources_description,
       event_title_1,
       event_year_1,
       event_brief_description_1,
@@ -363,6 +355,14 @@ app.post('/submit', async (req, res) => {
       figure_roleyears_5,
       figure_brief_description_5,
       figure_sources_description_5,
+      year_institution_creation,
+      year_building_started,
+      year_building_ended,
+      year_desegration,
+      year_ceased,
+      year_demolished,
+      brief_description,
+      sources_description,
     } = req.body;
 
     // Construct the MongoDB document
@@ -506,9 +506,10 @@ app.post('/submit', async (req, res) => {
             briefDescription: event_brief_description_10,
             sources: event_sources_10
           }
-        },
-        relevantFigures: {
-          figure1: {
+        }
+      },
+      relevantFigures: {
+        figure1: {
             name: figure_name_1,
             years: figure_years_1,
             role: figure_role_1,
@@ -549,7 +550,6 @@ app.post('/submit', async (req, res) => {
             sources: figure_sources_description_5
           }
         }
-      }
     });
 
     // Save to MongoDB
