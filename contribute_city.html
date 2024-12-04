@@ -25,7 +25,7 @@
             </div>
             <div class="navbar-right">
                 <button class="nav-button">Explore</button>
-                <button class="nav-button">Contribute</button>
+                <button class="nav-button">Add to the Archive</button>
                 <button class="nav-button">News</button>
             </div>
         </nav>
@@ -35,7 +35,7 @@
                 <div class="row gx-3 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="site-heading text-center text-orange mb-3 pt-5">
-                            <t3>add to the archive</t3>
+                            <t3>Contribute</t3>
                         </div>
                         <div class="site-heading text-center mb-3">
                             <t1>Boston</t1>
@@ -49,7 +49,7 @@
                 <div class="row gx-3 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="text-center mb-3 pt-5">
-                            <t2>Contribute</t2>
+                            <t2>Add to the Archive</t2>
                         </div>
                         <div class="text-center mb-3">
                             <h4>What best describes you?</h4>
@@ -61,128 +61,25 @@
 <!-- Content -->
 <div class="row gx-3 gx-lg-5 justify-content-center">
     <div class="picker-buttons">
-        <div id="buttonA" class="card-picker" onclick="toggleContent('A')">
-            <h3 class="picker-title">Teacher</h3>
-            <img class="picker-image" src="teacher.jpg" alt="Teacher" />
+        <div id="buttonA" class="card-picker" onclick="changeContent('Teachers')">
+            <t2 class="picker-title">Teachers</t2>
+            <img class="picker-image" src="images/teacher.jpg" alt="Teachers" />
             <p class="picker-description">Discover resources and tools for educators.</p>
         </div>
-        <div id="buttonB" class="card-picker" onclick="toggleContent('B')">
-            <h3 class="picker-title">Organization</h3>
-            <img class="picker-image" src="organization.jpg" alt="Organization" />
+        <div id="buttonB" class="card-picker" onclick="changeContent('Organizations')">
+            <t2 class="picker-title">Organizations</t2>
+            <img class="picker-image" src="images/teacher.jpg" alt="Organizations" />
             <p class="picker-description">Explore opportunities for educational organizations.</p>
         </div>
     </div>
-</div> 
-<!-- Teacher -->
-    <div id="contentA" class="content mt-3">
-        <section class="parallax" style="background-image: url('./images/003-Maps_18871.jpg');"></section>
-        <section class="parallax" style="background-image: url('./images/003-Maps_19041.jpg');"></section>
-        <section class="parallax" style="background-image: url('./images/003-Maps_19241.jpg');"></section>
-        <section class="parallax" style="background-image: url('./images/003-Maps_19351.jpg');"></section>
+
+    <div id="contentArea">
+        <!-- Dynamic content will appear here based on the selection -->
     </div>
-<!-- Historical context-->
-    <div id="contentB" class="content mt-3 d-none text-dark">
-        <section>
-            <div class="row align-items-center">
-                <div class="col-md-2">
-                    <h4 id="context1.year">1841
-                    </h4>
-                </div>
-                <div id="context1.title" class="col-md-10 position-relative">
-                    <h3>Foundation
-                    </h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-1">
-                </div>
-                <div class="col-md-11 position-relative">
-                    <div id="context1.description">
-                    <p>Autofill-description</p>
-                    </div>
-                    <div id="context1.source">
-                    <p>Source: Autofill</p>
-                    </div>
-<!--                                     <div id="context1.imgpath">
-                    <a href="#!"><img class="img-fluid" src="./images/1892.jpg" alt="..." /></a>
-                    </div>
-                    <div id="context1.imgdescr">
-                    <p>Autofill-description</p>
-                    </div>
-                    <div id="context1.imgsource">
-                    <p>Source: Autofill</p>
-                    </div> -->
-                </div>
-            </div>
-        </section>
-        <section>
-            <div class="row align-items-center">
-                <div class="col-md-2">
-                    <h4 id="context2.year">1841
-                    </h4>
-                </div>
-                <div id="context2.title" class="col-md-10 position-relative">
-                    <h3>Foundation
-                    </h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-1">
-                </div>
-                <div class="col-md-11 position-relative">
-                    <div id="context2.description">
-                    <p>Autofill-description</p>
-                    </div>
-                    <div id="context2.source">
-                    <p>Source: Autofill</p>
-                    </div>
-<!--                                     <div id="context2.imgpath">
-                    <a href="#!"><img class="img-fluid" src="./images/1892.jpg" alt="..." /></a>
-                    </div>
-                    <div id="context2.imgdescr">
-                    <p>Autofill-description</p>
-                    </div>
-                    <div id="context2.imgsource">
-                    <p>Source: Autofill</p>
-                    </div> -->
-                </div>
-            </div>
-        </section>
-        <section>
-            <div class="row align-items-center">
-                <div class="col-md-2">
-                    <h4 id="context3.year">1841
-                    </h4>
-                </div>
-                <div id="context3.title" class="col-md-10 position-relative">
-                    <h3>Foundation
-                    </h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-1">
-                </div>
-                <div class="col-md-11 position-relative">
-                    <div id="context3.description">
-                    <p>Autofill-description</p>
-                    </div>
-                    <div id="context3.source">
-                    <p>Source: Autofill</p>
-                    </div>
-<!--                                     <div id="context1.imgpath">
-                    <a href="#!"><img class="img-fluid" src="./images/1892.jpg" alt="..." /></a>
-                    </div>
-                    <div id="context3.imgdescr">
-                    <p>Autofill-description</p>
-                    </div>
-                    <div id="context3.imgsource">
-                    <p>Source: Autofill</p>
-                    </div> -->
-                </div>
-            </div>
-        </section>
-</div>
-</div>
+</div> 
+
+<script src="script.js"></script>
+
 </article>
 
 
@@ -224,6 +121,7 @@
         </div>
     </div>
 </footer>
+
 <!-- On-off button -->    
     <script>
         function toggleContent(content) {

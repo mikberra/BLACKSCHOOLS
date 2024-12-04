@@ -143,7 +143,7 @@
     margin-top: 0;
     margin-bottom: 0.5rem;
     font-family: var(--bs-title-font);
-    line-height: 1.2;
+    line-height: 0.7;
     text-transform: uppercase;
   }
 
@@ -156,7 +156,7 @@
 
     t1,
     .t1 {
-      font-size: 5rem;
+      font-size: 6rem;
     }
   }
 
@@ -416,21 +416,31 @@
     display: flex;
     justify-content: center; /* Centers the cards horizontally */
     gap: 20px; /* Adds a margin of 20px between the cards */
-    margin: 20px 0; /* Optional: Adds vertical spacing around the container */
+    margin: 0; /* Remove the existing margin */
+    padding-top: 32px; /* Add padding to create space above */
   }
 
   /* Individual card-like buttons */
   .card-picker {
-    width: 25%; /* Approximately 3/12 (25%) of the parent width */
+    width: 22%; /* Approximately 3/12 (25%) of the parent width */
+    height: 135%;
     background-color: #fff;
     border: 1px solid #ddd;
-    border-radius: 10px; /* Rounded corners for a card-like look */
-    padding: 20px;
+    border-radius: 6px; /* Rounded corners for a card-like look */
+    padding: 0 24px;
     text-align: center;
     cursor: pointer;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
     transition: transform 0.3s, box-shadow 0.3s; /* Smooth hover effects */
+
+    /* Flexbox properties to center content */
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+    
   }
+  
 
   /* Hover effect for cards */
   .card-picker:hover {
@@ -440,28 +450,37 @@
 
   /* Title text inside each card */
   .picker-title {
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 40px;
     color: #333;
-    margin-bottom: 10px;
+    margin-bottom: 40px;
   }
 
   /* Image inside each card */
   .picker-image {
-    width: 100px; /* Set image width */
-    height: 100px; /* Set image height */
+    width: 120px; /* Set image width */
+    height: 120px; /* Set image height */
     border-radius: 50%; /* Makes the image round */
-    margin-bottom: 10px;
+    margin-bottom: 16px;
   }
 
   /* Description text inside each card */
   .picker-description {
-    font-size: 14px;
+    font-size: 18px;
     color: #666;
     margin-top: 10px;
   }
 
- 
+
+/* Content below card pickers*/
+
+#contentArea {
+    margin-top: 128px;
+    padding: 40px;
+    min-height: 300px;
+    background-color: #ffffff;
+    transition: background-color 0.3s ease
+}
+
 /**/
 
 /*! Buttons  */
@@ -2986,7 +3005,7 @@
     .form-control {
       display: block;
       width: 100%;
-      padding: 0.375rem 0.75rem;
+      padding: 0.75rem 1rem;
       font-size: 1rem;
       font-weight: 400;
       line-height: 1.5;
@@ -2997,7 +3016,7 @@
       -webkit-appearance: none;
         -moz-appearance: none;
               appearance: none;
-      border-radius: 50px;
+      border-radius: 6px;
       transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     }
     @media (prefers-reduced-motion: reduce) {
@@ -3899,7 +3918,7 @@
     left: 0; /* Ensures alignment from the left edge */
     width: 100%; /* Spans the full width of the viewport */
     z-index: 9999; /* Ensures it's above other content */
-    background-color: black; /* Solid background for visibility */
+    background-color: #2b2b2b; /* Solid background for visibility */
     color: white; /* White text for visibility */
   }
 
@@ -4023,7 +4042,7 @@
   .navbar {
     --bs-navbar-padding-x: 0;
     --bs-navbar-padding-y: 0.5rem;
-    --bs-navbar-background-color: black;
+    --bs-navbar-background-color: #2b2b2b;
     --bs-navbar-color: white;
     --bs-navbar-hover-color: white;
     --bs-navbar-disabled-color: white;
@@ -4051,7 +4070,7 @@
     display: flex; /* Use flexbox for alignment */
     justify-content: space-between; /* Space between left and right elements */
     align-items: center; /* Center items vertically */
-    padding: 10px 20px; /* Add some spacing */
+    padding: 16px 64px; /* Add some spacing */
     z-index: 9999; /* Ensure it's above all other elements */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Optional: Add a subtle shadow */
   }
@@ -4066,10 +4085,10 @@
     background-color: transparent; /* Transparent background */
     color: white; /* White text */
     border: 1px solid white; /* White border */
-    border-radius: 5px; /* Rounded corners */
-    padding: 8px 15px; /* Add some padding */
+    border-radius: 16px; /* Rounded corners */
+    padding: 8px 16px; /* Add some padding */
     cursor: pointer; /* Pointer cursor on hover */
-    font-size: 16px; /* Consistent font size */
+    font-size: 10px; /* Consistent font size */
     transition: background-color 0.3s, color 0.3s; /* Smooth hover effect */
   }
 
@@ -8018,7 +8037,7 @@
     }
 
     .py-3 {
-      padding-top: 1rem !important;
+      padding-top: 2rem !important;
       padding-bottom: 1rem !important;
     }
 
@@ -11904,4 +11923,15 @@
       font-size: 2.25rem;
     }
   }
+
+  .horizontal-container {
+    display: flex; /* Align items horizontally */
+    align-items: center; /* Center items vertically */
+    gap: 1rem; /* Space between items */
+    padding: 2rem 0; /* Add padding above and below the container */
+    justify-content: center; /* Center the container horizontally */
+    margin: 0 auto; /* Ensure it's centered horizontally */
+    text-align: center; /* Align text in the container */
+}
+ 
 /**/
