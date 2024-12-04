@@ -36,6 +36,29 @@ const geoSchema = new mongoose.Schema({
 
 const GeoModel = mongoose.model('GeoCollection', geoSchema);
 
+// 
+app.use(express.static(path.join(__dirname, '')));
+
+
+//navigation
+
+app.get('/homepage', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+app.get('/CS', (req, res) => {
+  res.sendFile(path.join(__dirname, 'CS3.html'));
+});
+
+app.get('/contribute', (req, res) => {
+  res.sendFile(path.join(__dirname, 'contribute.html'));
+});
+
+app.get('/contribute_', (req, res) => {
+  res.sendFile(path.join(__dirname, 'contribute_city.html'));
+});
+
+
 
 // API endpoint to get all GeoJSON data
 app.get('/api/geojson', async (req, res) => {
