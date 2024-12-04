@@ -11,6 +11,8 @@
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+        <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
         <style>
             body {
               background: url('./images/background.png') no-repeat center center fixed;
@@ -83,7 +85,8 @@
             <div class="col-md-5 position-relative">
                 <!-- Mapbox Map as Background -->
                 <div id="map"></div>
-                
+                <script src="map.js"></script>
+
                 <!-- Events Section Overlaid -->
                 <div class="events-overlay">
                     <h3 class="t3">Contributed by</h3>
@@ -993,19 +996,5 @@
                 }
                 }
           </script>
-
-    <!-- Mapbox --> 
-        <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
-        <script>
-            // Initialize Mapbox
-            mapboxgl.accessToken = 'pk.eyJ1IjoibWlrYmVycmEiLCJhIjoiY20xODh2MHdwMTIwdDJxcHNhazBoZTE3NCJ9.KQAl5jVzZBXZUvvLoD4x_Q';
-
-            const map = new mapboxgl.Map({
-                container: 'map',
-                style: 'mapbox://styles/mikberra/cm1gpvzcc00y601nw1c3iaao8',
-                center: [-73.9507, 40.7061], // Default center (longitude, latitude)
-                zoom: 12
-            });
-        </script>
     </body>
 </html>
