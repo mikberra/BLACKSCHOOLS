@@ -416,14 +416,13 @@
     display: flex;
     justify-content: center; /* Centers the cards horizontally */
     gap: 20px; /* Adds a margin of 20px between the cards */
-    margin: 0; /* Remove the existing margin */
-    padding-top: 32px; /* Add padding to create space above */
+    padding: 32px; /* Add padding to create space above */
   }
 
   /* Individual card-like buttons */
   .card-picker {
     width: 22%; /* Approximately 3/12 (25%) of the parent width */
-    height: 135%;
+    height: 100%;
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 6px; /* Rounded corners for a card-like look */
