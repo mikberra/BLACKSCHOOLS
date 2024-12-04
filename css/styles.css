@@ -837,26 +837,24 @@
 /**/
 
 /*!Maps*/
-  .map-container {
+  .map-schools {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 600px; /* Set height for the map */
+    height: 100%; /* Set height for the map */
     z-index: 0; /* Place the map behind the content */
   }
+
+  .map-index {
+    position: relative;
+    height: 80vh;
+    z-index: 0; /* Place the map behind the content */
+  }
+
   .map-column {
     position: relative;
     overflow: hidden; /* Ensures no overflow outside the column */
-  }
-
-  #map {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0; /* Map stays in the background */
   }
 
   .events-overlay {
