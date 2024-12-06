@@ -207,11 +207,11 @@
                     <label for="sources_description">Sources:</label>
                     <textarea id="sources_description" name="sources_description"></textarea><br><br>
                     <label for="image_school">Upload Image:</label>
-                    <input type="file" id="image_school" name="image_school" accept="image/*"><br><br>
-                    <label for="footnote_image">Footnote:</label>
-                    <input type="text" id="footnote_image" name="footnote_image"><br><br>
-                    <label for="sources_image">Sources:</label>
-                    <textarea id="sources_image" name="sources_image"></textarea><br><br>
+                    <input type="file" id="image_school" name="school.description.image" accept="image/*"><br><br>
+                    <label for="school_footnote">Footnote:</label>
+                    <input type="text" id="school_footnote" name="school_footnote"><br><br>
+                    <label for="school_image_sources">Sources:</label>
+                    <textarea id="school_image_sources" name="school_image_sources"></textarea><br><br>
                 </fieldset>
             </fieldset>
         </fieldset>
@@ -219,8 +219,12 @@
         <!-- Timeline -->
         <fieldset id="timeline">
             <legend>Timeline of the School</legend>
+            <div class="timeline-instructions">
+                <p><strong>Important Note:</strong> Please add one significant event for each decade. If multiple important events occurred in a single decade, create a summary highlighting the most significant event and its year. This will help create a comprehensive chronological overview of the school's history. If you have two equally significant events in one decade that cannot be combined into a single summary, you may add the second event to the next decade's entry if that decade currently has no significant events to report.</p>
+            </div>
+
             <fieldset id="timeline">
-                <legend>Event 1</legend>
+                <legend>Event of the 1850s</legend>
                 <label for="event_title_1">Title of the event:</label>
                 <input type="text" id="event_title_1" name="event_title_1"><br><br>
 
@@ -234,15 +238,15 @@
                 <textarea id="event_sources_1" name="event_sources_1"></textarea><br><br>
 
                 <label for="event_image_1">Upload Image:</label>
-                <input type="file" id="event_image_1" name="event_image_1" accept="image/*"><br><br>
-                <label for="footnote_event_image_1">Footnote:</label>
-                <input type="text" id="footnote_event_image_1" name="footnote_event_image_1"><br><br>
-                <label for="sources_event_image_1">Sources:</label>
-                <textarea id="sources_event_image_1" name="sources_event_image_1"></textarea><br><br>
+                <input type="file" id="event_image_1" name="school.timeline.event1.image" accept="image/*"><br><br>
+                <label for="event_footnote_1">Footnote:</label>
+                <input type="text" id="event_footnote_1" name="event_footnote_1"><br><br>
+                <label for="event_image_sources_1">Sources:</label>
+                <textarea id="event_image_sources_1" name="event_image_sources_1"></textarea><br><br>
             
 
                 <!-- Event 2 -->
-                <legend>Event 2</legend>
+                <legend>Event of the 1860s (Civil War)</legend>
                 <label for="event_title_2">Title of the event:</label>
                 <input type="text" id="event_title_2" name="event_title_2"><br><br>
 
@@ -256,15 +260,15 @@
                 <textarea id="event_sources_2" name="event_sources_2"></textarea><br><br>
                 
                 <label for="event_image_2">Upload Image:</label>
-                <input type="file" id="event_image_2" name="event_image_2" accept="image/*"><br><br>
-                <label for="footnote_event_image_2">Footnote:</label>
-                <input type="text" id="footnote_event_image_2" name="footnote_event_image_2"><br><br>
-                <label for="sources_event_image_2">Sources:</label>
-                <textarea id="sources_event_image_2" name="sources_event_image_2"></textarea><br><br>
+                <input type="file" id="event_image_2" name="school.timeline.event2.image" accept="image/*"><br><br>
+                <label for="event_footnote_2">Footnote:</label>
+                <input type="text" id="event_footnote_2" name="event_footnote_2"><br><br>
+                <label for="event_image_sources_2">Sources:</label>
+                <textarea id="event_image_sources_2" name="event_image_sources_2"></textarea><br><br>
 
 
                 <!-- Event 3 -->
-                <legend>Event 3</legend>
+                <legend>Event of the 1870s</legend>
                 <label for="event_title_3">Title of the event:</label>
                 <input type="text" id="event_title_3" name="event_title_3"><br><br>
 
@@ -278,14 +282,14 @@
                 <textarea id="event_sources_3" name="event_sources_3"></textarea><br><br>
 
                 <label for="event_image_3">Upload Image:</label>
-                <input type="file" id="event_image_3" name="event_image_3" accept="image/*"><br><br>
-                <label for="footnote_event_image_3">Footnote:</label>
-                <input type="text" id="footnote_event_image_3" name="footnote_event_image_2"><br><br>
-                <label for="sources_event_image_3">Sources:</label>
-                <textarea id="sources_event_image_3" name="sources_event_image_3"></textarea><br><br>
+                <input type="file" id="event_image_3" name="school.timeline.event3.image" accept="image/*"><br><br>
+                <label for="event_footnote_3">Footnote:</label>
+                <input type="text" id="event_footnote_3" name="event_footnote_3"><br><br>
+                <label for="event_image_sources_3">Sources:</label>
+                <textarea id="event_image_sources_3" name="event_image_sources_3"></textarea><br><br>
 
                 <!-- Event 4 -->
-                <legend>Event 4</legend>
+                <legend>Event of the 1880s</legend>
                 <label for="event_title_4">Title of the event:</label>
                 <input type="text" id="event_title_4" name="event_title_4"><br><br>
 
@@ -299,14 +303,14 @@
                 <textarea id="event_sources_4" name="event_sources_4"></textarea><br><br>
 
                 <label for="event_image_4">Upload Image:</label>
-                <input type="file" id="event_image_4" name="event_image_4" accept="image/*"><br><br>
-                <label for="footnote_event_image_4">Footnote:</label>
-                <input type="text" id="footnote_event_image_4" name="footnote_event_image_4"><br><br>
-                <label for="sources_event_image_4">Sources:</label>
-                <textarea id="sources_event_image_4" name="sources_event_image_4"></textarea><br><br>
+                <input type="file" id="event_image_4" name="school.timeline.event4.image" accept="image/*"><br><br>
+                <label for="event_footnote_4">Footnote:</label>
+                <input type="text" id="event_footnote_4" name="event_footnote_4"><br><br>
+                <label for="event_image_sources_4">Sources:</label>
+                <textarea id="event_image_sources_4" name="event_image_sources_4"></textarea><br><br>
 
                 <!-- Event 5 -->
-                <legend>Event 5</legend>
+                <legend>Event of the 1890s</legend>
                 <label for="event_title_5">Title of the event:</label>
                 <input type="text" id="event_title_5" name="event_title_5"><br><br>
 
@@ -320,14 +324,14 @@
                 <textarea id="event_sources_5" name="event_sources_5"></textarea><br><br>
 
                 <label for="event_image_5">Upload Image:</label>
-                <input type="file" id="event_image_5" name="event_image_5" accept="image/*"><br><br>
-                <label for="footnote_event_image_5">Footnote:</label>
-                <input type="text" id="footnote_event_image_5" name="footnote_event_image_5"><br><br>
-                <label for="sources_event_image_5">Sources:</label>
-                <textarea id="sources_event_image_5" name="sources_event_image_5"></textarea><br><br>
+                <input type="file" id="event_image_5" name="school.timeline.event5.image" accept="image/*"><br><br>
+                <label for="event_footnote_5">Footnote:</label>
+                <input type="text" id="event_footnote_5" name="event_footnote_5"><br><br>
+                <label for="event_image_sources_5">Sources:</label>
+                <textarea id="event_image_sources_5" name="event_image_sources_5"></textarea><br><br>
 
                 <!-- Event 6 -->
-                <legend>Event 6</legend>
+                <legend>Event of the 1900s</legend>
                 <label for="event_title_6">Title of the event:</label>
                 <input type="text" id="event_title_6" name="event_title_6"><br><br>
 
@@ -341,14 +345,14 @@
                 <textarea id="event_sources_6" name="event_sources_6"></textarea><br><br>
 
                 <label for="event_image_6">Upload Image:</label>
-                <input type="file" id="event_image_6" name="event_image_6" accept="image/*"><br><br>
-                <label for="footnote_event_image_6">Footnote:</label>
-                <input type="text" id="footnote_event_image_6" name="footnote_event_image_6"><br><br>
-                <label for="sources_event_image_6">Sources:</label>
-                <textarea id="sources_event_image_6" name="sources_event_image_6"></textarea><br><br>
+                <input type="file" id="event_image_6" name="school.timeline.event6.image" accept="image/*"><br><br>
+                <label for="event_footnote_6">Footnote:</label>
+                <input type="text" id="event_footnote_6" name="event_footnote_6"><br><br>
+                <label for="event_image_sources_6">Sources:</label>
+                <textarea id="event_image_sources_6" name="event_image_sources_6"></textarea><br><br>
                 
                 <!-- Event 7 -->
-                <legend>Event 7</legend>
+                <legend>Event of the 1910s</legend>
                 <label for="event_title_7">Title of the event:</label>
                 <input type="text" id="event_title_7" name="event_title_7"><br><br>
 
@@ -362,14 +366,14 @@
                 <textarea id="event_sources_7" name="event_sources_7"></textarea><br><br>
 
                 <label for="event_image_7">Upload Image:</label>
-                <input type="file" id="event_image_7" name="event_image_7" accept="image/*"><br><br>
-                <label for="footnote_event_image_7">Footnote:</label>
-                <input type="text" id="footnote_event_image_7" name="footnote_event_image_7"><br><br>
-                <label for="sources_event_image_7">Sources:</label>
-                <textarea id="sources_event_image_7" name="sources_event_image_7"></textarea><br><br>
+                <input type="file" id="event_image_7" name="school.timeline.event7.image" accept="image/*"><br><br>
+                <label for="event_footnote_7">Footnote:</label>
+                <input type="text" id="event_footnote_7" name="event_footnote_7"><br><br>
+                <label for="event_image_sources_7">Sources:</label>
+                <textarea id="event_image_sources_7" name="event_image_sources_7"></textarea><br><br>
 
                 <!-- Event 8 -->
-                <legend>Event 8</legend>
+                <legend>Event of the 1920s</legend>
                 <label for="event_title_8">Title of the event:</label>
                 <input type="text" id="event_title_8" name="event_title_8"><br><br>
 
@@ -383,14 +387,14 @@
                 <textarea id="event_sources_8" name="event_sources_8"></textarea><br><br>
 
                 <label for="event_image_8">Upload Image:</label>
-                <input type="file" id="event_image_8" name="event_image_8" accept="image/*"><br><br>
-                <label for="footnote_event_image_8">Footnote:</label>
-                <input type="text" id="footnote_event_image_8" name="footnote_event_image_8"><br><br>
-                <label for="sources_event_image_8">Sources:</label>
-                <textarea id="sources_event_image_8" name="sources_event_image_8"></textarea><br><br>
+                <input type="file" id="event_image_8" name="school.timeline.event8.image" accept="image/*"><br><br>
+                <label for="event_footnote_8">Footnote:</label>
+                <input type="text" id="event_footnote_8" name="event_footnote_8"><br><br>
+                <label for="event_image_sources_8">Sources:</label>
+                <textarea id="event_image_sources_8" name="event_image_sources_8"></textarea><br><br>
 
                 <!-- Event 9 -->
-                <legend>Event 9</legend>
+                <legend>Event of the 1930s</legend>
                 <label for="event_title_9">Title of the event:</label>
                 <input type="text" id="event_title_9" name="event_title_9"><br><br>
 
@@ -404,14 +408,14 @@
                 <textarea id="event_sources_9" name="event_sources_9"></textarea><br><br>
 
                 <label for="event_image_9">Upload Image:</label>
-                <input type="file" id="event_image_9" name="event_image_9" accept="image/*"><br><br>
-                <label for="footnote_event_image_9">Footnote:</label>
-                <input type="text" id="footnote_event_image_9" name="footnote_event_image_9"><br><br>
-                <label for="sources_event_image_9">Sources:</label>
-                <textarea id="sources_event_image_9" name="sources_event_image_9"></textarea><br><br>
+                <input type="file" id="event_image_9" name="school.timeline.event9.image" accept="image/*"><br><br>
+                <label for="event_footnote_9">Footnote:</label>
+                <input type="text" id="event_footnote_9" name="event_footnote_9"><br><br>
+                <label for="event_image_sources_9">Sources:</label>
+                <textarea id="event_image_sources_9" name="event_image_sources_9"></textarea><br><br>
 
                 <!-- Event 10 -->
-                <legend>Event 10</legend>
+                <legend>Event of the 1940s</legend>
                 <label for="event_title_10">Title of the event:</label>
                 <input type="text" id="event_title_10" name="event_title_10"><br><br>
 
@@ -425,11 +429,12 @@
                 <textarea id="event_sources_10" name="event_sources_10"></textarea><br><br>
                 
                 <label for="event_image_10">Upload Image:</label>
-                <input type="file" id="event_image_10" name="event_image_10" accept="image/*"><br><br>
-                <label for="footnote_event_image_10">Footnote:</label>
-                <input type="text" id="footnote_event_image_10" name="footnote_event_image_10"><br><br>
-                <label for="sources_event_image_10">Sources:</label>
-                <textarea id="sources_event_image_10" name="sources_event_image_10"></textarea><br><br>
+                <input type="file" id="event_image_10" name="school.timeline.event10.image" accept="image/*"><br><br>
+                <label for="event_footnote_10">Footnote:</label>
+                <input type="text" id="event_footnote_10" name="event_footnote_10"><br><br>
+                <label for="event_image_sources_10">Sources:</label>
+                <textarea id="event_image_sources_10" name="event_image_sources_10"></textarea><br><br>
+
         
             </fieldset>
 
@@ -458,10 +463,10 @@
             <textarea id="figure_sources_description_1" name="figure_sources_description_1"></textarea><br><br>
 
             <label for="figure_image_1">Upload Image:</label>
-            <input type="file" id="figure_image_1" name="figure_image_1" accept="image/*"><br><br>
+            <input type="file" id="figure_image_1" name="relevantFigures.figure1.image" accept="image/*"><br><br>
             <label for="footnote_figure_image_1">Footnote:</label>
             <input type="text" id="footnote_figure_image_1" name="footnote_figure_image_1"><br><br>
-            <label for="footnote_figure_image_11">Sources:</label>
+            <label for="sources_figure_image_1">Sources:</label>
             <textarea id="sources_figure_image_1" name="sources_figure_image_1"></textarea><br><br>
 
             <!-- Figure 2 -->
@@ -485,7 +490,7 @@
             <textarea id="figure_sources_description_2" name="figure_sources_description_2"></textarea><br><br>
 
             <label for="figure_image_2">Upload Image:</label>
-            <input type="file" id="figure_image_2" name="figure_image_2" accept="image/*"><br><br>
+            <input type="file" id="figure_image_2" name="relevantFigures.figure2.image" accept="image/*"><br><br>
             <label for="footnote_figure_image_2">Footnote:</label>
             <input type="text" id="footnote_figure_image_2" name="footnote_figure_image_2"><br><br>
             <label for="sources_figure_image_2">Sources:</label>
@@ -512,7 +517,7 @@
             <textarea id="figure_sources_description_3" name="figure_sources_description_3"></textarea><br><br>
 
             <label for="figure_image_3">Upload Image:</label>
-            <input type="file" id="figure_image_3" name="figure_image_3" accept="image/*"><br><br>
+            <input type="file" id="figure_image_3" name="relevantFigures.figure3.image" accept="image/*"><br><br>
             <label for="footnote_figure_image_3">Footnote:</label>
             <input type="text" id="footnote_figure_image_3" name="footnote_figure_image_3"><br><br>
             <label for="sources_figure_image_3">Sources:</label>
@@ -539,7 +544,7 @@
             <textarea id="figure_sources_description_4" name="figure_sources_description_4"></textarea><br><br>
 
             <label for="figure_image_4">Upload Image:</label>
-            <input type="file" id="figure_image_4" name="figure_image_4" accept="image/*"><br><br>
+            <input type="file" id="figure_image_4" name="relevantFigures.figure4.image" accept="image/*"><br><br>
             <label for="footnote_figure_image_4">Footnote:</label>
             <input type="text" id="footnote_figure_image_4" name="footnote_figure_image_4"><br><br>
             <label for="sources_figure_image_4">Sources:</label>
@@ -566,11 +571,43 @@
             <textarea id="figure_sources_description_5" name="figure_sources_description_5"></textarea><br><br>
 
             <label for="figure_image_5">Upload Image:</label>
-            <input type="file" id="figure_image_5" name="figure_image_5" accept="image/*"><br><br>
+            <input type="file" id="figure_image_5" name="relevantFigures.figure5.image" accept="image/*"><br><br>
             <label for="footnote_figure_image_5">Footnote:</label>
             <input type="text" id="footnote_figure_image_5" name="footnote_figure_image_5"><br><br>
             <label for="sources_figure_image_5">Sources:</label>
             <textarea id="sources_figure_image_5" name="sources_figure_image_5"></textarea><br><br>
+        </fieldset>
+        <fieldset id="maps">
+            <legend>Maps</legend>
+            <!-- Map 1 -->
+            <legend>Map 1</legend>
+            <label for="map_title_1">Title of the map:</label>
+            <input type="text" id="map_title_1" name="map_title_1"><br><br>
+
+            <label for="map_period_1">Time Period:</label>
+            <select id="map_period_1" name="map_decade_1">
+                <option value="">Select a time period</option>
+                <option value="1860-1880">1860-1880</option>
+                <option value="1880-1900">1880-1900</option>
+                <option value="1900-1920">1900-1920</option>
+                <option value="20th-century">20th Century</option>
+                <option value="current">Current</option>
+            </select><br><br>
+
+            <label for="map_description_1">Description:</label>
+            <textarea id="map_description_1" name="map_brief_description_1"></textarea><br><br>
+
+            <label for="map_image_1">Upload Map:</label>
+            <input type="file" id="map_image_1" name="maps.map1.image" accept="image/*"><br><br>
+
+            <label for="map_sources_1">Sources:</label>
+            <textarea id="map_sources_1" name="map_sources_1"></textarea><br><br>
+
+            <label for="map_footnote_1">Footnote:</label>
+            <input type="text" id="map_footnote_1" name="map_footnote_1"><br><br>
+
+            <label for="map_image_sources_1">Image Sources:</label>
+            <textarea id="map_image_sources_1" name="map_image_sources_1"></textarea><br><br>
         </fieldset>
 
         <button type="submit">Submit</button>
