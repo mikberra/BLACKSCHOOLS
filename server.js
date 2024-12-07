@@ -1080,7 +1080,78 @@ app.post('/submit_context', async (req, res) => {
 });
 
 
+// API endpoint to get all form data
+app.get('/api/formdata', async (req, res) => {
+  try {
+    console.log('Fetching all form data...');
+    
+    const formData = await FormData.find({});
+    
+    // Transform the data to include only non-null/non-empty values
+    const transformedData = formData.map(doc => {
+      const data = doc.toObject();
+      
+      // Helper function to remove empty/null values from objects
+      const removeEmpty = (obj) => {
+        Object.keys(obj).forEach(key => {
+          if (obj[key] && typeof obj[key] === 'object') {
+            removeEmpty(obj[key]);
+          }
+          if (obj[key] === null || obj[key] === undefined || obj[key] === '') {
+            delete obj[key];
+          }
+        });
+        return obj;
+      };
 
+      return removeEmpty(data);
+    });
+
+    console.log(`Found ${transformedData.length} documents`);
+    res.json(transformedData);
+    
+  } catch (error) {
+    console.error('Error fetching form data:', error);
+    res.status(500).json({ error: 'Failed to fetch form data' });
+  }
+});
+
+
+// API endpoint to get all context form data
+app.get('/api/formdata_context', async (req, res) => {
+  try {
+    console.log('Fetching all context form data...');
+    
+    const formDataContext = await FormDataContext.find({});
+    
+    // Transform the data to include only non-null/non-empty values
+    const transformedData = formDataContext.map(doc => {
+      const data = doc.toObject();
+      
+      // Helper function to remove empty/null values from objects
+      const removeEmpty = (obj) => {
+        Object.keys(obj).forEach(key => {
+          if (obj[key] && typeof obj[key] === 'object') {
+            removeEmpty(obj[key]);
+          }
+          if (obj[key] === null || obj[key] === undefined || obj[key] === '') {
+            delete obj[key];
+          }
+        });
+        return obj;
+      };
+
+      return removeEmpty(data);
+    });
+
+    console.log(`Found ${transformedData.length} context documents`);
+    res.json(transformedData);
+    
+  } catch (error) {
+    console.error('Error fetching context form data:', error);
+    res.status(500).json({ error: 'Failed to fetch context form data' });
+  }
+});
 
 
 
@@ -1103,3 +1174,4 @@ app.get('/test', (req, res) => {
   res.status(500).json({ error: 'Failed to fetch data' });
   }
   });
+
