@@ -16,6 +16,12 @@ if (!fs.existsSync(uploadDir)){
     fs.mkdirSync(uploadDir);
 }
 
+// Create uploads_maps directory if it doesn't exist
+const uploadMapsDir = 'uploads_maps';
+if (!fs.existsSync(uploadMapsDir)){
+    fs.mkdirSync(uploadMapsDir);
+}
+
 // ... existing imports ...
 const express = require('express');
 const cors = require('cors');
@@ -322,6 +328,87 @@ const formSchema = new mongoose.Schema({
       image: { type: String },
       footnote: { type: String },
       imageSources: { type: String }
+    },
+    map2: {
+      title: { type: String },
+      decade: { type: String },
+      briefDescription: { type: String },
+      sources: { type: String },
+      image: { type: String },
+      footnote: { type: String },
+      imageSources: { type: String }
+    },
+    map3: {
+      title: { type: String },
+      decade: { type: String },
+      briefDescription: { type: String },
+      sources: { type: String },
+      image: { type: String },
+      footnote: { type: String },
+      imageSources: { type: String }
+    },
+    map4: {
+      title: { type: String },
+      decade: { type: String },
+      briefDescription: { type: String },
+      sources: { type: String },
+      image: { type: String },
+      footnote: { type: String },
+      imageSources: { type: String }
+    },
+    map5: {
+      title: { type: String },
+      decade: { type: String },
+      briefDescription: { type: String },
+      sources: { type: String },
+      image: { type: String },
+      footnote: { type: String },
+      imageSources: { type: String }
+    },
+    map6: {
+      title: { type: String },
+      decade: { type: String },
+      briefDescription: { type: String },
+      sources: { type: String },
+      image: { type: String },
+      footnote: { type: String },
+      imageSources: { type: String }
+    },
+    map7: {
+      title: { type: String },
+      decade: { type: String },
+      briefDescription: { type: String },
+      sources: { type: String },
+      image: { type: String },
+      footnote: { type: String },
+      imageSources: { type: String }
+    },
+    map8: {
+      title: { type: String },
+      decade: { type: String },
+      briefDescription: { type: String },
+      sources: { type: String },
+      image: { type: String },
+      footnote: { type: String },
+      imageSources: { type: String }
+    },
+    map9: {
+      title: { type: String },
+      decade: { type: String },
+      briefDescription: { type: String },
+      sources: { type: String },
+      image: { type: String },
+      footnote: { type: String },
+      imageSources: { type: String }
+    },
+    map10: {
+      title: { type: String },
+      decade: { type: String },
+      briefDescription: { type: String },
+      sources: { type: String },
+      image: { type: String },
+      footnote: { type: String },
+      imageSources: { type: String }
     }
   }
 });
@@ -339,6 +426,20 @@ const storage = multer.diskStorage({
   destination: function(req, file, cb) {
     // Make sure this directory exists!
     cb(null, 'uploads/');
+  },
+  filename: function(req, file, cb) {
+    cb(null, Date.now() + '-' + file.originalname);
+  }
+});
+
+// Configure multer for map uploads
+const mapStorage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    if (file.fieldname.startsWith('maps.')) {
+      cb(null, 'uploads_maps/');
+    } else {
+      cb(null, 'uploads/');
+    }
   },
   filename: function(req, file, cb) {
     cb(null, Date.now() + '-' + file.originalname);
@@ -366,7 +467,14 @@ const uploadFields = [
   // Maps
   { name: 'maps.map1.image', maxCount: 1 },
   { name: 'maps.map2.image', maxCount: 1 },
-  { name: 'maps.map3.image', maxCount: 1 }
+  { name: 'maps.map3.image', maxCount: 1 },
+  { name: 'maps.map4.image', maxCount: 1 },
+  { name: 'maps.map5.image', maxCount: 1 },
+  { name: 'maps.map6.image', maxCount: 1 },
+  { name: 'maps.map7.image', maxCount: 1 },
+  { name: 'maps.map8.image', maxCount: 1 },
+  { name: 'maps.map9.image', maxCount: 1 },
+  { name: 'maps.map10.image', maxCount: 1 }
 ];
 
 const upload = multer({ 
@@ -418,17 +526,18 @@ app.post('/submit', upload.fields(uploadFields), async (req, res) => {
     }
 
     // Process maps data
-    const maps = {
-      map1: {
-        title: req.body.map_title_1,
-        decade: req.body.map_decade_1,
-        briefDescription: req.body.map_brief_description_1,
-        sources: req.body.map_sources_1,
-        image: req.files['maps.map1.image'] ? req.files['maps.map1.image'][0].filename : null,
-        footnote: req.body.map_footnote_1,
-        imageSources: req.body.map_image_sources_1
-      }
-    };
+    const maps = {};
+    for (let i = 1; i <= 10; i++) {
+      maps[`map${i}`] = {
+        title: req.body[`map_title_${i}`],
+        decade: req.body[`map_decade_${i}`],
+        briefDescription: req.body[`map_brief_description_${i}`],
+        sources: req.body[`map_sources_${i}`],
+        image: req.files[`maps.map${i}.image`] ? req.files[`maps.map${i}.image`][0].filename : null,
+        footnote: req.body[`map_footnote_${i}`],
+        imageSources: req.body[`map_image_sources_${i}`]
+      };
+    }
 
     const {
       area_of_work,
