@@ -48,7 +48,7 @@ const geoSchema = new mongoose.Schema({
     type: { type: String, enum: ['Point'], required: true },
     coordinates: { type: [Number], required: true }
   }
-}, { collection: 'Brooklyn' }); //To be changed when integrate
+}, { collection: 'formdatas' }); // This should match your MongoDB collection name
 
 const GeoModel = mongoose.model('GeoCollection', geoSchema);
 
@@ -79,12 +79,35 @@ app.get('/contribute_', (req, res) => {
 // API endpoint to get all GeoJSON data
 app.get('/api/geojson', async (req, res) => {
   try {
-    const features = await GeoModel.find();
+    // Add logging to debug
+    console.log('Fetching GeoJSON data...');
+    
+    // Use the FormData model instead of GeoModel since the location data is nested
+    const features = await FormData.find({}, {
+      'school.location': 1 // Only fetch the location field
+    });
+    
+    // Transform the data to GeoJSON format
+    const geoJsonFeatures = features
+      .filter(doc => doc.school && doc.school.location) // Filter out documents without location
+      .map(doc => ({
+        type: 'Feature',
+        properties: {
+          name: doc.school.name,
+          // Add any other properties you want to include
+        },
+        geometry: doc.school.location.geometry
+      }));
+
+    // Send the GeoJSON response
     res.json({
       type: "FeatureCollection",
-      features: features
+      features: geoJsonFeatures
     });
+    
+    console.log(`Found ${geoJsonFeatures.length} features`);
   } catch (error) {
+    console.error('Error fetching GeoJSON:', error);
     res.status(500).json({ error: 'Failed to fetch data' });
   }
 });
