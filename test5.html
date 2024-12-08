@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>School Information</title>
+</head>
+<body>
+  <h1>School Information</h1>
+  <p>School Name: <span id="school-name">Loading...</span></p>
+  <img id="school-img" alt="School Image" style="max-width: 100%; height: auto;">
+
+  <script>
+    async function fetchSchoolById() {
+        const targetId = "6754c7233eac10c4d575d570"; // Replace with the desired _id
+        const response = await fetch('http://localhost:3000/api/formdata'); // Replace with your API endpoint
+        const data = await response.json();
+        const targetEntry = data.find(item => item._id === targetId);
+
+        // Set the school name
+        document.getElementById('school-name').textContent = targetEntry.school.name;
+
+        // Set the image source
+        const imgSrc = targetEntry.school.description.image; // Adjusted to use description.image as in the provided API example
+        document.getElementById('school-img').src = imgSrc;
+    }
+
+    window.onload = fetchSchoolById;
+  </script>
+</body>
+</html>

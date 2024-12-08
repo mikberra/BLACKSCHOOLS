@@ -382,7 +382,7 @@
 /*! Specific buttons*/
   .sticky-top-buttons {
       position: sticky;
-      top: 0;
+      top: 60px;
       z-index: 1020;
       background-color: #fff;
       border-bottom: 1px solid #ddd;

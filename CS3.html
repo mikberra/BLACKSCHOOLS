@@ -969,5 +969,18 @@
                 }
                 }
           </script>
+
+    <!-- Feeder script -->  
+    <script>
+        async function fetchSchoolById() {
+            const targetId = "6754c7233eac10c4d575d570"; // Replace with the desired _id
+            const response = await fetch('http://localhost:3000/api/formdata'); // Replace with your API endpoint
+            const data = await response.json();
+            const targetEntry = data.find(item => item._id === targetId);
+            document.getElementById('school.name').textContent = targetEntry.school.name;
+        }
+    
+        window.onload = fetchSchoolById;
+    </script>
     </body>
 </html>
