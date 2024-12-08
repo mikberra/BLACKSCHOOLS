@@ -47,32 +47,36 @@
                         <h5 id="school.condition">Characteristics</h5>
                     </div>
                 </div>
+            </div>
+            <!-- Right Column: 5/12 wide -->
+            <div class="col-md-5 position-relative">
+                <!-- Mapbox Map as Background -->
+                <div id="map" class="map-schools"></div>
+                <script src="map.js"></script>
+            </div>
+        </div>
+    </div>
+<!-- Info-->
+    <div class="container-fluid px-0">
+        <div class="row g-0 bg-dark text-white">
+            <!-- Left Column: 7/12 wide -->
+            <div class="col-md-7 position-relative">
                 <!-- Description Section -->
-                <div class="bg-dark text-white p-4">
-                        <div id="school.description.briefDescription" class="mb-4">
+                <div class="p-4">
+                        <div class="mb-4">
                             <t3>Summary</t3>
-                            <p>A small building surrounded by giants: it is how the former Colored School no. 3 feels today. The single-storey brick building in 270 Union Avenue, Williamsburg, is the only standing Colored School building in Brooklyn, and stands as a testament to the physical and social transformations that have reshaped the area.</p>
+                            <p id="school.description.briefDescription"></p>
                         </div>
                     <div>
                         <t3>Notable People</t3>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="avatar-card">
-                                    <img class="avatar" id="relevantFigures.figure2.image">
+                                    <img class="avatar" id="relevantFigures.figure1.image">
                                     <div class="avatar-text-content">
-                                        <h5 id="relevantFigures.figure1.name" class="avatar-name">Catharine T. Clow</h5>
-                                        <p id="relevantFigures.figure1.role" class="avatar-title">Principal</p>
-                                        <p id="relevantFigures.figure1.briefDescription" class="avatar-description">Colored School 3, Brooklyn</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="avatar-card">
-                                    <img class="avatar" id="relevantFigures.figure2.image">
-                                    <div class="avatar-text-content">
-                                        <h5 id="relevantFigures.figure2.name" class="avatar-name">Philip A. White</h5>
-                                        <p id="relevantFigures.figure2.role" class="avatar-title">Principal</p>
-                                        <p id="relevantFigures.figure2.briefDescription" class="avatar-description">Colored School 3, Brooklyn</p>
+                                        <h5 id="relevantFigures.figure1.name" class="avatar-name"></h5>
+                                        <p id="relevantFigures.figure1.role" class="avatar-title"></p>
+                                        <p id="relevantFigures.figure1.briefDescription" class="avatar-description"></p>
                                     </div>
                                 </div>
                             </div>
@@ -82,9 +86,28 @@
             </div>
             <!-- Right Column: 5/12 wide -->
             <div class="col-md-5 position-relative">
-                <!-- Mapbox Map as Background -->
-                <div id="map" class="map-schools"></div>
-                <script src="map.js"></script>
+                <div class="p-4">
+                    <t3>Current condition</t3>
+                    <p id="school.currentUse"></p>
+                    <p id="school.condition"></p>
+                    <p id="school.landmarked"></p>
+                    <p id="school.landmarkedBy"></p>
+                    <p id="school.sign"></p>
+                    <p id="school.owner"></p>
+                    <t3>Quick dates</t3>
+                    <p id="school.description.yearInstitutionCreation"></p>
+                    <p id="school.description.yearBuildingStarted"></p>
+                    <p id="school.description.yearBuildingEnded"></p>
+                    <p id="school.description.yearDesegregation"></p>
+                    <p id="school.description.yearCeased"></p>
+                    <p id="school.description.yearDemolished"></p>
+                    <t3>Names over time</t3>
+                    <p id="school.otherNames.name1"></p>
+                    <p id="school.otherNames.name2"></p>
+                    <p id="school.otherNames.name3"></p>
+                    <p id="school.otherNames.name4"></p>
+                    <p id="school.otherNames.name5"></p>
+                </div>
             </div>
         </div>
     </div>
