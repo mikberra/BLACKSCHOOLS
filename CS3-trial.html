@@ -148,10 +148,10 @@
                     </section>
                 </div>
                     <div class="col-md-5 position-relative">
-                        <div id="contentA" class="content mt-3">
+                        <div class="contentA content mt-3">
                             <section class="parallax" style="background-image: url('./images/003-Maps_18871.jpg');"></section>
                         </div>
-                        <div id="contentB" class="content mt-3 d-none text-dark">
+                        <div class="contentB content mt-3 d-none text-dark">
                             <section>
                                 <div class="row align-items-center">
                                     <div class="col-md-2">
@@ -228,10 +228,10 @@
                         </div>
     </div>
                     <div class="col-md-5 position-relative">
-                    <div id="contentA" class="content mt-3">
+                    <div class="contentA content mt-3">
                         <section class="parallax" style="background-image: url('./images/003-Maps_19041.jpg');"></section>
                     </div>
-                    <div id="contentB" class="content mt-3 d-none text-dark">
+                    <div class="contentB content mt-3 d-none text-dark">
                         <section>
                             <div class="row align-items-center">
                                 <div class="col-md-2">
@@ -330,25 +330,28 @@
     <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
     <!-- On-off button -->    
-        <script>
-            function toggleContent(content) {
-                const contentA = document.getElementById('contentA');
-                const contentB = document.getElementById('contentB');
-                const buttonA = document.getElementById('buttonA');
-                const buttonB = document.getElementById('buttonB');
-
-                if (content === 'A') {
-                    contentA.classList.remove('d-none');
-                    contentB.classList.add('d-none');
-                    buttonA.classList.add('active');
-                    buttonB.classList.remove('active');
-                } else if (content === 'B') {
-                    contentA.classList.add('d-none');
-                    contentB.classList.remove('d-none');
-                    buttonA.classList.remove('active');
-                    buttonB.classList.add('active');
-                }
-                }
-          </script>
+    <script>
+        function toggleContent(content) {
+            // Select all content elements
+            const contentAElements = document.querySelectorAll('.contentA');
+            const contentBElements = document.querySelectorAll('.contentB');
+            
+            // Select the buttons
+            const buttonA = document.getElementById('buttonA');
+            const buttonB = document.getElementById('buttonB');
+    
+            if (content === 'A') {
+                contentAElements.forEach(el => el.classList.remove('d-none'));
+                contentBElements.forEach(el => el.classList.add('d-none'));
+                buttonA.classList.add('active');
+                buttonB.classList.remove('active');
+            } else if (content === 'B') {
+                contentAElements.forEach(el => el.classList.add('d-none'));
+                contentBElements.forEach(el => el.classList.remove('d-none'));
+                buttonA.classList.remove('active');
+                buttonB.classList.add('active');
+            }
+        }
+    </script>
     </body>
 </html>
