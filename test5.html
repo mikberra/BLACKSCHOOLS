@@ -21,8 +21,7 @@
         document.getElementById('school-name').textContent = targetEntry.school.name;
 
         // Set the image source
-        const imgSrc = targetEntry.school.description.image; // Adjusted to use description.image as in the provided API example
-        document.getElementById('school-img').src = imgSrc;
+        document.getElementById('school-img').src = targetEntry.school.description.image;
     }
 
     window.onload = fetchSchoolById;
