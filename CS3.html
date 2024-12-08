@@ -237,119 +237,95 @@
 
             function updateData(schoolEntry, contextEntry) {
                 // Update or hide elements
-                function updateOrHide(id, value) {
+                function updateOrHide(id, value, isImage = false) {
                     const element = document.getElementById(id);
                     if (element) {
                         if (value) {
-                            element.textContent = value;
-                            element.style.display = ''; // Show element
+                            if (isImage) {
+                                // For image elements, update the src attribute
+                                // Remove 'uploads/' from the beginning if it exists
+                                const imagePath = value.startsWith('uploads/') ? value : `uploads/${value}`;
+                                element.src = '/' + imagePath; // Add leading slash
+                                element.style.display = ''; // Show element
+                                
+                                // Debug log
+                                console.log(`Setting image src for ${id} to: /${imagePath}`);
+                            } else {
+                                element.textContent = value;
+                                element.style.display = ''; // Show element
+                            }
                         } else {
                             element.style.display = 'none'; // Hide element
                         }
+                    } else {
+                        // Debug log for missing elements
+                        console.log(`Element not found: ${id}`);
                     }
                 }
 
                 if (schoolEntry) {
-                // General Information
-                updateOrHide('generalInformation.areaOfWork', schoolEntry.generalInformation?.areaOfWork);
-                updateOrHide('generalInformation.city', schoolEntry.generalInformation?.city);
-                updateOrHide('generalInformation.county', schoolEntry.generalInformation?.county);
-                updateOrHide('generalInformation.neighborhood', schoolEntry.generalInformation?.neighborhood);
-                updateOrHide('generalInformation.state', schoolEntry.generalInformation?.state);
-        
-                // Contacts
-                updateOrHide('contacts.contactPerson.name', schoolEntry.contacts?.contactPerson?.name);
-                updateOrHide('contacts.contactPerson.email', schoolEntry.contacts?.contactPerson?.email);
-                updateOrHide('contacts.contactPerson.phone', schoolEntry.contacts?.contactPerson?.phone);
-                updateOrHide('contacts.organization.name', schoolEntry.contacts?.organization?.name);
-                updateOrHide('contacts.organization.type', schoolEntry.contacts?.organization?.type);
-        
-                // Contributors
-                for (let i = 1; i <= 5; i++) {
-                    updateOrHide(`contacts.contributors.contributor${i}.organization`, schoolEntry.contacts?.contributors[`contributor${i}`]?.organization);
-                    updateOrHide(`contacts.contributors.contributor${i}.type`, schoolEntry.contacts?.contributors[`contributor${i}`]?.type);
+                    // General Information (non-image updates)
+                    updateOrHide('generalInformation.areaOfWork', schoolEntry.generalInformation?.areaOfWork);
+                    updateOrHide('generalInformation.city', schoolEntry.generalInformation?.city);
+                    updateOrHide('generalInformation.county', schoolEntry.generalInformation?.county);
+                    updateOrHide('generalInformation.neighborhood', schoolEntry.generalInformation?.neighborhood);
+                    updateOrHide('generalInformation.state', schoolEntry.generalInformation?.state);
+
+                    // School Details (non-image updates)
+                    updateOrHide('school.name', schoolEntry.school?.name);
+                    updateOrHide('school.address', schoolEntry.school?.address);
+                    updateOrHide('school.condition', schoolEntry.school?.condition);
+                    updateOrHide('school.description.briefDescription', schoolEntry.school?.description?.briefDescription);
+
+                    // Images - Note the isImage flag set to true
+                    updateOrHide('school.description.image', schoolEntry.school?.description?.image, true);
+
+                    // Timeline Events
+                    for (let i = 1; i <= 10; i++) {
+                        updateOrHide(`school.timeline.event${i}.title`, schoolEntry.school?.timeline[`event${i}`]?.title);
+                        updateOrHide(`school.timeline.event${i}.year`, schoolEntry.school?.timeline[`event${i}`]?.year);
+                        updateOrHide(`school.timeline.event${i}.briefDescription`, schoolEntry.school?.timeline[`event${i}`]?.briefDescription);
+                        updateOrHide(`school.timeline.event${i}.sources`, schoolEntry.school?.timeline[`event${i}`]?.sources);
+                        updateOrHide(`school.timeline.event${i}.footnote`, schoolEntry.school?.timeline[`event${i}`]?.footnote);
+                        updateOrHide(`school.timeline.event${i}.image`, schoolEntry.school?.timeline[`event${i}`]?.image, true);
+                        updateOrHide(`school.timeline.event${i}.imageSources`, schoolEntry.school?.timeline[`event${i}`]?.imageSources);
+                    }
+
+                    // Relevant Figures
+                    for (let i = 1; i <= 5; i++) {
+                        updateOrHide(`relevantFigures.figure${i}.name`, schoolEntry.relevantFigures?.[`figure${i}`]?.name);
+                        updateOrHide(`relevantFigures.figure${i}.role`, schoolEntry.relevantFigures?.[`figure${i}`]?.role);
+                        updateOrHide(`relevantFigures.figure${i}.briefDescription`, schoolEntry.relevantFigures?.[`figure${i}`]?.briefDescription);
+                        updateOrHide(`relevantFigures.figure${i}.image`, schoolEntry.relevantFigures?.[`figure${i}`]?.image, true);
+                    }
+
+                    // Maps
+                    for (let i = 1; i <= 10; i++) {
+                        updateOrHide(`maps.map${i}.title`, schoolEntry.maps?.[`map${i}`]?.title);
+                        updateOrHide(`maps.map${i}.decade`, schoolEntry.maps?.[`map${i}`]?.decade);
+                        updateOrHide(`maps.map${i}.briefDescription`, schoolEntry.maps?.[`map${i}`]?.briefDescription);
+                        updateOrHide(`maps.map${i}.sources`, schoolEntry.maps?.[`map${i}`]?.sources);
+                        updateOrHide(`maps.map${i}.footnote`, schoolEntry.maps?.[`map${i}`]?.footnote);
+                        updateOrHide(`maps.map${i}.image`, schoolEntry.maps?.[`map${i}`]?.image, true);
+                        updateOrHide(`maps.map${i}.imageSources`, schoolEntry.maps?.[`map${i}`]?.imageSources);
+                    }
                 }
-        
-                // School Details
-                updateOrHide('school.name', schoolEntry.school?.name);
-                updateOrHide('school.location', schoolEntry.school?.location);
-                updateOrHide('school.address', schoolEntry.school?.address);
-                updateOrHide('school.city', schoolEntry.school?.city);
-                updateOrHide('school.county', schoolEntry.school?.county);
-                updateOrHide('school.neighborhood', schoolEntry.school?.neighborhood);
-                updateOrHide('school.state', schoolEntry.school?.state);
-                updateOrHide('school.currentUse', schoolEntry.school?.currentUse);
-                updateOrHide('school.condition', schoolEntry.school?.condition);
-                updateOrHide('school.landmarked', schoolEntry.school?.landmarked);
-                updateOrHide('school.landmarkedBy', schoolEntry.school?.landmarkedBy);
-                updateOrHide('school.sign', schoolEntry.school?.sign);
-                updateOrHide('school.owner', schoolEntry.school?.owner);
-        
-                // Other Names
-                for (let i = 1; i <= 5; i++) {
-                    updateOrHide(`school.otherNames.name${i}`, schoolEntry.school?.otherNames[`name${i}`]);
-                }
-        
-                // School Description
-                updateOrHide('school.description.yearInstitutionCreation', schoolEntry.school?.description?.yearInstitutionCreation);
-                updateOrHide('school.description.yearBuildingStarted', schoolEntry.school?.description?.yearBuildingStarted);
-                updateOrHide('school.description.yearBuildingEnded', schoolEntry.school?.description?.yearBuildingEnded);
-                updateOrHide('school.description.yearDesegregation', schoolEntry.school?.description?.yearDesegregation);
-                updateOrHide('school.description.yearCeased', schoolEntry.school?.description?.yearCeased);
-                updateOrHide('school.description.yearDemolished', schoolEntry.school?.description?.yearDemolished);
-                updateOrHide('school.description.briefDescription', schoolEntry.school?.description?.briefDescription);
-                updateOrHide('school.description.sources', schoolEntry.school?.description?.sources);
-                updateOrHide('school.description.footnote', schoolEntry.school?.description?.footnote);
-                updateOrHide('school.description.imageSources', schoolEntry.school?.description?.imageSources);
-                updateOrHide('school.description.image', schoolEntry.school?.description?.image);
-        
-                // Timeline Events
-                for (let i = 1; i <= 10; i++) {
-                    updateOrHide(`school.timeline.event${i}.title`, schoolEntry.school?.timeline[`event${i}`]?.title);
-                    updateOrHide(`school.timeline.event${i}.year`, schoolEntry.school?.timeline[`event${i}`]?.year);
-                    updateOrHide(`school.timeline.event${i}.briefDescription`, schoolEntry.school?.timeline[`event${i}`]?.briefDescription);
-                    updateOrHide(`school.timeline.event${i}.sources`, schoolEntry.school?.timeline[`event${i}`]?.sources);
-                    updateOrHide(`school.timeline.event${i}.footnote`, schoolEntry.school?.timeline[`event${i}`]?.footnote);
-                    updateOrHide(`school.timeline.event${i}.image`, schoolEntry.school?.timeline[`event${i}`]?.image);
-                }
-        
-                // Relevant Figures
-                for (let i = 1; i <= 5; i++) {
-                    updateOrHide(`relevantFigures.figure${i}.name`, schoolEntry.relevantFigures?.[`figure${i}`]?.name);
-                    updateOrHide(`relevantFigures.figure${i}.years`, schoolEntry.relevantFigures?.[`figure${i}`]?.years);
-                    updateOrHide(`relevantFigures.figure${i}.role`, schoolEntry.relevantFigures?.[`figure${i}`]?.role);
-                    updateOrHide(`relevantFigures.figure${i}.roleYears`, schoolEntry.relevantFigures?.[`figure${i}`]?.roleYears);
-                    updateOrHide(`relevantFigures.figure${i}.briefDescription`, schoolEntry.relevantFigures?.[`figure${i}`]?.briefDescription);
-                    updateOrHide(`relevantFigures.figure${i}.sources`, schoolEntry.relevantFigures?.[`figure${i}`]?.sources);
-                    updateOrHide(`relevantFigures.figure${i}.footnote`, schoolEntry.relevantFigures?.[`figure${i}`]?.footnote);
-                    updateOrHide(`relevantFigures.figure${i}.image`, schoolEntry.relevantFigures?.[`figure${i}`]?.image);
-                }
-        
-                // Maps
-                for (let i = 1; i <= 10; i++) {
-                    updateOrHide(`maps.map${i}.title`, schoolEntry.maps?.[`map${i}`]?.title);
-                    updateOrHide(`maps.map${i}.decade`, schoolEntry.maps?.[`map${i}`]?.decade);
-                    updateOrHide(`maps.map${i}.briefDescription`, schoolEntry.maps?.[`map${i}`]?.briefDescription);
-                    updateOrHide(`maps.map${i}.sources`, schoolEntry.maps?.[`map${i}`]?.sources);
-                    updateOrHide(`maps.map${i}.footnote`, schoolEntry.maps?.[`map${i}`]?.footnote);
-                    updateOrHide(`maps.map${i}.imageSources`, schoolEntry.maps?.[`map${i}`]?.imageSources);
-                    updateOrHide(`maps.map${i}.image`, schoolEntry.maps?.[`map${i}`]?.image);
-                }
-            }
 
                 if (contextEntry) {
+                    // Context Information
                     updateOrHide('ctxt.generalInformation.areaOfWork', contextEntry.generalInformation?.areaOfWork);
-        updateOrHide('ctxt.generalInformation.city', contextEntry.generalInformation?.city);
-        updateOrHide('ctxt.generalInformation.county', contextEntry.generalInformation?.county);
-        updateOrHide('ctxt.generalInformation.neighborhood', contextEntry.generalInformation?.neighborhood);
-        updateOrHide('ctxt.generalInformation.state', contextEntry.generalInformation?.state);
+                    updateOrHide('ctxt.generalInformation.city', contextEntry.generalInformation?.city);
+                    updateOrHide('ctxt.generalInformation.county', contextEntry.generalInformation?.county);
+                    updateOrHide('ctxt.generalInformation.neighborhood', contextEntry.generalInformation?.neighborhood);
+                    updateOrHide('ctxt.generalInformation.state', contextEntry.generalInformation?.state);
 
-        // Updating or hiding timeline fields
-        for (let i = 1; i <= 10; i++) {
-                    updateOrHide(`ctxt.timeline.event${i}.title`, contextEntry.timeline?.[`event${i}`]?.title);
-                    updateOrHide(`ctxt.timeline.event${i}.year`, contextEntry.timeline?.[`event${i}`]?.year);
-                    updateOrHide(`ctxt.timeline.event${i}.briefDescription`, contextEntry.timeline?.[`event${i}`]?.briefDescription);
-                    updateOrHide(`ctxt.timeline.event${i}.sources`, contextEntry.timeline?.[`event${i}`]?.sources);
+                    // Context Timeline
+                    for (let i = 1; i <= 10; i++) {
+                        updateOrHide(`ctxt.timeline.event${i}.title`, contextEntry.timeline?.[`event${i}`]?.title);
+                        updateOrHide(`ctxt.timeline.event${i}.year`, contextEntry.timeline?.[`event${i}`]?.year);
+                        updateOrHide(`ctxt.timeline.event${i}.briefDescription`, contextEntry.timeline?.[`event${i}`]?.briefDescription);
+                        updateOrHide(`ctxt.timeline.event${i}.sources`, contextEntry.timeline?.[`event${i}`]?.sources);
+                        updateOrHide(`ctxt.timeline.event${i}.image`, contextEntry.timeline?.[`event${i}`]?.image, true);
                     }
                 }
             }

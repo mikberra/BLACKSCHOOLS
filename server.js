@@ -38,6 +38,9 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// Add these lines near the top where other middleware is configured
+app.use('/uploads', express.static('uploads'));
+app.use('/uploads_maps', express.static('uploads_maps'));
 
 // GeoJSON for map
 // Define schema for GeoJSON data
