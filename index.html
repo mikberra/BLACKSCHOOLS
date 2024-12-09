@@ -108,66 +108,21 @@
         <div class="container">
             <t2>Recently added Schools</t2>
         </div>
-        <div class="row py-3">
-            <!-- School Card 1 -->
-            <div class="col-md-3">
-                <div class="school-card" style="background-image: url('./images/CS3_i1.png');">
-                    <div class="t3 card-overlay">
-                        <div class="card-text-top">New York</div>
-                        <div class="card-text-bottom">Brooklyn High School</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- School Card 2 -->
-            <div class="col-md-3">
-                <div class="school-card" style="background-image: url('./images/1892.jpg');">
-                    <div class="t3 card-overlay">
-                        <div class="card-text-top">Los Angeles</div>
-                        <div class="card-text-bottom">LA Central School</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- School Card 3 -->
-            <div class="col-md-3">
-                <div class="school-card" style="background-image: url('./images/1944.jpg');">
-                    <div class="t3 card-overlay">
-                        <div class="card-text-top">Chicago</div>
-                        <div class="card-text-bottom">Southside Academy</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- School Card 4 -->
-            <div class="col-md-3">
-                <div class="school-card" style="background-image: url('./images/school4.jpg');">
-                    <div class="t3 card-overlay">
-                        <div class="card-text-top">Houston</div>
-                        <div class="card-text-bottom">Houston Preparatory School</div>
-                    </div>
-                </div>
-            </div>
+        <div class="row py-3" id="school-cards-container">
+            <!-- School cards will be dynamically inserted here -->
         </div>
     </div>
 
 <!-- People -->
 <div class="container py-3 py-lg-5">
     <div class="container">
-        <t2>Recently added PEOPLE</t2>
+        <t2>Recently added People</t2>
     </div>
-            <div class="row py-3 gx-3 gx-lg-5">
-                <div class="col-md-3"> 
-                    <div class="avatar-card">
-                        <img class="avatar" src="./images/1892,CatharineClow.jpg" alt="Avatar">
-                        <div class="avatar-text-content">
-                          <h5 class="avatar-name">Catharine T. Clow</h5>
-                          <p class="avatar-title">Principal</p>
-                          <p class="avatar-description">Colored School 3, Brooklyn</p>
-                        </div>
-                    </div>
-            </div>
-        </div>
+    <div class="row py-3 gx-3 gx-lg-5" id="people-cards-container">
+        <!-- People cards will be dynamically inserted here -->
+    </div>
+</div>
+
 <!-- Footer-->
 <script src="footer.js"></script>
 
@@ -184,6 +139,73 @@
 <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
 <!-- Feeder JS-->
+
+<script>
+async function populateRecentSchools() {
+    try {
+        const response = await fetch('/api/recent-schools');
+        const schools = await response.json();
+        const container = document.getElementById('school-cards-container');
+        
+        container.innerHTML = '';
+        
+        schools.forEach(school => {
+            const imageUrl = school.school.description.image 
+                ? school.school.description.image 
+                : './images/school4.jpg';
+            const cardHtml = `
+                <div class="col-md-3">
+                    <div class="school-card" style="background-image: url('${imageUrl}');">
+                        <div class="t3 card-overlay">
+                            <div class="card-text-top">${school.school.city || 'Unknown City'}</div>
+                            <div class="card-text-bottom">${school.school.name || 'Unknown School'}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.innerHTML += cardHtml;
+        });
+    } catch (error) {
+        console.error('Error populating recent schools:', error);
+    }
+}
+
+async function populateRecentPeople() {
+    try {
+        const response = await fetch('/api/recent-people');
+        const people = await response.json();
+        const container = document.getElementById('people-cards-container');
+        
+        container.innerHTML = '';
+        
+        people.forEach(person => {
+            const imageUrl = person.image 
+                ? person.image  
+                : './images/default-avatar.jpg';
+            const cardHtml = `
+                <div class="col-md-3"> 
+                    <div class="avatar-card">
+                        <img class="avatar" src="${imageUrl}" alt="Avatar">
+                        <div class="avatar-text-content">
+                            <h5 class="avatar-name">${person.name || 'Unknown Name'}</h5>
+                            <p class="avatar-title">${person.role || 'Unknown Role'}</p>
+                            <p class="avatar-description">${person.schoolName || 'Unknown School'}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.innerHTML += cardHtml;
+        });
+    } catch (error) {
+        console.error('Error populating recent people:', error);
+    }
+}
+
+window.addEventListener('load', () => {
+    populateRecentSchools();
+    populateRecentPeople();
+});
+</script>
 
 
 
