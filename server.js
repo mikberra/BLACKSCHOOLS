@@ -68,7 +68,7 @@ const storage = new CloudinaryStorage({
 const mapStorage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: 'uploads_maps',
+    folder: 'uploads',
     allowed_formats: ['jpg', 'jpeg', 'png', 'gif'],
     transformation: [{ width: 2000, height: 2000, crop: 'limit' }] // Maps might need larger sizes
   }

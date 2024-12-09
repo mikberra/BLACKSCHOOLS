@@ -274,21 +274,14 @@
                     if (element) {
                         if (value) {
                             if (isImage) {
-                                // Handle Cloudinary URLs - Fix the URL construction
-                                let imageUrl = value;
-                                if (!value.startsWith('http')) {
-                                    // If it's a path from Cloudinary storage object
-                                    console.log('Original image path:', value);
-                                    const imagePath = value.replace('uploads/', '');
-                                    console.log('Cleaned image path:', imagePath);
-                                    imageUrl = `https://res.cloudinary.com/ddsuauehz/image/upload/${imagePath}`;
-                                }
-                                console.log(`Setting image URL for ${id}:`, imageUrl); // Debug log
-                                element.src = imageUrl;
+                                // If it's already a full URL, use it directly
+                                console.log(`Setting image URL for ${id}:`, value);
+                                element.src = value;
                                 element.style.display = '';
                                 
+                                // Add error handling to help debug
                                 element.onerror = function() {
-                                    console.log(`Failed to load image for ${id}:`, imageUrl);
+                                    console.log(`Failed to load image for ${id}:`, value);
                                     element.style.display = 'none';
                                 };
                             } else {
