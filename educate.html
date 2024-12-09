@@ -117,72 +117,10 @@
     </div>
     </div>
 <!-- Footer -->
-<footer class="bg-dark text-white">
-    <div class="container px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5">
-            <div class="col-md-10 col-lg-10 col-xl-10">
-                <div class="t2">Black Schools Reconstructing an American History</div>
-                <div class="h5">African American Cultural Heritage Action Fund</div>
-                <ul class="list-inline">
-                    <li class="list-inline-item">
-                        <a href="#!">
-                            <span class="fa-stack fa-lg">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="#!">
-                            <span class="fa-stack fa-lg">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="#!">
-                            <span class="fa-stack fa-lg">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                </ul>
-                <div class="small text-muted fst-italic">Copyright &copy; Your Website 2023</div>
-            </div>
-        </div>
-    </div>
-</footer>
+<script src="footer.js"></script>
+
 
 <!-- JavaScript -->
-<script>
-    function toggleContent(content) {
-        const contentA = document.getElementById('contentA');
-        const contentB = document.getElementById('contentB');
-        const buttonA = document.getElementById('buttonA');
-        const buttonB = document.getElementById('buttonB');
-
-        if (content === 'A') {
-            contentA.classList.remove('d-none');
-            contentB.classList.add('d-none');
-            buttonA.classList.add('active');
-            buttonB.classList.remove('active');
-        } else if (content === 'B') {
-            contentA.classList.add('d-none');
-            contentB.classList.remove('d-none');
-            buttonA.classList.remove('active');
-            buttonB.classList.add('active');
-        }
-    }
-
-    // Hide all content by default on page load
-    window.onload = function () {
-        document.getElementById('contentA').classList.add('d-none');
-        document.getElementById('contentB').classList.add('d-none');
-    };
-</script>
-
 <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->

@@ -31,12 +31,11 @@
             <!-- Left Column: 7/12 wide -->
             <div class="col-md-7 position-relative">
                 <!-- Masthead Section -->
-                <div class="masthead-overlay d-flex flex-column justify-content-end" style="background-image: url('./images/CS3_i1.png'); height: 80vh;">
-                    <div class="text-overlay p-4">
-                        <h4 id="school.address">Address</h4>
-                        <t1 id="school.name">SCHOOL 1</t1>
-                        <h5 id="school.condition">Characteristics</h5>
-                    </div>
+                <img class="masthead-overlay" id="school.description.image" style="height: 80vh; width: 100%; object-fit: cover;">
+                <div class="text-overlay p-4" style="position: absolute; bottom: 0; left: 0; z-index: 1;">
+                    <h4 id="school.address">Address</h4>
+                    <t1 id="school.name">SCHOOL 1</t1>
+                    <h5 id="school.condition">Characteristics</h5>
                 </div>
             </div>
             <!-- Right Column: 5/12 wide -->
@@ -51,7 +50,7 @@
     <div class="container-fluid px-0">
         <div class="row g-0 bg-dark text-white">
             <!-- Left Column: 7/12 wide -->
-            <div class="col-md-7 position-relative">
+            <div class="col-md-7">
                 <!-- Description Section -->
                 <div class="p-4">
                         <div class="mb-4">
@@ -76,37 +75,69 @@
                 </div>
             </div>
             <!-- Right Column: 5/12 wide -->
-            <div class="col-md-5 position-relative">
-                <div class="p-4">
-                    <t3>Current condition</t3>
-                    <div class="extra-small-text">
-                        <p class="my-0 py-0" id="school.currentUse">Current use: <span></span></p>
-                        <p class="my-0 py-0" id="school.condition">Current condition: <span></span></p>
-                        <p class="my-0 py-0" id="school.landmarked">Is it landmarked? <span></span></p>
-                        <p class="my-0 py-0" id="school.landmarkedBy">By who? <span></span></p>
-                        <p class="my-0 py-0" id="school.sign">Is there a sign? <span></span></p>
-                        <p class="mb-2 py-0" id="school.owner">Who owns the building? <span></span></p>
+            <div class="col-md-5">   
+            <!-- First Row -->
+                <div class="row">
+                    <!-- First Row, First Column: Current condition -->
+                    <div class="col-6">
+                        <div class="p-4">
+                            <t3>Current condition</t3>
+                            <div class="extra-small-text">
+                                <p class="my-0 py-0" id="school.currentUse">Current use: <span></span></p>
+                                <p class="my-0 py-0" id="school.condition">Current condition: <span></span></p>
+                                <p class="my-0 py-0" id="school.landmarked">Is it landmarked? <span></span></p>
+                                <p class="my-0 py-0" id="school.landmarkedBy">By who? <span></span></p>
+                                <p class="my-0 py-0" id="school.sign">Is there a sign? <span></span></p>
+                                <p class="my-0 py-0" id="school.owner">Who owns the building? <span></span></p>
+                            </div>
+                        </div>
                     </div>
-                    <t3>Quick dates</t3>
-                    <div class="extra-small-text">
-                        <p class="my-0 py-0" id="school.description.yearInstitutionCreation">Year of creation: <span></span></p>
-                        <p class="my-0 py-0" id="school.description.yearBuildingStarted">Building started: <span></span></p>
-                        <p class="my-0 py-0" id="school.description.yearBuildingEnded">Building ended: <span></span></p>
-                        <p class="my-0 py-0" id="school.description.yearDesegregation">Desegregation: <span></span></p>
-                        <p class="my-0 py-0" id="school.description.yearCeased">School ceased: <span></span></p>
-                        <p class="mb-2 py-0" id="school.description.yearDemolished">Building demolished: <span></span></p>
-                    </div>
-                    <t3>Names over time</t3>
-                    <div class="extra-small-text">
-                        <p class="my-0 py-0" id="school.otherNames.name1"></p>
-                        <p class="my-0 py-0" id="school.otherNames.name2"></p>
-                        <p class="my-0 py-0" id="school.otherNames.name3"></p>
-                        <p class="my-0 py-0" id="school.otherNames.name4"></p>
-                        <p class="my-0 py-0" id="school.otherNames.name5"></p>
+                    <!-- First Row, Second Column: Contributors -->
+                    <div class="col-6">
+                        <div class="p-4">
+                            <t3>Contributors</t3>
+                            <div class="extra-small-text">
+                                <p class="my-0 py-0" id="contacts.contributors.contributor1.organization"><span></span></p>
+                                <p class="my-0 py-0" id="contacts.contributors.contributor2.organization"><span></span></p>
+                                <p class="my-0 py-0" id="contacts.contributors.contributor3.organization"><span></span></p>
+                                <p class="my-0 py-0" id="contacts.contributors.contributor4.organization"><span></span></p>
+                                <p class="my-0 py-0" id="contacts.contributors.contributor5.organization"><span></span></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+
+                <!-- Second Row -->
+                <div class="row">
+                    <!-- Second Row, First Column: Quick dates -->
+                    <div class="col-6">
+                        <div class="p-4">
+                            <t3>Quick dates</t3>
+                            <div class="extra-small-text">
+                                <p class="my-0 py-0" id="school.description.yearInstitutionCreation">Year of creation: <span></span></p>
+                                <p class="my-0 py-0" id="school.description.yearBuildingStarted">Building started: <span></span></p>
+                                <p class="my-0 py-0" id="school.description.yearBuildingEnded">Building ended: <span></span></p>
+                                <p class="my-0 py-0" id="school.description.yearDesegregation">Desegregation: <span></span></p>
+                                <p class="my-0 py-0" id="school.description.yearCeased">School ceased: <span></span></p>
+                                <p class="my-0 py-0" id="school.description.yearDemolished">Building demolished: <span></span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Second Row, Second Column: Names over time -->
+                    <div class="col-6">
+                        <div class="p-4">
+                            <t3>Names over time</t3>
+                            <div class="extra-small-text">
+                                <p class="my-0 py-0" id="school.otherNames.name1"></p>
+                                <p class="my-0 py-0" id="school.otherNames.name2"></p>
+                                <p class="my-0 py-0" id="school.otherNames.name3"></p>
+                                <p class="my-0 py-0" id="school.otherNames.name4"></p>
+                                <p class="my-0 py-0" id="school.otherNames.name5"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+         </div>
     </div>
 
 <!-- Timeline-->
@@ -126,6 +157,13 @@
     </article>
 <!-- Decade 1 -->
 <div id="timeline-container" class="container"></div>
+
+<!-- Sources -->
+
+
+<!-- Footer -->
+<script src="footer.js"></script>
+
 
 <!-- Components-->   
     <!-- Bootstrap core JS-->
@@ -181,7 +219,7 @@
                                 <div class="col-md-11 timeline-box">
                                     <p id="school.timeline.event${i}.briefDescription"></p>
                                     <p id="school.timeline.event${i}.sources"></p>
-                                    <img id="school.timeline.event${i}.image" class="img-fluid" />
+                                    <img id="school.timeline.event${i}.image" class="img-fluid" style="max-height: 50vh"/>
                                     <p id="school.timeline.event${i}.footnote"></p>
                                     <p id="school.timeline.event${i}.imageSources"></p>
                                 </div>

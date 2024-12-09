@@ -906,7 +906,7 @@
     align-items: flex-start; /* Align content to the left */
     justify-content: flex-end; /* Align content to the bottom */
     color: white; /* Text color for the overlaid title */
-    padding: var(--bs-padding); /* Use Bootstrap padding variable */
+    padding: 0; /* Use Bootstrap padding variable */
   }
 
 
