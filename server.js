@@ -1213,23 +1213,20 @@ app.get('/CS/:id', async (req, res) => {
         
         // Fix paths for all assets
         htmlContent = htmlContent
-            // Fix CSS paths
             .replace(
                 /<link[^>]*href=["'](?!http|\/\/)([^"']*\.css)["'][^>]*>/g,
                 match => match.replace(/href=["']([^"']*)["']/, 'href="/$1"')
             )
-            // Fix JS paths
             .replace(
                 /<script[^>]*src=["'](?!http|\/\/)([^"']*\.js)["'][^>]*>/g,
                 match => match.replace(/src=["']([^"']*)["']/, 'src="/$1"')
             )
-            // Fix image paths
             .replace(
                 /src=["'](?!http|\/\/)([^"']*\.(jpg|jpeg|png|gif))["']/g,
                 'src="/$1"'
             );
 
-        // Update the fetchData function to use the correct IDs
+        // Replace the hardcoded schoolId in the script with the dynamic one
         const scriptReplacement = `
             <script>
                 window.onload = async function () {
@@ -1237,28 +1234,6 @@ app.get('/CS/:id', async (req, res) => {
                     const contextId = "6755f8497dc1fb8687a92dfb"; // Context ID
                     await fetchData(schoolId, contextId);
                 };
-
-                async function fetchData(schoolId, contextId) {
-                    const schoolApiUrl = '/api/formdata/' + schoolId; // Update to use specific school endpoint
-                    const contextApiUrl = '/api/formdata_context/' + contextId;
-
-                    try {
-                        // Fetch specific school data
-                        const schoolResponse = await fetch(schoolApiUrl);
-                        if (!schoolResponse.ok) throw new Error("Failed to fetch school data");
-                        const schoolData = await schoolResponse.json();
-
-                        // Fetch context data
-                        const contextResponse = await fetch(contextApiUrl);
-                        if (!contextResponse.ok) throw new Error("Failed to fetch context data");
-                        const contextData = await contextResponse.json();
-
-                        // Update the DOM with fetched data
-                        updateData(schoolData, contextData);
-                    } catch (error) {
-                        console.error("Error fetching data:", error);
-                    }
-                }
             </script>
         `;
 
@@ -1298,8 +1273,30 @@ app.get('/api/formdata_context/:id', async (req, res) => {
         }
         res.json(context);
     } catch (error) {
-        console.error('Error fetching context data:', error);
+        console.error('Error fetching form data:', error);
         res.status(500).json({ error: 'Failed to fetch data' });
     }
+});
+
+// Add this near the top of your server.js file
+app.use((err, req, res, next) => {
+    console.error('Server Error:', err);
+    res.status(500).send('Internal Server Error');
+});
+
+// Add this to log all requests
+app.use((req, res, next) => {
+    console.log(`${req.method} ${req.url}`);
+    next();
+});
+
+// Add error handler for static files
+app.use((err, req, res, next) => {
+  if (err.status === 404) {
+    console.error(`File not found: ${req.url}`);
+    res.status(404).send('File not found');
+  } else {
+    next(err);
+  }
 });
 

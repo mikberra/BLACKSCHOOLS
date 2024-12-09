@@ -229,8 +229,17 @@
     <!-- Pulling all info script -->
         <script>
             window.onload = async function () {
-                const schoolId = "6756041d7dc1fb8687a92dff"; // Replace with the School API _id
-                const contextId = "6755f8497dc1fb8687a92dfb"; // Replace with the Context API _id
+                // Get the schoolId from the URL path
+                const pathParts = window.location.pathname.split('/');
+                const schoolId = pathParts[pathParts.length - 1]; // Gets the last part of the URL path
+                const contextId = "6755f8497dc1fb8687a92dfb";
+
+                if (!schoolId) {
+                    console.error('No school ID found in URL');
+                    return;
+                }
+
+                console.log('Loading school data for ID:', schoolId);
                 await fetchData(schoolId, contextId);
             };
 

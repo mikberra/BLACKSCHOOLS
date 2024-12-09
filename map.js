@@ -66,7 +66,7 @@ map.on('load', () => {
             console.log('Clicked school ID:', schoolId); // Debug log
             
             if (schoolId) {
-                // Always navigate to CS page with the school ID
+                // Navigate to CS page with the school ID
                 window.location.href = `/CS/${schoolId}`;
             }
         }
