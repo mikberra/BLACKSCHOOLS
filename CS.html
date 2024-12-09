@@ -15,10 +15,10 @@
         <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
         <style>
             body {
-              background: url('./images/background.png') no-repeat center center fixed;
-              background-size: cover; 
-              margin: 0; 
-              padding: 0; 
+                background: url('/images/background.png') no-repeat center center fixed;
+                background-size: cover; 
+                margin: 0; 
+                padding: 0; 
             }
           </style>
     </head>
@@ -274,22 +274,22 @@
                     if (element) {
                         if (value) {
                             if (isImage) {
-                                // For Cloudinary images, use the URL directly
-                                element.src = value; // Cloudinary URLs are already complete
-                                element.style.display = ''; // Show element
+                                // Use Cloudinary URL directly
+                                element.src = value;  // Cloudinary URLs are complete
+                                element.style.display = '';
                                 
-                                // Debug log
-                                console.log(`Setting image src for ${id} to: ${value}`);
+                                // Add error handling for images
+                                element.onerror = function() {
+                                    console.log(`Failed to load image: ${value}`);
+                                    element.style.display = 'none';
+                                };
                             } else {
                                 element.textContent = value;
-                                element.style.display = ''; // Show element
+                                element.style.display = '';
                             }
                         } else {
-                            element.style.display = 'none'; // Hide element
+                            element.style.display = 'none';
                         }
-                    } else {
-                        // Debug log for missing elements
-                        console.log(`Element not found: ${id}`);
                     }
                 }
 
