@@ -1,5 +1,11 @@
 const fs = require('fs');
 const mongoose = require('mongoose');
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 
 // MongoDB connection with error handling
 mongoose.connect('mongodb+srv://mikberra:brooklynCS1@lab6cluster.w1enu.mongodb.net/BLACKSCHOOLS?retryWrites=true&w=majority&appName=Lab6Cluster')
@@ -41,6 +47,34 @@ app.use(bodyParser.json());
 // Add these lines near the top where other middleware is configured
 app.use('/uploads', express.static('uploads'));
 app.use('/uploads_maps', express.static('uploads_maps'));
+
+// Cloudinary configuration
+cloudinary.config({
+  cloud_name: 'ddsuauehz',
+  api_key: '924313197448929',
+  api_secret: 'pJh8P0UP5tDIGRUZrqt3VtggUpI'
+});
+
+// Configure storage for different types of uploads
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'uploads',
+    allowed_formats: ['jpg', 'jpeg', 'png', 'gif'],
+    transformation: [{ width: 1000, height: 1000, crop: 'limit' }] // Optional: resize large images
+  }
+});
+
+const mapStorage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'uploads_maps',
+    allowed_formats: ['jpg', 'jpeg', 'png', 'gif'],
+    transformation: [{ width: 2000, height: 2000, crop: 'limit' }] // Maps might need larger sizes
+  }
+});
+
+
 
 // GeoJSON for map
 // Define schema for GeoJSON data
@@ -447,30 +481,6 @@ app.get('/form', (req, res) => {
   res.sendFile(path.join(__dirname, 'form.html'));
 });
 
-// Configure multer for file uploads
-const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    // Make sure this directory exists!
-    cb(null, 'uploads/');
-  },
-  filename: function(req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname);
-  }
-});
-
-// Configure multer for map uploads
-const mapStorage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    if (file.fieldname.startsWith('maps.')) {
-      cb(null, 'uploads_maps/');
-    } else {
-      cb(null, 'uploads/');
-    }
-  },
-  filename: function(req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname);
-  }
-});
 
 // Update the upload fields configuration to match your form
 const uploadFields = [
@@ -503,52 +513,49 @@ const uploadFields = [
   { name: 'maps.map10.image', maxCount: 1 }
 ];
 
-const upload = multer({ 
+app.post('/submit', multer({
   storage: storage,
   fileFilter: function(req, file, cb) {
-    // Optional: Add file type validation
     if (file.mimetype.startsWith('image/')) {
       cb(null, true);
     } else {
       cb(new Error('Only image files are allowed!'), false);
     }
   }
-});
-
-app.post('/submit', upload.fields(uploadFields), async (req, res) => {
+}).fields(uploadFields), async (req, res) => {
   try {
-    // Log the received files to debug
     console.log('Received files:', req.files);
     
-    // Get file paths or null if no file was uploaded
-    const schoolImage = req.files['school.description.image'] ? 
-      req.files['school.description.image'][0].path : null;
+    // Process uploaded files - now using Cloudinary URLs
+    const processUploadedFile = (fieldName) => {
+      if (req.files[fieldName] && req.files[fieldName][0]) {
+        return req.files[fieldName][0].path; // Cloudinary returns the URL in the path property
+      }
+      return null;
+    };
+
+    // Process school image
+    const schoolImage = processUploadedFile('school.description.image');
     
-    // Handle timeline event images
+    // Process timeline images
     const timelineImages = {};
     for (let i = 1; i <= 10; i++) {
       const fieldName = `school.timeline.event${i}.image`;
-      timelineImages[`event${i}`] = req.files[fieldName] ? 
-        req.files[fieldName][0].path : null;
+      timelineImages[`event${i}`] = processUploadedFile(fieldName);
     }
     
-    // Handle figure images
+    // Process figure images
     const figureImages = {};
     for (let i = 1; i <= 5; i++) {
       const fieldName = `relevantFigures.figure${i}.image`;
-      figureImages[`figure${i}`] = req.files[fieldName] ? 
-        req.files[fieldName][0].path : null;
+      figureImages[`figure${i}`] = processUploadedFile(fieldName);
     }
 
     // Process map images
     const mapImages = {};
-    if (req.files) {
-      for (let i = 1; i <= 3; i++) {
-        const fieldName = `maps.map${i}.image`;
-        if (req.files[fieldName] && req.files[fieldName][0]) {
-          mapImages[`map${i}`] = req.files[fieldName][0].filename;
-        }
-      }
+    for (let i = 1; i <= 10; i++) {
+      const fieldName = `maps.map${i}.image`;
+      mapImages[`map${i}`] = processUploadedFile(fieldName);
     }
 
     // Process maps data
@@ -559,7 +566,7 @@ app.post('/submit', upload.fields(uploadFields), async (req, res) => {
         decade: req.body[`map_decade_${i}`],
         briefDescription: req.body[`map_brief_description_${i}`],
         sources: req.body[`map_sources_${i}`],
-        image: req.files[`maps.map${i}.image`] ? req.files[`maps.map${i}.image`][0].filename : null,
+        image: mapImages[`map${i}`],
         footnote: req.body[`map_footnote_${i}`],
         imageSources: req.body[`map_image_sources_${i}`]
       };
@@ -826,6 +833,7 @@ app.post('/submit', upload.fields(uploadFields), async (req, res) => {
       throw new Error('Invalid coordinates: longitude and latitude must be valid numbers');
     }
 
+    // Update how images are saved in the formData object
     const formData = new FormData({
       generalInformation: {
         areaOfWork: area_of_work,
@@ -887,7 +895,7 @@ app.post('/submit', upload.fields(uploadFields), async (req, res) => {
 
     // Save to MongoDB
     await formData.save();
-    res.send('Data successfully saved to MongoDB!');
+    res.send('Data successfully saved to MongoDB with Cloudinary images!');
   } catch (err) {
     console.error('Error:', err);
     res.status(500).send(`Error saving data: ${err.message}`);
