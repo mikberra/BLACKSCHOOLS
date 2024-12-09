@@ -1309,3 +1309,27 @@ app.get('/', async (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+// API endpoint for recent people
+app.get('/api/recent-people', async (req, res) => {
+    try {
+        const recentPeople = await FormData.find({
+            'relevantFigures.figure1.name': { $exists: true }
+        })
+        .sort({ _id: -1 })
+        .limit(4)
+        .select('relevantFigures.figure1 school.name');
+
+        const transformedPeople = recentPeople.map(doc => ({
+            name: doc.relevantFigures.figure1.name,
+            role: doc.relevantFigures.figure1.role,
+            schoolName: doc.school.name,
+            image: doc.relevantFigures.figure1.image || './images/default-avatar.jpg'
+        }));
+
+        res.json(transformedPeople);
+    } catch (error) {
+        console.error('Error fetching recent people:', error);
+        res.status(500).json({ error: 'Failed to fetch recent people' });
+    }
+});
+
