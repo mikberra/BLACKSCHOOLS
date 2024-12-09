@@ -58,55 +58,84 @@
     </div>
 <!-- Info-->
     <div class="container-fluid px-0">
-        <div class="row g-0 bg-dark text-white">
+        <div class="row gx-4 gx-lg-5 bg-dark text-white">
             <!-- Left Column: 7/12 wide -->
-            <div class="col-md-7 position-relative">
+            <div class="col-md-7">
                 <!-- Description Section -->
                 <div class="p-4">
-                        <div class="mb-4">
-                            <t3>Summary</t3>
-                            <p id="school.description.briefDescription"></p>
-                        </div>
+                    <div class="mb-4">
+                        <t3>Summary</t3>
+                        <p id="school.description.briefDescription"></p>
+                    </div>
                     <div>
                         <t3>Notable People</t3>
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="avatar-card">
+                            <div class="avatar-card">
                                     <img class="avatar" id="relevantFigures.figure1.image">
                                     <div class="avatar-text-content">
                                         <h5 id="relevantFigures.figure1.name" class="avatar-name"></h5>
                                         <p id="relevantFigures.figure1.role" class="avatar-title"></p>
                                         <p id="relevantFigures.figure1.briefDescription" class="avatar-description"></p>
                                     </div>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
             <!-- Right Column: 5/12 wide -->
-            <div class="col-md-5 position-relative">
-                <div class="p-4">
-                    <t3>Current condition</t3>
-                    <p id="school.currentUse"></p>
-                    <p id="school.condition"></p>
-                    <p id="school.landmarked"></p>
-                    <p id="school.landmarkedBy"></p>
-                    <p id="school.sign"></p>
-                    <p id="school.owner"></p>
-                    <t3>Quick dates</t3>
-                    <p id="school.description.yearInstitutionCreation"></p>
-                    <p id="school.description.yearBuildingStarted"></p>
-                    <p id="school.description.yearBuildingEnded"></p>
-                    <p id="school.description.yearDesegregation"></p>
-                    <p id="school.description.yearCeased"></p>
-                    <p id="school.description.yearDemolished"></p>
-                    <t3>Names over time</t3>
-                    <p id="school.otherNames.name1"></p>
-                    <p id="school.otherNames.name2"></p>
-                    <p id="school.otherNames.name3"></p>
-                    <p id="school.otherNames.name4"></p>
-                    <p id="school.otherNames.name5"></p>
+            <div class="col-md-5 nomargin">
+                <!-- First Row -->
+                <div class="row gx-4">
+                    <!-- First Row, First Column -->
+                    <div class="col-6">
+                        <div class="p-4">
+                            <t3>Current condition</t3>
+                            <p id="school.condition">Current condition</p>
+                            <p id="school.landmarked">Landmark status</p>
+                            <p id="school.landmarkedBy">Landmarked by</p>
+                            <p id="school.sign">Sign</p>
+                            <p id="school.owner">Owner</p>
+                        </div>
+                    </div>
+                    <!-- First Row, Second Column -->
+                    <div class="col-6">
+                        <div class="p-4">
+                            <t3>Contributors</t3>
+                            <p id="contacts.contributors.contributor1.organization"></p>
+                            <p id="contacts.contributors.contributor2.organization"></p>
+                            <p id="contacts.contributors.contributor3.organization"></p>
+                            <p id="contacts.contributors.contributor4.organization"></p>
+                            <p id="contacts.contributors.contributor5.organization"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Second Row -->
+                <div class="row gx-4">
+                    <!-- Second Row, First Column -->
+                    <div class="col-6">
+                        <div class="p-4">
+                            <t3>Quick dates</t3>
+                            <p id="school.description.yearInstitutionCreation">Institution creation</p>
+                            <p id="school.description.yearBuildingStarted">Building started</p>
+                            <p id="school.description.yearBuildingEnded">Building ended</p>
+                            <p id="school.description.yearDesegregation">Desegregation</p>
+                            <p id="school.description.yearCeased">Ceased operation</p>
+                            <p id="school.description.yearDemolished">Demolished</p>
+                        </div>
+                    </div>
+                    <!-- Second Row, Second Column -->
+                    <div class="col-6">
+                        <div class="p-4">
+                            <t3>Names over time</t3>
+                            <p id="school.otherNames.name1">Other name 1</p>
+                            <p id="school.otherNames.name2">Other name 2</p>
+                            <p id="school.otherNames.name3">Other name 3</p>
+                            <p id="school.otherNames.name4">Other name 4</p>
+                            <p id="school.otherNames.name5">Other name 5</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -128,7 +157,7 @@
             </div>
     </article>
 <!-- Decade 1 -->
-<div id="timeline-container" class="container"></div>
+<div id="timeline-container" class="container-fluid px-4 px-lg-5"></div>
 
 <!-- Components-->   
     <!-- Bootstrap core JS-->
@@ -168,9 +197,9 @@
 
             for (let i = 1; i <= decades; i++) {
                 const html = `
-                    <div class="row gx-4 gx-lg-5">
+                    <div class="row gx-3 gx-lg-3">
                         <!-- School event -->
-                        <div class="col-md-7">
+                        <div class="col-md-7 pe-5">
                             <section>
                                 <div class="row align-items-center">
                                     <div class="col-md-2">
@@ -183,10 +212,20 @@
                                 <div class="col-md-1"></div>
                                 <div class="col-md-11 timeline-box">
                                     <p id="school.timeline.event${i}.briefDescription"></p>
-                                    <p id="school.timeline.event${i}.sources"></p>
+                                    <div id="school.timeline.event${i}.sources-container" style="display: none;">
+                                        <p class="source-text">
+                                            <span class="source-label">Source: </span>
+                                            <span id="school.timeline.event${i}.sources"></span>
+                                        </p>
+                                    </div>
                                     <img id="school.timeline.event${i}.image" class="img-fluid" />
                                     <p id="school.timeline.event${i}.footnote"></p>
-                                    <p id="school.timeline.event${i}.imageSources"></p>
+                                    <div id="school.timeline.event${i}.imageSources-container" style="display: none;">
+                                        <p class="source-text">
+                                            <span class="source-label">Source: </span>
+                                            <span id="school.timeline.event${i}.imageSources"></span>
+                                        </p>
+                                    </div>
                                 </div>
                             </section>
                         </div>
@@ -212,10 +251,20 @@
                                     </div>
                                     <div class="timeline-box">
                                         <p id="ctxt.timeline.event${i}.briefDescription"></p>
-                                        <p id="ctxt.timeline.event${i}.sources"></p>
+                                        <div id="ctxt.timeline.event${i}.sources-container" style="display: none;">
+                                            <p class="source-text">
+                                                <span class="source-label">Source: </span>
+                                                <span id="ctxt.timeline.event${i}.sources"></span>
+                                            </p>
+                                        </div>
                                         <img id="ctxt.timeline.event${i}.image" class="img-fluid" />
                                         <p id="ctxt.timeline.event${i}.footnote"></p>
-                                        <p id="ctxt.timeline.event${i}.imageSources"></p>
+                                        <div id="ctxt.timeline.event${i}.imageSources-container" style="display: none;">
+                                            <p class="source-text">
+                                                <span class="source-label">Source: </span>
+                                                <span id="ctxt.timeline.event${i}.imageSources"></span>
+                                            </p>
+                                        </div>
                                     </div>
                                 </section>
                             </div>
@@ -262,27 +311,28 @@
                 // Update or hide elements
                 function updateOrHide(id, value, isImage = false) {
                     const element = document.getElementById(id);
+                    const containerElement = document.getElementById(id + '-container');
+                    
                     if (element) {
                         if (value) {
                             if (isImage) {
-                                // For image elements, update the src attribute
-                                // Remove 'uploads/' from the beginning if it exists
-                                const imagePath = value.startsWith('uploads/') ? value : `uploads/${value}`;
-                                element.src = '/' + imagePath; // Add leading slash
-                                element.style.display = ''; // Show element
-                                
-                                // Debug log
-                                console.log(`Setting image src for ${id} to: /${imagePath}`);
+                                element.src = '/' + value;
+                                element.style.display = '';
                             } else {
                                 element.textContent = value;
-                                element.style.display = ''; // Show element
+                                element.style.display = '';
+                                // Show the container with "Source:" label if it exists
+                                if (containerElement && (id.endsWith('.sources') || id.endsWith('.imageSources'))) {
+                                    containerElement.style.display = '';
+                                }
                             }
                         } else {
-                            element.style.display = 'none'; // Hide element
+                            element.style.display = 'none';
+                            // Hide the container with "Source:" label if it exists
+                            if (containerElement) {
+                                containerElement.style.display = 'none';
+                            }
                         }
-                    } else {
-                        // Debug log for missing elements
-                        console.log(`Element not found: ${id}`);
                     }
                 }
 
