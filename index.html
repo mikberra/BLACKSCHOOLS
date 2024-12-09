@@ -43,49 +43,42 @@
 
 <!-- Events and Contribute -->
     <div class="border-top border-bottom">
-    <div class="container text-center">
+    <div class="container">
         <div class="row">
             <!-- Events Column -->
-            <div class="col-md-6 border-right py-3">
-                <t2>Events</t2>
-                <p>Join an archiving session</p>
-                <div class="event-card">
-                    <div class="row h-100">
-                        <!-- Left: Date -->
-                        <div class="col-3 d-flex justify-content-center align-items-center">
-                            <div class="event-card-date text-center">
-                                <div class="month">Jan</div>
-                                <div class="day">6</div>
-                            </div>
-                        </div>
-
-                        <!-- Center: Title and Button -->
-                        <div class="col-6 d-flex flex-column justify-content-center align-items-center">
-                            <div class="event-card-title">
-                                <h5>Quarterly Meeting</h5>
-                            </div>
-                            <div>
-                                <button class="btn">Learn More</button>
-                            </div>
-                        </div>
-
-                        <!-- Right: Vertical City Name -->
-                        <div class="col-3 d-flex justify-content-center align-items-center">
-                            <div class="event-card-city text-center">
-                                <span class="h5 vertical-text">Brooklyn</span>
-                            </div>
-                        </div>
-                    </div>
+            <div class="col-md-6  border-right py-3">
+                <div class="text-center pb-4">
+                    <t2>OUR MISSION</t2>
                 </div>
+                <div class="text-center">   
+                    <h4>After the Civil War, Black schools were more than just classrooms, they were spaces of empowerment.</h4>
+                </div>
+                <p class="reg-size">Our mission is to create a database of Black education institutions in the Reconstruction Era (1865-1900) to illuminate their stories and the individuals who shaped them. Through this work, we hop to cultivate a wide network of professional and amateur collaborators across the US. Today, as the fight for racial justice continues, the story of Black schools remains a powerful reminder of how education can serve as a tool for liberation for us all. </p>
             </div>
-
             <!-- Contribute Column -->
-            <div class="col-md-6 py-3">
-                <t2>Contribute</t2>
-                <p>Add to or edit our archive</p>
-                <div class="contribute-content">
-                    <img src="./images/000-guides.png" alt="Guides" class="img-fluid mb-3">
-                    <button class="btn">Contribute</button>
+            <div class="col-md-6 px-4 py-3">
+                <div class="text-center pb-4">
+                    <t2>YOUR ROLE</t2>
+                </div>
+                <div class="text-center">   
+                    <h4>Do you have a story about Black education in the Reconstruction Era? Add it to our database!</h4>
+                </div>
+                <p class="reg-size">Whether you are a teacher hoping to educate students through a collaborative archiving lesson plan, or an organization interested in contributing your work to our centralized database, we invite you to add to our archive.</p>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <h2>
+                            <a href="preserve.html">
+                            <button type="button" class="btn w-100">For Organizations</button>
+                            </a>
+                        </h2>
+                    </div>
+                    <div class="col-md-6 mb-3 position-relative">
+                        <h2>
+                            <a href="educate.html">
+                            <button type="button" class="btn w-100">For Schools</button>
+                            </a>
+                        </h2>
+                    </div>
                 </div>
             </div>
         </div>
@@ -114,17 +107,17 @@
     </div>
 
 <!-- People -->
-<div class="container py-3 py-lg-5">
-    <div class="container">
-        <t2>Recently added People</t2>
+    <div class="container py-3 py-lg-5">
+        <div class="container">
+            <t2>Recently added People</t2>
+        </div>
+        <div class="row py-3 gx-3 gx-lg-5" id="people-cards-container">
+            <!-- People cards will be dynamically inserted here -->
+        </div>
     </div>
-    <div class="row py-3 gx-3 gx-lg-5" id="people-cards-container">
-        <!-- People cards will be dynamically inserted here -->
-    </div>
-</div>
 
 <!-- Footer-->
-<script src="footer.js"></script>
+    <script src="footer.js"></script>
 
 <!-- Navbar-->
     <script>

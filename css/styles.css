@@ -300,6 +300,10 @@
     font-size: 0.9rem;
   }
 
+  .reg-size {
+    font-size: 1rem;
+  }
+
 
 /**/
 
@@ -555,6 +559,8 @@
     cursor: pointer;
   }
 /**/
+
+
 
 /*! Buttons  */
   .btn {
