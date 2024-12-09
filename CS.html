@@ -79,25 +79,31 @@
             <div class="col-md-5 position-relative">
                 <div class="p-4">
                     <t3>Current condition</t3>
-                    <p id="school.currentUse"></p>
-                    <p id="school.condition"></p>
-                    <p id="school.landmarked"></p>
-                    <p id="school.landmarkedBy"></p>
-                    <p id="school.sign"></p>
-                    <p id="school.owner"></p>
+                    <div class="extra-small-text">
+                        <p class="my-0 py-0" id="school.currentUse">Current use: <span></span></p>
+                        <p class="my-0 py-0" id="school.condition">Current condition: <span></span></p>
+                        <p class="my-0 py-0" id="school.landmarked">Is it landmarked? <span></span></p>
+                        <p class="my-0 py-0" id="school.landmarkedBy">By who? <span></span></p>
+                        <p class="my-0 py-0" id="school.sign">Is there a sign? <span></span></p>
+                        <p class="mb-2 py-0" id="school.owner">Who owns the building? <span></span></p>
+                    </div>
                     <t3>Quick dates</t3>
-                    <p id="school.description.yearInstitutionCreation"></p>
-                    <p id="school.description.yearBuildingStarted"></p>
-                    <p id="school.description.yearBuildingEnded"></p>
-                    <p id="school.description.yearDesegregation"></p>
-                    <p id="school.description.yearCeased"></p>
-                    <p id="school.description.yearDemolished"></p>
+                    <div class="extra-small-text">
+                        <p class="my-0 py-0" id="school.description.yearInstitutionCreation">Year of creation: <span></span></p>
+                        <p class="my-0 py-0" id="school.description.yearBuildingStarted">Building started: <span></span></p>
+                        <p class="my-0 py-0" id="school.description.yearBuildingEnded">Building ended: <span></span></p>
+                        <p class="my-0 py-0" id="school.description.yearDesegregation">Desegregation: <span></span></p>
+                        <p class="my-0 py-0" id="school.description.yearCeased">School ceased: <span></span></p>
+                        <p class="mb-2 py-0" id="school.description.yearDemolished">Building demolished: <span></span></p>
+                    </div>
                     <t3>Names over time</t3>
-                    <p id="school.otherNames.name1"></p>
-                    <p id="school.otherNames.name2"></p>
-                    <p id="school.otherNames.name3"></p>
-                    <p id="school.otherNames.name4"></p>
-                    <p id="school.otherNames.name5"></p>
+                    <div class="extra-small-text">
+                        <p class="my-0 py-0" id="school.otherNames.name1"></p>
+                        <p class="my-0 py-0" id="school.otherNames.name2"></p>
+                        <p class="my-0 py-0" id="school.otherNames.name3"></p>
+                        <p class="my-0 py-0" id="school.otherNames.name4"></p>
+                        <p class="my-0 py-0" id="school.otherNames.name5"></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -263,27 +269,23 @@
                 function updateOrHide(id, value, isImage = false) {
                     const element = document.getElementById(id);
                     if (element) {
-                        if (value) {
+                        if (value && value !== 'null' && value !== 'undefined') {
                             if (isImage) {
-                                console.log(`Setting image URL for ${id}:`, value);
                                 element.src = value;
-                                // Only show the image if there's a valid URL
-                                if (value) {
-                                    element.style.display = 'block';
-                                } else {
-                                    element.style.display = 'none';
-                                }
-                                
-                                // Add error handling to help debug
-                                element.onerror = function() {
-                                    console.log(`Failed to load image for ${id}:`, value);
-                                    element.style.display = 'none';
-                                };
+                                element.style.display = 'block';
                             } else {
-                                element.textContent = value;
-                                element.style.display = value ? '' : 'none';
+                                // Check if there's a span element
+                                const span = element.querySelector('span');
+                                if (span) {
+                                    span.textContent = value;
+                                } else {
+                                    // If no span, append to existing text
+                                    element.textContent += ` ${value}`;
+                                }
+                                element.style.display = '';
                             }
                         } else {
+                            // Hide the entire element (including label) if value is null/undefined/empty
                             element.style.display = 'none';
                         }
                     } else {
@@ -351,6 +353,29 @@
                             updateOrHide(`maps.map${i}.image`, imageUrl, true);
                         }
                     }
+
+                    // Update current condition section
+                    updateOrHide('school.currentUse', schoolEntry.school?.currentUse);
+                    updateOrHide('school.condition', schoolEntry.school?.condition);
+                    updateOrHide('school.landmarked', schoolEntry.school?.landmarked);
+                    updateOrHide('school.landmarkedBy', schoolEntry.school?.landmarkedBy);
+                    updateOrHide('school.sign', schoolEntry.school?.sign);
+                    updateOrHide('school.owner', schoolEntry.school?.owner);
+
+                    // Update quick dates section
+                    updateOrHide('school.description.yearInstitutionCreation', schoolEntry.school?.description?.yearInstitutionCreation);
+                    updateOrHide('school.description.yearBuildingStarted', schoolEntry.school?.description?.yearBuildingStarted);
+                    updateOrHide('school.description.yearBuildingEnded', schoolEntry.school?.description?.yearBuildingEnded);
+                    updateOrHide('school.description.yearDesegregation', schoolEntry.school?.description?.yearDesegregation);
+                    updateOrHide('school.description.yearCeased', schoolEntry.school?.description?.yearCeased);
+                    updateOrHide('school.description.yearDemolished', schoolEntry.school?.description?.yearDemolished);
+
+                    // Update names over time section
+                    updateOrHide('school.otherNames.name1', schoolEntry.school?.otherNames?.name1);
+                    updateOrHide('school.otherNames.name2', schoolEntry.school?.otherNames?.name2);
+                    updateOrHide('school.otherNames.name3', schoolEntry.school?.otherNames?.name3);
+                    updateOrHide('school.otherNames.name4', schoolEntry.school?.otherNames?.name4);
+                    updateOrHide('school.otherNames.name5', schoolEntry.school?.otherNames?.name5);
                 }
 
                 if (contextEntry) {
