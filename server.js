@@ -44,13 +44,9 @@ app.use(bodyParser.json());
 
 // Static file middleware - order matters!
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, ''))); // Serve files from root directory
+app.use('/CS', express.static(path.join(__dirname, ''))); // Serve CS directory files
 app.use('/css', express.static(path.join(__dirname, 'css')));
-app.use('/js', express.static(path.join(__dirname, 'js')));
-app.use('/assets', express.static(path.join(__dirname, 'assets')));
 app.use('/images', express.static(path.join(__dirname, 'images')));
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-app.use('/uploads_maps', express.static(path.join(__dirname, 'uploads_maps')));
 
 // Cloudinary configuration
 cloudinary.config({
@@ -1288,15 +1284,5 @@ app.use((err, req, res, next) => {
 app.use((req, res, next) => {
     console.log(`${req.method} ${req.url}`);
     next();
-});
-
-// Add error handler for static files
-app.use((err, req, res, next) => {
-  if (err.status === 404) {
-    console.error(`File not found: ${req.url}`);
-    res.status(404).send('File not found');
-  } else {
-    next(err);
-  }
 });
 

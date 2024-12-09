@@ -274,14 +274,12 @@
                     if (element) {
                         if (value) {
                             if (isImage) {
-                                // For image elements, update the src attribute
-                                // Remove 'uploads/' from the beginning if it exists
-                                const imagePath = value.startsWith('uploads/') ? value : `uploads/${value}`;
-                                element.src = '/' + imagePath; // Add leading slash
+                                // For Cloudinary images, use the URL directly
+                                element.src = value; // Cloudinary URLs are already complete
                                 element.style.display = ''; // Show element
                                 
                                 // Debug log
-                                console.log(`Setting image src for ${id} to: /${imagePath}`);
+                                console.log(`Setting image src for ${id} to: ${value}`);
                             } else {
                                 element.textContent = value;
                                 element.style.display = ''; // Show element
