@@ -1286,3 +1286,26 @@ app.use((req, res, next) => {
     next();
 });
 
+// Add this new endpoint near other API endpoints
+app.get('/api/recent-schools', async (req, res) => {
+  try {
+    const recentSchools = await FormData.find({
+      'school.name': { $exists: true },
+      'school.city': { $exists: true }
+    })
+    .sort({ _id: -1 }) // Sort by newest first
+    .limit(4) // Get only 4 records
+    .select('school.name school.city school.description.image _id'); // Include image field
+
+    res.json(recentSchools);
+  } catch (error) {
+    console.error('Error fetching recent schools:', error);
+    res.status(500).json({ error: 'Failed to fetch recent schools' });
+  }
+});
+
+// Modify the homepage route to include the data
+app.get('/', async (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
