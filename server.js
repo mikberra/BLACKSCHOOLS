@@ -104,12 +104,12 @@ app.get('/CS', (req, res) => {
 });
 
 
-app.get('/contribute', (req, res) => {
-  res.sendFile(path.join(__dirname, 'contribute.html'));
+app.get('/preserve', (req, res) => {
+  res.sendFile(path.join(__dirname, 'preserve.html'));
 });
 
-app.get('/contribute_', (req, res) => {
-  res.sendFile(path.join(__dirname, 'contribute_city.html'));
+app.get('/educate', (req, res) => {
+  res.sendFile(path.join(__dirname, 'educate.html'));
 });
 
 
