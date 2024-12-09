@@ -3,11 +3,13 @@ document.addEventListener('DOMContentLoaded', function() {
     navbar.className = 'navbar';
     
     navbar.innerHTML = `
+        <a href="index.html" style="color: white;">
         <div class="t3">
             BLACK SCHOOLS
         </div>
+        </a>
         <div class="navbar-right">
-            <button class="nav-button" onclick="window.location.href='index.html'">Explore</button>
+            <button class="nav-button" onclick="window.location.href='index.html#explore'">Explore</button>
             <button class="nav-button" onclick="window.location.href='preserve.html'">Preserve</button>
             <button class="nav-button" onclick="window.location.href='educate.html'">Educate</button>
         </div>

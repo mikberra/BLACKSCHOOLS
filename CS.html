@@ -52,22 +52,20 @@
             <div class="col-md-7">
                 <!-- Description Section -->
                 <div class="p-4">
-                        <div class="mb-4">
+                        <div class="mb-5">
                             <t3>Summary</t3>
                             <p id="school.description.briefDescription"></p>
                         </div>
                     <div>
                         <t3>Notable People</t3>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="avatar-card">
+                        <div class="row mt-4">
+                             <div class="avatar-card">
                                     <img class="avatar" id="relevantFigures.figure1.image">
                                     <div class="avatar-text-content">
                                         <h5 id="relevantFigures.figure1.name" class="avatar-name"></h5>
                                         <p id="relevantFigures.figure1.role" class="avatar-title"></p>
                                         <p id="relevantFigures.figure1.briefDescription" class="avatar-description"></p>
                                     </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -82,12 +80,12 @@
                         <div class="p-4">
                             <t3>Current condition</t3>
                             <div class="extra-small-text">
-                                <p class="my-0 py-0" id="school.currentUse">Current use: <span></span></p>
-                                <p class="my-0 py-0" id="school.condition">Current condition: <span></span></p>
-                                <p class="my-0 py-0" id="school.landmarked">Is it landmarked? <span></span></p>
-                                <p class="my-0 py-0" id="school.landmarkedBy">By who? <span></span></p>
-                                <p class="my-0 py-0" id="school.sign">Is there a sign? <span></span></p>
-                                <p class="my-0 py-0" id="school.owner">Who owns the building? <span></span></p>
+                                <p class="my-0 py-0" id="school.currentUse"><strong>Current use: </strong><span></span></p>
+                                <p class="my-0 py-0" id="school.condition"><strong>Current condition: </strong><span></span></p>
+                                <p class="my-0 py-0" id="school.landmarked"><strong>Is it landmarked? </strong><span></span></p>
+                                <p class="my-0 py-0" id="school.landmarkedBy"><strong>By who? </strong><span></span></p>
+                                <p class="my-0 py-0" id="school.sign"><strong>Is there a sign? </strong><span></span></p>
+                                <p class="my-0 py-0" id="school.owner"><strong>Who owns the building? </strong><span></span></p>
                             </div>
                         </div>
                     </div>
@@ -113,12 +111,12 @@
                         <div class="p-4">
                             <t3>Quick dates</t3>
                             <div class="extra-small-text">
-                                <p class="my-0 py-0" id="school.description.yearInstitutionCreation">Year of creation: <span></span></p>
-                                <p class="my-0 py-0" id="school.description.yearBuildingStarted">Building started: <span></span></p>
-                                <p class="my-0 py-0" id="school.description.yearBuildingEnded">Building ended: <span></span></p>
-                                <p class="my-0 py-0" id="school.description.yearDesegregation">Desegregation: <span></span></p>
-                                <p class="my-0 py-0" id="school.description.yearCeased">School ceased: <span></span></p>
-                                <p class="my-0 py-0" id="school.description.yearDemolished">Building demolished: <span></span></p>
+                                <p class="my-0 py-0" id="school.description.yearInstitutionCreation"><strong>Year of creation:</strong> <span></span></p>
+                                <p class="my-0 py-0" id="school.description.yearBuildingStarted"><strong>Building started:</strong> <span></span></p>
+                                <p class="my-0 py-0" id="school.description.yearBuildingEnded"><strong>Building ended:</strong> <span></span></p>
+                                <p class="my-0 py-0" id="school.description.yearDesegregation"><strong>Desegregation:</strong> <span></span></p>
+                                <p class="my-0 py-0" id="school.description.yearCeased"><strong>School closed:</strong> <span></span></p>
+                                <p class="my-0 py-0" id="school.description.yearDemolished"><strong>Building demolished:</strong> <span></span></p>
                             </div>
                         </div>
                     </div>
@@ -142,7 +140,7 @@
 <!-- Timeline-->
 <article class="bg-white">
     <div class="container-fluid px-4 pt-4 pb-2 px-lg-5">
-        <div class="row">
+        <div class="container">
             <t1>Timeline</t1>
         </div>
     </div>
@@ -159,7 +157,20 @@
 <div id="timeline-container" class="container pt-2"></div>
 
 <!-- Sources -->
-
+<article class="py-2 bg-orange" >
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5">
+                        <t2>Sources</t2>
+        </div>
+    </div>
+</article>
+<article class="py-4 bg-light" >
+    <div class="container px-4 px-lg-5">
+        <div class="row">
+            <p id="school.description.sources"></p>
+        </div>  
+    </div>
+</article>
 
 <!-- Footer -->
 <script src="footer.js"></script>
@@ -352,6 +363,7 @@
                     updateOrHide('school.address', schoolEntry.school?.address);
                     updateOrHide('school.condition', schoolEntry.school?.condition);
                     updateOrHide('school.description.briefDescription', schoolEntry.school?.description?.briefDescription);
+                    updateOrHide('school.description.sources', schoolEntry.school?.description?.sources);
 
                     // Images - Note the isImage flag set to true
                     updateOrHide('school.description.image', schoolEntry.school?.description?.image, true);
@@ -392,6 +404,13 @@
                         }
                     }
 
+                    // Update contributors section
+                    updateOrHide('contacts.contributors.contributor1.organization', schoolEntry.contacts?.contributors?.contributor1?.organization);
+                    updateOrHide('contacts.contributors.contributor1.organization', schoolEntry.contacts?.contributors?.contributor1?.organization);
+                    updateOrHide('contacts.contributors.contributor1.organization', schoolEntry.contacts?.contributors?.contributor1?.organization);
+                    updateOrHide('contacts.contributors.contributor1.organization', schoolEntry.contacts?.contributors?.contributor1?.organization);
+                    updateOrHide('contacts.contributors.contributor1.organization', schoolEntry.contacts?.contributors?.contributor1?.organization);
+                    
                     // Update current condition section
                     updateOrHide('school.currentUse', schoolEntry.school?.currentUse);
                     updateOrHide('school.condition', schoolEntry.school?.condition);
@@ -414,6 +433,8 @@
                     updateOrHide('school.otherNames.name3', schoolEntry.school?.otherNames?.name3);
                     updateOrHide('school.otherNames.name4', schoolEntry.school?.otherNames?.name4);
                     updateOrHide('school.otherNames.name5', schoolEntry.school?.otherNames?.name5);
+
+
                 }
 
                 if (contextEntry) {

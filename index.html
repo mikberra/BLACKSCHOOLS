@@ -29,6 +29,11 @@
                         <div class="site-heading text-center mb-3">
                             <t1>Reconstructing an American History of Black Schools</t1>
                         </div>
+                        <div class="text-center">
+                            <h2>
+                                <button type="button" class="btn" onclick="scrollToSection()">Explore the Schools</button>
+                            </h2>
+                        </div>
                         <div class="text-center mb-3">
                             <img src="./images/000-collage.png" alt="Collage image" class="img-fluid">
                         </div>
@@ -86,7 +91,7 @@
     </div>
 <!-- Map -->
     <section>
-        <div class="container-fluid bg-dark py-3 pb-5">
+        <div id="explore" class="container-fluid bg-dark py-3 pb-5">
             <div class="container py-1">
                 <t2 class="text-white">Explore the Map</t2>
             </div>
@@ -131,74 +136,81 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+<!-- Scrolling button JS-->
+    <script>
+        function scrollToSection() {
+            document.getElementById("explore").scrollIntoView({ behavior: "smooth" });
+        }
+    </script>
+
+
 <!-- Feeder JS-->
-
-<script>
-async function populateRecentSchools() {
-    try {
-        const response = await fetch('/api/recent-schools');
-        const schools = await response.json();
-        const container = document.getElementById('school-cards-container');
-        
-        container.innerHTML = '';
-        
-        schools.forEach(school => {
-            const imageUrl = school.school.description.image 
-                ? school.school.description.image 
-                : './images/school4.jpg';
-            const cardHtml = `
-                <div class="col-md-3">
-                    <div class="school-card" style="background-image: url('${imageUrl}');">
-                        <div class="t3 card-overlay">
-                            <div class="card-text-top">${school.school.city || 'Unknown City'}</div>
-                            <div class="card-text-bottom">${school.school.name || 'Unknown School'}</div>
+    <script>
+    async function populateRecentSchools() {
+        try {
+            const response = await fetch('/api/recent-schools');
+            const schools = await response.json();
+            const container = document.getElementById('school-cards-container');
+            
+            container.innerHTML = '';
+            
+            schools.forEach(school => {
+                const imageUrl = school.school.description.image 
+                    ? school.school.description.image 
+                    : './images/school4.jpg';
+                const cardHtml = `
+                    <div class="col-md-3">
+                        <div class="school-card" style="background-image: url('${imageUrl}');">
+                            <div class="t3 card-overlay">
+                                <div class="card-text-top">${school.school.city || 'Unknown City'}</div>
+                                <div class="card-text-bottom">${school.school.name || 'Unknown School'}</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            `;
-            container.innerHTML += cardHtml;
-        });
-    } catch (error) {
-        console.error('Error populating recent schools:', error);
+                `;
+                container.innerHTML += cardHtml;
+            });
+        } catch (error) {
+            console.error('Error populating recent schools:', error);
+        }
     }
-}
 
-async function populateRecentPeople() {
-    try {
-        const response = await fetch('/api/recent-people');
-        const people = await response.json();
-        const container = document.getElementById('people-cards-container');
-        
-        container.innerHTML = '';
-        
-        people.forEach(person => {
-            const imageUrl = person.image 
-                ? person.image  
-                : './images/default-avatar.jpg';
-            const cardHtml = `
-                <div class="col-md-3"> 
-                    <div class="avatar-card">
-                        <img class="avatar" src="${imageUrl}" alt="Avatar">
-                        <div class="avatar-text-content">
-                            <h5 class="avatar-name">${person.name || 'Unknown Name'}</h5>
-                            <p class="avatar-title">${person.role || 'Unknown Role'}</p>
-                            <p class="avatar-description">${person.schoolName || 'Unknown School'}</p>
+    async function populateRecentPeople() {
+        try {
+            const response = await fetch('/api/recent-people');
+            const people = await response.json();
+            const container = document.getElementById('people-cards-container');
+            
+            container.innerHTML = '';
+            
+            people.forEach(person => {
+                const imageUrl = person.image 
+                    ? person.image  
+                    : './images/default-avatar.jpg';
+                const cardHtml = `
+                    <div class="col-md-3"> 
+                        <div class="avatar-card">
+                            <img class="avatar" src="${imageUrl}" alt="Avatar">
+                            <div class="avatar-text-content">
+                                <h5 class="avatar-name">${person.name || 'Unknown Name'}</h5>
+                                <p class="avatar-title">${person.role || 'Unknown Role'}</p>
+                                <p class="avatar-description">${person.schoolName || 'Unknown School'}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            `;
-            container.innerHTML += cardHtml;
-        });
-    } catch (error) {
-        console.error('Error populating recent people:', error);
+                `;
+                container.innerHTML += cardHtml;
+            });
+        } catch (error) {
+            console.error('Error populating recent people:', error);
+        }
     }
-}
 
-window.addEventListener('load', () => {
-    populateRecentSchools();
-    populateRecentPeople();
-});
-</script>
+    window.addEventListener('load', () => {
+        populateRecentSchools();
+        populateRecentPeople();
+    });
+    </script>
 
 
 
