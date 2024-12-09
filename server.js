@@ -100,8 +100,9 @@ app.get('/homepage', (req, res) => {
 });
 
 app.get('/CS', (req, res) => {
-  res.sendFile(path.join(__dirname, 'CS3.html'));
+  res.sendFile(path.join(__dirname, 'CS.html'));
 });
+
 
 app.get('/contribute', (req, res) => {
   res.sendFile(path.join(__dirname, 'contribute.html'));
@@ -120,30 +121,30 @@ app.get('/api/geojson', async (req, res) => {
     
     const features = await FormData.find({
       'school.name': { $exists: true },
-      'school.location': { $exists: true }
+      'school.location.geometry': { $exists: true }
     });
     
     // Transform the data to GeoJSON format
     const geoJsonFeatures = features
-      .filter(doc => doc.school && doc.school.location && doc.school.location.geometry) // Filter out invalid documents
+      .filter(doc => doc.school && doc.school.location && doc.school.location.geometry)
       .map(doc => ({
         type: 'Feature',
         properties: {
+          _id: doc._id.toString(), // Ensure _id is included and converted to string
           Name: doc.school.name || 'Unknown Name',
           Address: doc.school.address || 'No address'
         },
         geometry: doc.school.location.geometry
       }));
 
-    // Send the GeoJSON response
+    // Debug log
+    console.log('First feature example:', geoJsonFeatures[0]);
+
     res.json({
       type: "FeatureCollection",
       features: geoJsonFeatures
     });
     
-    console.log(`Found ${geoJsonFeatures.length} features`);
-    // Debug log to see what data is being sent
-    console.log('First feature example:', geoJsonFeatures[0]);
   } catch (error) {
     console.error('Error fetching GeoJSON:', error);
     res.status(500).json({ error: 'Failed to fetch data' });
@@ -1186,4 +1187,76 @@ app.get('/test', (req, res) => {
   res.status(500).json({ error: 'Failed to fetch data' });
   }
   });
+
+// Serve static files
+app.use(express.static('public'));
+
+// Dynamic route for school pages
+app.get('/CS/:id', async (req, res) => {
+    try {
+        // First check if the school exists
+        const school = await FormData.findById(req.params.id);
+        if (!school) {
+            return res.status(404).send('School not found');
+        }
+
+        // Read the CS.html template
+        const template = await fs.promises.readFile(path.join(__dirname, 'CS.html'), 'utf8');
+        
+        // Inject the school ID into the template
+        const html = template.replace(
+            /const schoolId = "[^"]*";/,
+            `const schoolId = "${schoolId}";`
+        );
+        
+        res.send(html);
+    } catch (error) {
+        console.error('Error serving school page:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+// Add this route handler
+app.get('/CS3/:id', async (req, res) => {
+    try {
+        const schoolId = req.params.id;
+        
+        // Read the CS.html file
+        let htmlContent = await fs.promises.readFile(path.join(__dirname, 'CS.html'), 'utf8');
+        
+        // Replace the hardcoded schoolId with the dynamic one
+        htmlContent = htmlContent.replace(
+            'const schoolId = "6756041d7dc1fb8687a92dff";',
+            `const schoolId = "${schoolId}";`
+        );
+        
+        res.send(htmlContent);
+    } catch (error) {
+        console.error('Error serving CS page:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+// Make sure this endpoint exists to fetch school data
+app.get('/api/formdata', async (req, res) => {
+    try {
+        const schools = await FormData.find({});
+        res.json(schools);
+    } catch (error) {
+        console.error('Error fetching form data:', error);
+        res.status(500).json({ error: 'Failed to fetch data' });
+    }
+});
+
+// Add this near the top of your server.js file
+app.use((err, req, res, next) => {
+    console.error('Server Error:', err);
+    res.status(500).send('Internal Server Error');
+});
+
+// Add this to log all requests
+app.use((req, res, next) => {
+    console.log(`${req.method} ${req.url}`);
+    next();
+});
 

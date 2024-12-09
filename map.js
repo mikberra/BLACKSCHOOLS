@@ -58,4 +58,27 @@ map.on('load', () => {
         // Remove the pop-up
         popup.remove();
     });
+
+    // Add click handler for the schools layer
+    map.on('click', 'mongoLayer', (e) => {
+        if (e.features.length > 0) {
+            const schoolId = e.features[0].properties._id;
+            console.log('Clicked school ID:', schoolId); // Debug log
+            
+            if (schoolId) {
+                // Always navigate to CS page with the school ID
+                window.location.href = `/CS/${schoolId}`;
+            }
+        }
+    });
+
+    // Optional: Change cursor to pointer when hovering over schools
+    map.on('mouseenter', 'mongoLayer', () => {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+
+    map.on('mouseleave', 'mongoLayer', () => {
+        map.getCanvas().style.cursor = '';
+    });
 });
+
