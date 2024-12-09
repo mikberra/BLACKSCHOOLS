@@ -196,7 +196,7 @@
                             <!-- Context map -->
                             <div class="contentA mt-3">
                                 <section class="parallax">
-                                    <img id="maps.map${i}.image" class="img-fluid" alt="Historical Map ${i}">
+                                    <img id="maps.map${i}.image" class="img-fluid" style="display: none;">
                                 </section>
                             </div>
                             <!-- Context event -->
@@ -274,10 +274,14 @@
                     if (element) {
                         if (value) {
                             if (isImage) {
-                                // If it's already a full URL, use it directly
                                 console.log(`Setting image URL for ${id}:`, value);
                                 element.src = value;
-                                element.style.display = '';
+                                // Only show the image if there's a valid URL
+                                if (value) {
+                                    element.style.display = 'block';
+                                } else {
+                                    element.style.display = 'none';
+                                }
                                 
                                 // Add error handling to help debug
                                 element.onerror = function() {
@@ -286,7 +290,7 @@
                                 };
                             } else {
                                 element.textContent = value;
-                                element.style.display = '';
+                                element.style.display = value ? '' : 'none';
                             }
                         } else {
                             element.style.display = 'none';

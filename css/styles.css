@@ -955,37 +955,31 @@
 
 /*! Case-Maps  */
   .parallax {
-    flex: 1; /* Take up one portion of the available space */
-    margin-right: -50px; /* Extend right to overlap margins */
-    height: 200vh;
-    /* Full viewport height */
-    background-size: 50%;
-    /* Ensure the background covers the entire section */
-    background-position: top left;
-    /* Align left */
-    background-attachment: fixed;
-    /* Keeps the image fixed during scroll */
-    display: flex;
-    align-items: center;
-    /* Center content vertically */
-    justify-content: center;
-    /* Center content horizontally */
-    color: white;
-    /* Text color for readability */
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
-    /* Add text shadow for better contrast */
-    font-size: 2rem;
-    text-align: center;
+    position: relative;  /* Changed from fixed */
+    overflow: hidden;
+    height: auto;       /* Changed from 200vh */
+    width: 100%;       /* Added width constraint */
   }
 
   .parallax img {
-    position: fixed;
-    top: 0;
-    left: 0;
+    position: relative; /* Changed from fixed */
     width: 100%;
     height: auto;
-    z-index: -1;
-    transform: translateZ(0); /* Helps with smooth scrolling on some browsers */
+    z-index: 1;        /* Changed from -1 */
+    transform: none;    /* Remove transform */
+  }
+
+  .contentA {
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+  }
+
+  .contentA img {
+    max-width: 100%;
+    height: auto;
+    display: block;    /* Ensures proper image display */
   }
 /**/
 
@@ -1593,7 +1587,7 @@
   }
 
   .blockquote-footer::before {
-    content: "— ";
+    content: "— ";
   }
 
   .img-fluid {
@@ -2807,7 +2801,7 @@
 
     .row-cols-xxl-5>* {
       flex: 0 0 auto;
-    : 20%;
+      width: 20%;
     }
 
     .row-cols-xxl-6>* {
