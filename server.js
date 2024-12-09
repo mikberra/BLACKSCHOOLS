@@ -116,22 +116,21 @@ app.get('/contribute_', (req, res) => {
 // API endpoint to get all GeoJSON data
 app.get('/api/geojson', async (req, res) => {
   try {
-    // Add logging to debug
     console.log('Fetching GeoJSON data...');
     
-    // Use the FormData model instead of GeoModel since the location data is nested
-    const features = await FormData.find({}, {
-      'school.location': 1 // Only fetch the location field
+    const features = await FormData.find({
+      'school.name': { $exists: true },
+      'school.location': { $exists: true }
     });
     
     // Transform the data to GeoJSON format
     const geoJsonFeatures = features
-      .filter(doc => doc.school && doc.school.location) // Filter out documents without location
+      .filter(doc => doc.school && doc.school.location && doc.school.location.geometry) // Filter out invalid documents
       .map(doc => ({
         type: 'Feature',
         properties: {
-          name: doc.school.name,
-          // Add any other properties you want to include
+          Name: doc.school.name || 'Unknown Name',
+          Address: doc.school.address || 'No address'
         },
         geometry: doc.school.location.geometry
       }));
@@ -143,6 +142,8 @@ app.get('/api/geojson', async (req, res) => {
     });
     
     console.log(`Found ${geoJsonFeatures.length} features`);
+    // Debug log to see what data is being sent
+    console.log('First feature example:', geoJsonFeatures[0]);
   } catch (error) {
     console.error('Error fetching GeoJSON:', error);
     res.status(500).json({ error: 'Failed to fetch data' });
