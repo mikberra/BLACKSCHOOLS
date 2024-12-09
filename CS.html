@@ -141,22 +141,23 @@
     </div>
 
 <!-- Timeline-->
-    <article class="mb-4 bg-primary">
-        <div class="container-fluid px-4 px-lg-5">
-            <div class="row">
-                <t1>Timeline</t1>
-            </div>
-            <div class="row gx-4 gx-lg-5">
-                <div class="col-md-7"></div>
-                <div class="col-md-5 position-relative">
-                    <div class="sticky-top-buttons">
-                        <button id="buttonA" class="active" onclick="toggleContent('A')">Maps</button>
-                        <button id="buttonB" onclick="toggleContent('B')">Historical context</button>
-                    </div>
-            </div>
-    </article>
+<article class="bg-white">
+    <div class="container-fluid px-4 pt-4 pb-2 px-lg-5">
+        <div class="row">
+            <t1>Timeline</t1>
+        </div>
+    </div>
+</article>
+<div class="row sticky-top-buttons mb-2">
+    <div class="col-md-7"><h4>School Events</h4></div>  <!-- Empty left column to push content right -->
+    <div class="col-md-5 sticky-top-buttons">
+        <button id="buttonA" class="active" onclick="toggleContent('A')">Maps</button>
+        <button id="buttonB" onclick="toggleContent('B')">Historical context</button>
+    </div>
+</div>
+
 <!-- Decade 1 -->
-<div id="timeline-container" class="container"></div>
+<div id="timeline-container" class="container pt-2"></div>
 
 <!-- Sources -->
 

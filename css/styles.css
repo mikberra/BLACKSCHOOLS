@@ -80,6 +80,9 @@
       background-color: linear-gradient(to bottom, white, rgb(101, 101, 101));
     }
 
+    .bg-white {
+      background-color: var(--bs-white) !important;
+    }
 
 /**/
 
@@ -382,12 +385,25 @@
 /*! Specific buttons*/
   .sticky-top-buttons {
       position: sticky;
-      top: 60px;
+      top: 60px;  /* Match the navbar height */
       z-index: 1020;
-      background-color: #fff;
+      background-color: var(--bs-white);
       border-bottom: 1px solid #ddd;
       display: flex;
     }
+
+    .sticky-top-buttons h4 {
+      flex: 1;
+      background-color: #fff;
+      border: none;
+      color: grey;
+      font-weight: bold;
+      text-align: center;
+      padding: 10px 0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
 
     .sticky-top-buttons button {
       flex: 1;
@@ -997,6 +1013,29 @@
     padding: var(--bs-padding);
     display: inline-block; 
   } */
+/**/
+
+/*! Participation cards*/
+  .parti-card {
+    border: 2px solid black; /* Thicker black stroke */
+    border-radius: 0.75rem; /* Rounded edges */
+    padding: 20px;
+    margin-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  .parti-card t3 {
+    display: block;  /* Makes t3 take full width */
+    margin-bottom: 10px;  /* Adds space between t3 and p */
+  }
+
+  .parti-card p {
+      margin: 0;  /* Removes default paragraph margins */
+  }
+
+  .parti-right {
+    display: block;
+    margin: 0 auto;
+  }
 /**/
 
 /*! Event card  */
@@ -6078,7 +6117,7 @@
     justify-content: center;
     padding: 0;
     margin-right: 15%;
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
     margin-left: 15%;
     list-style: none;
   }
