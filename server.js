@@ -39,14 +39,18 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(cors());
-
-// Middleware Set Up
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// Add these lines near the top where other middleware is configured
-app.use('/uploads', express.static('uploads'));
-app.use('/uploads_maps', express.static('uploads_maps'));
+// Static file middleware - order matters!
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, ''))); // Serve files from root directory
+app.use('/css', express.static(path.join(__dirname, 'css')));
+app.use('/js', express.static(path.join(__dirname, 'js')));
+app.use('/assets', express.static(path.join(__dirname, 'assets')));
+app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads_maps', express.static(path.join(__dirname, 'uploads_maps')));
 
 // Cloudinary configuration
 cloudinary.config({
@@ -1194,69 +1198,108 @@ app.use(express.static('public'));
 // Dynamic route for school pages
 app.get('/CS/:id', async (req, res) => {
     try {
+        const schoolId = req.params.id;
+        console.log('Requested school ID:', schoolId);
+        
         // First check if the school exists
-        const school = await FormData.findById(req.params.id);
+        const school = await FormData.findById(schoolId);
         if (!school) {
+            console.log('School not found for ID:', schoolId);
             return res.status(404).send('School not found');
         }
 
-        // Read the CS.html template
-        const template = await fs.promises.readFile(path.join(__dirname, 'CS.html'), 'utf8');
+        // Read the CS.html file
+        let htmlContent = await fs.promises.readFile(path.join(__dirname, 'CS.html'), 'utf8');
         
-        // Inject the school ID into the template
-        const html = template.replace(
-            /const schoolId = "[^"]*";/,
-            `const schoolId = "${schoolId}";`
+        // Fix paths for all assets
+        htmlContent = htmlContent
+            // Fix CSS paths
+            .replace(
+                /<link[^>]*href=["'](?!http|\/\/)([^"']*\.css)["'][^>]*>/g,
+                match => match.replace(/href=["']([^"']*)["']/, 'href="/$1"')
+            )
+            // Fix JS paths
+            .replace(
+                /<script[^>]*src=["'](?!http|\/\/)([^"']*\.js)["'][^>]*>/g,
+                match => match.replace(/src=["']([^"']*)["']/, 'src="/$1"')
+            )
+            // Fix image paths
+            .replace(
+                /src=["'](?!http|\/\/)([^"']*\.(jpg|jpeg|png|gif))["']/g,
+                'src="/$1"'
+            );
+
+        // Update the fetchData function to use the correct IDs
+        const scriptReplacement = `
+            <script>
+                window.onload = async function () {
+                    const schoolId = "${schoolId}"; // Dynamic school ID
+                    const contextId = "6755f8497dc1fb8687a92dfb"; // Context ID
+                    await fetchData(schoolId, contextId);
+                };
+
+                async function fetchData(schoolId, contextId) {
+                    const schoolApiUrl = '/api/formdata/' + schoolId; // Update to use specific school endpoint
+                    const contextApiUrl = '/api/formdata_context/' + contextId;
+
+                    try {
+                        // Fetch specific school data
+                        const schoolResponse = await fetch(schoolApiUrl);
+                        if (!schoolResponse.ok) throw new Error("Failed to fetch school data");
+                        const schoolData = await schoolResponse.json();
+
+                        // Fetch context data
+                        const contextResponse = await fetch(contextApiUrl);
+                        if (!contextResponse.ok) throw new Error("Failed to fetch context data");
+                        const contextData = await contextResponse.json();
+
+                        // Update the DOM with fetched data
+                        updateData(schoolData, contextData);
+                    } catch (error) {
+                        console.error("Error fetching data:", error);
+                    }
+                }
+            </script>
+        `;
+
+        // Replace the entire script section
+        htmlContent = htmlContent.replace(
+            /<script>\s*window\.onload[^<]*<\/script>/s,
+            scriptReplacement
         );
         
-        res.send(html);
+        res.send(htmlContent);
     } catch (error) {
         console.error('Error serving school page:', error);
         res.status(500).send('Internal Server Error');
     }
 });
 
-// Add this route handler
-app.get('/CS3/:id', async (req, res) => {
+// Add endpoint to fetch specific school data
+app.get('/api/formdata/:id', async (req, res) => {
     try {
-        const schoolId = req.params.id;
-        
-        // Read the CS.html file
-        let htmlContent = await fs.promises.readFile(path.join(__dirname, 'CS.html'), 'utf8');
-        
-        // Replace the hardcoded schoolId with the dynamic one
-        htmlContent = htmlContent.replace(
-            'const schoolId = "6756041d7dc1fb8687a92dff";',
-            `const schoolId = "${schoolId}";`
-        );
-        
-        res.send(htmlContent);
+        const school = await FormData.findById(req.params.id);
+        if (!school) {
+            return res.status(404).json({ error: 'School not found' });
+        }
+        res.json(school);
     } catch (error) {
-        console.error('Error serving CS page:', error);
-        res.status(500).send('Internal Server Error');
-    }
-});
-
-// Make sure this endpoint exists to fetch school data
-app.get('/api/formdata', async (req, res) => {
-    try {
-        const schools = await FormData.find({});
-        res.json(schools);
-    } catch (error) {
-        console.error('Error fetching form data:', error);
+        console.error('Error fetching school data:', error);
         res.status(500).json({ error: 'Failed to fetch data' });
     }
 });
 
-// Add this near the top of your server.js file
-app.use((err, req, res, next) => {
-    console.error('Server Error:', err);
-    res.status(500).send('Internal Server Error');
-});
-
-// Add this to log all requests
-app.use((req, res, next) => {
-    console.log(`${req.method} ${req.url}`);
-    next();
+// Add endpoint to fetch specific context data
+app.get('/api/formdata_context/:id', async (req, res) => {
+    try {
+        const context = await FormDataContext.findById(req.params.id);
+        if (!context) {
+            return res.status(404).json({ error: 'Context not found' });
+        }
+        res.json(context);
+    } catch (error) {
+        console.error('Error fetching context data:', error);
+        res.status(500).json({ error: 'Failed to fetch data' });
+    }
 });
 
