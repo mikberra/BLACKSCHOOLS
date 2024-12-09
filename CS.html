@@ -15,7 +15,7 @@
         <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
         <style>
             body {
-                background: url('/images/background.png') no-repeat center center fixed;
+                background: url('../images/background.png') no-repeat center center fixed;
                 background-size: cover; 
                 margin: 0; 
                 padding: 0; 
@@ -196,7 +196,7 @@
                             <!-- Context map -->
                             <div class="contentA mt-3">
                                 <section class="parallax">
-                                    <img id="maps.map${i}.image" alt="Parallax Background">
+                                    <img id="maps.map${i}.image" class="img-fluid" alt="Historical Map ${i}">
                                 </section>
                             </div>
                             <!-- Context event -->
@@ -274,13 +274,21 @@
                     if (element) {
                         if (value) {
                             if (isImage) {
-                                // Use Cloudinary URL directly
-                                element.src = value;  // Cloudinary URLs are complete
+                                // Handle Cloudinary URLs - Fix the URL construction
+                                let imageUrl = value;
+                                if (!value.startsWith('http')) {
+                                    // If it's a path from Cloudinary storage object
+                                    console.log('Original image path:', value);
+                                    const imagePath = value.replace('uploads/', '');
+                                    console.log('Cleaned image path:', imagePath);
+                                    imageUrl = `https://res.cloudinary.com/ddsuauehz/image/upload/${imagePath}`;
+                                }
+                                console.log(`Setting image URL for ${id}:`, imageUrl); // Debug log
+                                element.src = imageUrl;
                                 element.style.display = '';
                                 
-                                // Add error handling for images
                                 element.onerror = function() {
-                                    console.log(`Failed to load image: ${value}`);
+                                    console.log(`Failed to load image for ${id}:`, imageUrl);
                                     element.style.display = 'none';
                                 };
                             } else {
@@ -290,10 +298,20 @@
                         } else {
                             element.style.display = 'none';
                         }
+                    } else {
+                        console.log(`Element not found: ${id}`); // Debug log
                     }
                 }
 
                 if (schoolEntry) {
+                    // Add debug logging
+                    console.log('School entry:', schoolEntry);
+                    
+                    // For the main school image
+                    if (schoolEntry.school?.description?.image) {
+                        console.log('School image path:', schoolEntry.school.description.image);
+                    }
+
                     // General Information (non-image updates)
                     updateOrHide('generalInformation.areaOfWork', schoolEntry.generalInformation?.areaOfWork);
                     updateOrHide('generalInformation.city', schoolEntry.generalInformation?.city);
@@ -330,14 +348,20 @@
                     }
 
                     // Maps
+                    console.log('Full schoolEntry:', schoolEntry);
+                    console.log('Maps data:', schoolEntry.maps);
+                    
+                    // Maps update with detailed logging
                     for (let i = 1; i <= 10; i++) {
-                        updateOrHide(`maps.map${i}.title`, schoolEntry.maps?.[`map${i}`]?.title);
-                        updateOrHide(`maps.map${i}.decade`, schoolEntry.maps?.[`map${i}`]?.decade);
-                        updateOrHide(`maps.map${i}.briefDescription`, schoolEntry.maps?.[`map${i}`]?.briefDescription);
-                        updateOrHide(`maps.map${i}.sources`, schoolEntry.maps?.[`map${i}`]?.sources);
-                        updateOrHide(`maps.map${i}.footnote`, schoolEntry.maps?.[`map${i}`]?.footnote);
-                        updateOrHide(`maps.map${i}.image`, schoolEntry.maps?.[`map${i}`]?.image, true);
-                        updateOrHide(`maps.map${i}.imageSources`, schoolEntry.maps?.[`map${i}`]?.imageSources);
+                        console.log(`Checking map${i}:`, schoolEntry.maps?.[`map${i}`]);
+                        const mapImage = schoolEntry.maps?.[`map${i}`]?.image;
+                        console.log(`Map ${i} image value:`, mapImage);
+                        
+                        if (mapImage) {
+                            const imageUrl = mapImage.startsWith('http') ? mapImage : `https://res.cloudinary.com/ddsuauehz/image/upload/${mapImage}`;
+                            console.log(`Processing map ${i} with URL:`, imageUrl);
+                            updateOrHide(`maps.map${i}.image`, imageUrl, true);
+                        }
                     }
                 }
 
