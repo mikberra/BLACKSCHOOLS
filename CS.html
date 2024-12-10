@@ -373,10 +373,18 @@
                         updateOrHide(`school.timeline.event${i}.title`, schoolEntry.school?.timeline[`event${i}`]?.title);
                         updateOrHide(`school.timeline.event${i}.year`, schoolEntry.school?.timeline[`event${i}`]?.year);
                         updateOrHide(`school.timeline.event${i}.briefDescription`, schoolEntry.school?.timeline[`event${i}`]?.briefDescription);
-                        updateOrHide(`school.timeline.event${i}.sources`, schoolEntry.school?.timeline[`event${i}`]?.sources);
+                        updateOrHide(`school.timeline.event${i}.sources`, 
+                            schoolEntry.school?.timeline[`event${i}`]?.sources ? 
+                            `Source: ${schoolEntry.school?.timeline[`event${i}`]?.sources}` : 
+                            null
+                        );
                         updateOrHide(`school.timeline.event${i}.footnote`, schoolEntry.school?.timeline[`event${i}`]?.footnote);
                         updateOrHide(`school.timeline.event${i}.image`, schoolEntry.school?.timeline[`event${i}`]?.image, true);
-                        updateOrHide(`school.timeline.event${i}.imageSources`, schoolEntry.school?.timeline[`event${i}`]?.imageSources);
+                        updateOrHide(`school.timeline.event${i}.imageSources`, 
+                            schoolEntry.school?.timeline[`event${i}`]?.imageSources ? 
+                            `Source: ${schoolEntry.school?.timeline[`event${i}`]?.imageSources}` : 
+                            null
+                        );
                     }
 
                     // Relevant Figures
@@ -450,7 +458,11 @@
                         updateOrHide(`ctxt.timeline.event${i}.title`, contextEntry.timeline?.[`event${i}`]?.title);
                         updateOrHide(`ctxt.timeline.event${i}.year`, contextEntry.timeline?.[`event${i}`]?.year);
                         updateOrHide(`ctxt.timeline.event${i}.briefDescription`, contextEntry.timeline?.[`event${i}`]?.briefDescription);
-                        updateOrHide(`ctxt.timeline.event${i}.sources`, contextEntry.timeline?.[`event${i}`]?.sources);
+                        updateOrHide(`ctxt.timeline.event${i}.sources`, 
+                            contextEntry.timeline?.[`event${i}`]?.sources ? 
+                            `Source: ${contextEntry.timeline[`event${i}`]?.sources}` : 
+                            null
+                        );
                         updateOrHide(`ctxt.timeline.event${i}.image`, contextEntry.timeline?.[`event${i}`]?.image, true);
                     }
                 }

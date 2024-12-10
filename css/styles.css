@@ -11,6 +11,17 @@
  * Copyright 2011-2022 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css?family=Hepta+Slab&display=swap');
+@font-face {
+  font-family: 'VTC Martin';
+  src: url('font/vtc-martin-regular-webfont.woff2') format('woff2'),
+       url('font/vtc-martin-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   --bs-black: #000;
   --bs-darkgray: #808080;
