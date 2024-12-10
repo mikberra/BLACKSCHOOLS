@@ -27,6 +27,22 @@ map.on('load', () => {
       }
   });
 
+  map.getSource('mongoLayer').on('data', (e) => {
+    if (e.isSourceLoaded) {
+      const geojson = map.getSource('mongoLayer')._data; // Access the GeoJSON data
+      const bounds = new mapboxgl.LngLatBounds();
+
+      geojson.features.forEach(feature => {
+        bounds.extend(feature.geometry.coordinates); // Extend bounds for each point
+      });
+
+      map.fitBounds(bounds, {
+        padding: 1, // Optional: Adds padding around the bounds
+        maxZoom: 14 // Optional: Limits the maximum zoom level
+      });
+    }
+  });
+
   // Step 3: Create a pop-up instance
   const popup = new mapboxgl.Popup({
       closeButton: false, // Disable close button
