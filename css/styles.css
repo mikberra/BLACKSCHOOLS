@@ -14,12 +14,17 @@
 
 /* Google Fonts Import */
 @import url('https://fonts.googleapis.com/css?family=Hepta+Slab&display=swap');
+
+/* Remove or comment out the Google Font import for VTC Martin */
+/* @import url('https://fonts.googleapis.com/css?family=VTC+Martin&display=swap'); */
+
 @font-face {
   font-family: 'VTC Martin';
-  src: url('font/vtc-martin-regular-webfont.woff2') format('woff2'),
-       url('font/vtc-martin-regular-webfont.woff') format('woff');
+  src: url('../fonts/vtc-martin-regular-webfont.woff2') format('woff2'),
+       url('../fonts/vtc-martin-regular-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
+  font-display: swap; /* This helps with font loading performance */
 }
 
 :root {

@@ -47,6 +47,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/CS', express.static(path.join(__dirname, ''))); // Serve CS directory files
 app.use('/css', express.static(path.join(__dirname, 'css')));
 app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/fonts', express.static(path.join(__dirname, 'fonts')));
 
 // Cloudinary configuration
 cloudinary.config({
