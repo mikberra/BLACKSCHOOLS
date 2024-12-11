@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', function() {
         </a>
         <div class="navbar-right">
             <button class="nav-button" onclick="window.location.href='index.html#explore'">Explore</button>
-            <button class="nav-button" onclick="window.location.href='preserve.html'">Preserve</button>
-            <button class="nav-button" onclick="window.location.href='educate.html'">Educate</button>
+            <button class="nav-button" onclick="window.location.href='preserve.html'">For Organizations</button>
+            <button class="nav-button" onclick="window.location.href='educate.html'">For Educators</button>
         </div>
     `;
 
